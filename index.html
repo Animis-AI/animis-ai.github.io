@@ -66,6 +66,7 @@ a{color:inherit}
   <nav class="site-nav">
     <a href="#company" data-i18n="nav_company">Company</a>
     <a href="https://animis-ai.github.io/asset-library/" data-i18n="nav_library">Asset Library</a>
+    <a href="anyego/">AnyEgo</a>
     <a href="https://github.com/Animis-AI" target="_blank" rel="noopener">GitHub</a>
     <a href="#" id="lang-toggle">中文</a>
   </nav>
@@ -133,6 +134,15 @@ a{color:inherit}
     </div>
     <a class="btn primary" href="https://animis-ai.github.io/asset-library/" data-i18n="lib_cta">Open the library →</a>
   </div>
+  <div class="libcard" style="margin-top:26px">
+    <div>
+      <h3>AnyEgo · <span data-i18n="any_h">Data Augmentation &amp; Auto-Annotation</span></h3>
+      <p data-i18n="any_p">Upload video, get back augmented variants and
+      automatic annotations — hand pose, boxes, masks, captions. Try the
+      in-browser demo, or integrate the same pipeline through the API.</p>
+    </div>
+    <a class="btn primary" href="anyego/" data-i18n="any_cta">Open AnyEgo →</a>
+  </div>
 </section>
 
 <footer class="site-footer">
@@ -160,6 +170,9 @@ const I18N = {
     lib_h:"SimGen · Asset Library",
     lib_p:"Our curated, browser-interactive catalogue of sim-ready assets — orbit them, drive their joints, and license the full packages for your robot-learning stack.",
     lib_cta:"Open the library →",
+    any_h:"Data Augmentation & Auto-Annotation",
+    any_p:"Upload video, get back augmented variants and automatic annotations — hand pose, boxes, masks, captions. Try the in-browser demo, or integrate the same pipeline through the API.",
+    any_cta:"Open AnyEgo →",
     ft_tag:"Building the world engine for physical AI.",
   },
   zh: {
@@ -179,6 +192,9 @@ const I18N = {
     lib_h:"SimGen · 资产库",
     lib_p:"我们的精选在线目录：浏览器里即可旋转查看、驱动关节，并为你的机器人学习栈购买完整资产包。",
     lib_cta:"打开资产库 →",
+    any_h:"数据扩增与自动标注",
+    any_p:"上传视频,拿回扩增变体与自动标注——手部姿态、物体框、掩码、描述。可先试浏览器内演示,也可通过 API 把同一条管线接进你的训练栈。",
+    any_cta:"打开 AnyEgo →",
     ft_tag:"为物理 AI 构建世界引擎。",
   },
 };
