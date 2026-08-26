@@ -31,7 +31,10 @@ a{color:inherit}
          line-height:1.1;max-width:15em}
 .hero h1 em{font-style:italic}
 .hero .lede{margin-top:30px;max-width:640px;color:var(--muted);font-size:14.5px}
-.hero .lines{margin-top:26px;max-width:640px;list-style:none;font-size:13.5px}
+.hero .pillars{margin-top:36px;max-width:640px;display:grid;
+               grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 40px}
+.hero .pillar-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero .lines{margin-top:10px;list-style:none;font-size:13.5px}
 .hero .lines li{padding:7px 0;border-top:1px solid var(--faint);color:var(--muted)}
 .hero .lines b{font-weight:400;color:var(--ink)}
 
@@ -48,7 +51,6 @@ a{color:inherit}
   <nav class="site-nav">
     <a href="https://animis-ai.github.io/asset-library/" data-i18n="nav_library">Asset Library</a>
     <a href="anyego/">AnyEgo</a>
-    <a href="https://github.com/Animis-AI" target="_blank" rel="noopener">GitHub</a>
     <a href="#" id="lang-toggle">中文</a>
   </nav>
 </header>
@@ -58,17 +60,27 @@ a{color:inherit}
   <p class="lede" data-i18n="lede">Physical AI is not short of models — it is short of
   data and environments. We synthesize data, process real-world capture, and deliver
   environments that are interactive, visually faithful, trainable and evaluatable.</p>
-  <ul class="lines">
-    <li data-i18n="l1"><b>Synthetic data</b> — generated at scale, automatically annotated.</li>
-    <li data-i18n="l2"><b>Real data</b> — captured, cleaned, reconstructed back into simulation.</li>
-    <li data-i18n="l3"><b>Environments</b> — interactive, high-fidelity, trainable, evaluatable.</li>
-  </ul>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-label" data-i18n="data_label">Data</div>
+      <ul class="lines">
+        <li data-i18n="d1"><b>Real data</b> — captured, cleaned, reconstructed back into simulation.</li>
+        <li data-i18n="d2"><b>Synthetic data</b> — generated at scale, automatically annotated.</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-label" data-i18n="env_label">Environment</div>
+      <ul class="lines">
+        <li data-i18n="e1">Interactive, high-fidelity, trainable, evaluatable.</li>
+      </ul>
+    </div>
+  </div>
 </main>
 
 <footer class="site-footer">
   <span>Animis AI</span>
-  <a href="mailto:fishcakewang11@gmail.com">fishcakewang11@gmail.com</a>
-  <a href="https://github.com/Animis-AI" target="_blank" rel="noopener">© 2026 · github.com/Animis-AI</a>
+  <a href="mailto:animislab@gmail.com">animislab@gmail.com</a>
+  <span>© 2026 Animis AI</span>
 </footer>
 
 <script>
@@ -77,20 +89,22 @@ const I18N = {
     nav_library:"Asset Library",
     hero_h1:'We build the <em>world engine</em> for physical AI.',
     lede:"Physical AI is not short of models — it is short of data and environments. We synthesize data, process real-world capture, and deliver environments that are interactive, visually faithful, trainable and evaluatable.",
-    l1:"<b>Synthetic data</b> — generated at scale, automatically annotated.",
-    l2:"<b>Real data</b> — captured, cleaned, reconstructed back into simulation.",
-    l3:"<b>Environments</b> — interactive, high-fidelity, trainable, evaluatable.",
+    data_label:"Data", env_label:"Environment",
+    d1:"<b>Real data</b> — captured, cleaned, reconstructed back into simulation.",
+    d2:"<b>Synthetic data</b> — generated at scale, automatically annotated.",
+    e1:"Interactive, high-fidelity, trainable, evaluatable.",
   },
   zh: {
     nav_library:"资产库",
     hero_h1:'我们为物理 AI 构建<em>世界引擎</em>。',
     lede:"物理 AI 缺的不是模型，而是数据与环境。我们合成数据、处理真实数据，并交付可交互、高视觉保真、可训练、可评测的环境。",
-    l1:"<b>合成数据</b> —— 规模化生成，自动标注。",
-    l2:"<b>真实数据</b> —— 采集、清洗，重建回仿真。",
-    l3:"<b>环境</b> —— 可交互、高保真、可训练、可评测。",
+    data_label:"数据", env_label:"环境",
+    d1:"<b>真实数据</b> —— 采集、清洗，重建回仿真。",
+    d2:"<b>合成数据</b> —— 规模化生成，自动标注。",
+    e1:"可交互、高保真、可训练、可评测。",
   },
 };
-const HTML_KEYS = new Set(["hero_h1", "l1", "l2", "l3"]);
+const HTML_KEYS = new Set(["hero_h1", "d1", "d2", "e1"]);
 let lang = localStorage.getItem("animis-lang") || "en";
 function applyLang() {
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
