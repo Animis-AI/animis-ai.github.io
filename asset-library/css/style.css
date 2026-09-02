@@ -276,6 +276,73 @@ i { font-style: normal; }
   min-height: 0;
   --poster-color: transparent;
 }
+
+/* ------------------------------------ mesh × collision inspector */
+.stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.stage[hidden] { display: none; }
+.viewer-tabs {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 6;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.vtab {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 5px 12px;
+  border: 1px solid var(--ink);
+  background: var(--box);
+  color: var(--ink);
+  cursor: pointer;
+}
+.vtab:hover { box-shadow: 2px 2px 0 0 var(--ink); }
+.vtab.active { background: var(--ink); color: var(--paper); }
+.stage-insp canvas { width: 100%; height: 100%; display: block; flex: 1; min-height: 0; }
+.insp-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+.insp-joints {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.insp-joint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--faint);
+  background: rgba(250, 249, 244, 0.85);
+  padding: 7px 12px;
+}
+.insp-joint-name { font-size: 11px; color: var(--muted); min-width: 90px; }
+.insp-joint input { flex: 1; accent-color: var(--ink); }
+.insp-joint-val { font-size: 11px; min-width: 42px; text-align: right; }
+.insp-count {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 11px;
+  color: var(--muted);
+}
 .sheet-viewer video.fallback {
   width: 100%; flex: 1; min-height: 0;
   object-fit: contain;

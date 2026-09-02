@@ -53,6 +53,11 @@ const I18N = {
     meta_note: "Purchase unlocks the download. Full packages (URDF, per-link meshes, collision hulls, physics report) ship on the live store; the sandbox delivers the compressed GLB.",
     hint_orbit: "DRAG TO ORBIT · SCROLL TO ZOOM", hint_video: "JOINT SWEEP RENDER",
     joint_label: "JOINT DRIVE", rigid_label: "rigid", dof_suffix: "DOF",
+    view_preview: "Preview", view_visual: "Visual mesh",
+    view_collision: "Collision", view_both: "Overlay",
+    insp_hulls: (n) => `${n} convex hulls`,
+    insp_loading: "Loading meshes…",
+    insp_error: "Could not load the inspector — try reopening the asset.",
   },
   zh: {
     nav_home: "Animis AI", nav_cart: "选购清单",
@@ -100,6 +105,11 @@ const I18N = {
     meta_note: "购买后解锁下载。正式商店交付完整资产包（URDF + 逐链接网格 + 碰撞凸包 + 物理报告）；沙盒环境交付压缩 GLB。",
     hint_orbit: "拖动旋转 · 滚轮缩放", hint_video: "关节演示渲染",
     joint_label: "关节驱动", rigid_label: "刚体", dof_suffix: "DOF",
+    view_preview: "预览", view_visual: "视觉网格",
+    view_collision: "碰撞体", view_both: "叠加",
+    insp_hulls: (n) => `${n} 个碰撞凸包`,
+    insp_loading: "网格加载中…",
+    insp_error: "检视器加载失败——请关闭后重新打开该资产。",
   },
 };
 
@@ -491,12 +501,17 @@ function loadModelViewer() {
 
 function openSheet(a) {
   if (state.sheetTimer) { clearInterval(state.sheetTimer); state.sheetTimer = null; }
+  disposeInspector();
   state.sheetAsset = a;
   sheetViewer.replaceChildren();
   sheetMeta.replaceChildren();
 
   if (a.model) {
     loadModelViewer();
+    const previewStage = document.createElement("div");
+    previewStage.className = "stage stage-preview";
+    sheetViewer.appendChild(previewStage);
+
     const mv = document.createElement("model-viewer");
     mv.src = `assets/${a.slug}/model.glb`;
     mv.setAttribute("camera-controls", "");
@@ -506,14 +521,15 @@ function openSheet(a) {
     mv.setAttribute("exposure", "1.05");
     mv.setAttribute("poster", `assets/${a.slug}/poster.jpg`);
     if (a.kind === "articulated") mv.setAttribute("autoplay", "");
-    sheetViewer.appendChild(mv);
+    previewStage.appendChild(mv);
 
     const hint = document.createElement("span");
     hint.className = "viewer-hint";
     hint.textContent = t("hint_orbit");
-    sheetViewer.appendChild(hint);
+    previewStage.appendChild(hint);
 
-    if (a.kind === "articulated") jointBar(mv);
+    if (a.kind === "articulated") jointBar(mv, previewStage);
+    if (a.inspect) inspectTabs(a, previewStage);
   } else if (a.demo) {
     const video = document.createElement("video");
     video.className = "fallback";
@@ -547,14 +563,14 @@ function openSheet(a) {
   document.body.style.overflow = "hidden";
 }
 
-function jointBar(mv) {
+function jointBar(mv, stage) {
   const bar = document.createElement("div");
   bar.className = "joint-bar";
   bar.innerHTML = `
     <button class="joint-play" title="play / pause">❚❚</button>
     <input class="joint-slider" type="range" min="0" max="1000" value="0">
     <span class="joint-label">${t("joint_label")}</span>`;
-  sheetViewer.appendChild(bar);
+  (stage || sheetViewer).appendChild(bar);
 
   const play = bar.querySelector(".joint-play");
   const slider = bar.querySelector(".joint-slider");
@@ -584,6 +600,62 @@ function jointBar(mv) {
     const frac = time <= half ? time / half : (mv.duration - time) / half;
     slider.value = Math.round(frac * 1000);
   }, 120);
+}
+
+/* mesh × collision inspector: tab row swaps the preview stage for a
+   three.js stage that articulates visual meshes and convex hulls together */
+function inspectTabs(a, previewStage) {
+  const tabs = document.createElement("div");
+  tabs.className = "viewer-tabs";
+  tabs.innerHTML = ["preview", "visual", "collision", "both"]
+    .map((v) => `<button class="vtab${v === "preview" ? " active" : ""}" data-v="${v}">${t("view_" + v)}</button>`)
+    .join("");
+  sheetViewer.appendChild(tabs);
+
+  const inspStage = document.createElement("div");
+  inspStage.className = "stage stage-insp";
+  inspStage.hidden = true;
+  sheetViewer.appendChild(inspStage);
+
+  tabs.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".vtab");
+    if (!btn) return;
+    const v = btn.dataset.v;
+    tabs.querySelectorAll(".vtab").forEach((b) => b.classList.toggle("active", b === btn));
+    if (v === "preview") {
+      inspStage.hidden = true;
+      previewStage.hidden = false;
+      return;
+    }
+    previewStage.hidden = true;
+    inspStage.hidden = false;
+    if (!state.inspector) {
+      if (state.inspectorLoading) return;
+      state.inspectorLoading = true;
+      inspStage.innerHTML = `<span class="insp-loading">${t("insp_loading")}</span>`;
+      try {
+        const { createInspector } = await import("./inspect3d.js");
+        const handle = await createInspector(inspStage, `assets/${a.slug}/inspect/`, {
+          hulls: (n) => t("insp_hulls")(n),
+        });
+        inspStage.querySelector(".insp-loading")?.remove();
+        state.inspector = handle;
+      } catch (err) {
+        inspStage.innerHTML = `<span class="insp-loading">${t("insp_error")}</span>`;
+        console.error("inspector failed:", err);
+        return;
+      } finally {
+        state.inspectorLoading = false;
+      }
+    }
+    state.inspector.setMode(v);
+  });
+}
+
+function disposeInspector() {
+  state.inspector?.dispose();
+  state.inspector = null;
+  state.inspectorLoading = false;
 }
 
 function metaPanel(a) {
@@ -635,6 +707,7 @@ function metaPanel(a) {
 function closeSheet() {
   overlay.hidden = true;
   document.body.style.overflow = "";
+  disposeInspector();
   sheetViewer.replaceChildren();
   state.sheetAsset = null;
   if (state.sheetTimer) { clearInterval(state.sheetTimer); state.sheetTimer = null; }
