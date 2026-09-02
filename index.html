@@ -5,58 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Animis AI — The World Engine for Physical AI</title>
 <meta name="description" content="Animis AI builds the world engine for physical AI: simulation-ready assets, articulated objects, physical parameters and scalable scene generation for robot learning.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F5F4EF'/><circle cx='50' cy='50' r='22' fill='none' stroke='%23050505' stroke-width='9'/><line x1='50' y1='50' x2='86' y2='14' stroke='%23050505' stroke-width='9' stroke-linecap='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23FAF9F4'/><circle cx='50' cy='50' r='22' fill='none' stroke='%23211D16' stroke-width='9'/><line x1='50' y1='50' x2='86' y2='14' stroke='%23211D16' stroke-width='9' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Inter:wght@300..600&display=swap">
 <style>
 :root {
-  --paper:#F5F4EF; --box:#FBFAF6; --ink:#050505; --muted:#6E6A5E; --faint:#D4D1C5;
-  --serif:"Source Serif 4", Georgia, "Songti SC", "STSong", serif;
-  --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --maxw:1080px;
+  --paper:#FAF9F4; --card:#F1EEE6; --ink:#211D16; --muted:rgba(33,29,22,.55);
+  --line:#E4E0D4; --line-strong:#D3CEC0;
+  --serif:"Source Serif 4", Georgia, "Songti SC", "STSong", "Times New Roman", serif;
+  --sans:"Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --maxw:1140px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.65}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.shell{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+html[lang="zh-CN"] body{line-height:1.6}
 
-.site-header{max-width:var(--maxw);margin:0 auto;padding:44px 28px 0;display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.wordmark{font-family:var(--serif);font-size:22px;font-weight:500;text-decoration:none;letter-spacing:.2px}
-.site-nav{display:flex;gap:22px;font-size:13px}
-.site-nav a{text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px}
-.site-nav a:hover{border-bottom-color:var(--ink)}
+.site-header{max-width:var(--maxw);margin:0 auto;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.wordmark{font-weight:600;font-size:17px;text-decoration:none;letter-spacing:-.01em}
+.site-nav{display:flex;gap:28px;font-size:15px}
+.site-nav a{text-decoration:none;color:var(--ink);opacity:.85;transition:opacity .12s}
+.site-nav a:hover{opacity:.5}
 
-.hero{max-width:var(--maxw);margin:0 auto;padding:110px 28px 70px}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,58px);line-height:1.12;max-width:820px}
+.hero{max-width:var(--maxw);margin:0 auto;padding:104px 28px 96px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,64px);line-height:1.08;letter-spacing:-.02em;max-width:880px}
 .hero h1 em{font-style:italic}
-.hero .lede{margin-top:28px;max-width:640px;color:var(--muted);font-size:15px}
-.cta-row{margin-top:44px;display:flex;gap:16px;flex-wrap:wrap}
-.btn{display:inline-block;text-decoration:none;font-size:14px;padding:13px 22px;border:1px solid var(--ink);background:var(--box);box-shadow:4px 4px 0 var(--ink);transition:transform .08s, box-shadow .08s}
-.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
-.btn.primary{background:var(--ink);color:var(--paper)}
+html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
+.hero .lede{margin-top:30px;max-width:620px;color:var(--muted);font-size:18px;line-height:1.62}
+.cta-row{margin-top:44px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-size:15px;font-weight:500;padding:12px 24px;border-radius:6px;border:1px solid var(--line-strong);background:transparent;transition:background .12s,opacity .12s}
+.btn:hover{background:var(--card)}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary:hover{background:var(--ink);opacity:.85}
 
-.rule{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-.rule hr{border:0;border-top:1px solid var(--faint)}
+.rule hr{border:0;border-top:1px solid var(--line)}
 
-.section{max-width:var(--maxw);margin:0 auto;padding:64px 28px}
-.section h2{font-family:var(--serif);font-weight:500;font-size:26px;margin-bottom:10px}
-.section .sub{color:var(--muted);max-width:640px;margin-bottom:36px}
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-.pillar{border:1px solid var(--ink);background:var(--box);box-shadow:5px 5px 0 var(--ink);padding:24px 22px}
-.pillar .num{font-size:12px;color:var(--muted);letter-spacing:.14em}
-.pillar h3{font-family:var(--serif);font-weight:500;font-size:19px;margin:10px 0 10px}
-.pillar p{color:var(--muted);font-size:13.5px}
+.section{max-width:var(--maxw);margin:0 auto;padding:88px 28px}
+.section .kicker{display:block;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.section h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.2vw,38px);letter-spacing:-.01em;line-height:1.2;margin-bottom:12px}
+html[lang="zh-CN"] .section h2{letter-spacing:0}
+.section .sub{color:var(--muted);max-width:640px;font-size:17px;line-height:1.62;margin-bottom:48px}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.pillar{background:var(--card);border-radius:10px;padding:30px 28px}
+.pillar .num{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.1em}
+.pillar h3{font-family:var(--serif);font-weight:400;font-size:23px;letter-spacing:-.01em;margin:14px 0 10px}
+.pillar p{color:var(--muted);font-size:15px;line-height:1.62}
 
-.strip{max-width:var(--maxw);margin:0 auto;padding:0 28px 8px;display:flex;gap:34px;flex-wrap:wrap}
-.strip b{font-family:var(--serif);font-size:26px;font-weight:500}
-.strip span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.strip{max-width:var(--maxw);margin:0 auto;padding:0 28px 88px;display:flex;gap:56px;flex-wrap:wrap}
+.strip b{font-family:var(--serif);font-size:34px;font-weight:400;letter-spacing:-.01em}
+.strip span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px}
 
-.libcard{border:1px solid var(--ink);background:var(--box);box-shadow:6px 6px 0 var(--ink);padding:34px 30px;display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap}
-.libcard h3{font-family:var(--serif);font-weight:500;font-size:24px}
-.libcard p{color:var(--muted);max-width:520px;margin-top:8px;font-size:13.5px}
+.libcard{background:var(--card);border-radius:12px;padding:44px 40px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
+.libcard h3{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:-.01em}
+.libcard p{color:var(--muted);max-width:520px;margin-top:10px;font-size:15px;line-height:1.62}
 
-.site-footer{max-width:var(--maxw);margin:0 auto;padding:56px 28px 44px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:12.5px}
-.site-footer a{text-decoration:none;border-bottom:1px solid var(--faint)}
-.site-footer .fm{font-family:var(--serif);color:var(--ink);font-size:14px}
+.site-footer{max-width:var(--maxw);margin:0 auto;padding:40px 28px 48px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.site-footer a{text-decoration:none;color:var(--muted);transition:color .12s}
+.site-footer a:hover{color:var(--ink)}
+.site-footer .fm{font-weight:600;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -69,6 +77,8 @@ a{color:inherit}
     <a href="#" id="lang-toggle">中文</a>
   </nav>
 </header>
+
+<div class="rule"><hr></div>
 
 <section class="hero">
   <h1 data-i18n="hero_h1">We build the <em>world engine</em> for physical AI.</h1>
@@ -86,6 +96,7 @@ a{color:inherit}
 <div class="rule"><hr></div>
 
 <section class="section" id="company">
+  <span class="kicker" data-i18n="co_kicker">What we build</span>
   <h2 data-i18n="co_head">The world engine</h2>
   <p class="sub" data-i18n="co_sub">Physical AI is not short of models — it is
   short of data and environments. We supply both.</p>
@@ -118,6 +129,8 @@ a{color:inherit}
   <div><b>3</b><span data-i18n="s4">simulators validated</span></div>
 </div>
 
+<div class="rule"><hr></div>
+
 <section class="section">
   <div class="libcard">
     <div>
@@ -129,6 +142,8 @@ a{color:inherit}
     <a class="btn primary" href="https://animis-ai.github.io/asset-library/" data-i18n="lib_cta">Open the library →</a>
   </div>
 </section>
+
+<div class="rule"><hr></div>
 
 <footer class="site-footer">
   <span class="fm">Animis AI</span>
@@ -143,6 +158,7 @@ const I18N = {
     hero_h1:'We build the <em>world engine</em> for physical AI.',
     hero_lede:"Robots learn in simulation before they act in the world. Animis AI turns the physical world into its simulatable twin — assets with articulation, mass, friction and collision, generated at scale and validated in physics engines — so embodied intelligence has a world to train in.",
     cta_library:"Explore the Asset Library →", cta_more:"What we build",
+    co_kicker:"What we build",
     co_head:"The world engine",
     co_sub:"Physical AI is not short of models — it is short of data and environments. We supply both.",
     p1_h:"Real data",
@@ -161,6 +177,7 @@ const I18N = {
     hero_h1:'我们为物理 AI 构建<em>世界引擎</em>。',
     hero_lede:"机器人在走进真实世界之前，先在仿真世界里学习。Animis AI 把物理世界变成它的可仿真孪生——带铰接、质量、摩擦与碰撞的资产，规模化生成、并在物理引擎中验证——让具身智能有一个可以训练的世界。",
     cta_library:"进入资产库 →", cta_more:"我们做什么",
+    co_kicker:"我们做什么",
     co_head:"世界引擎",
     co_sub:"物理 AI 缺的不是模型，而是数据与环境。我们两者都提供。",
     p1_h:"真实数据",
