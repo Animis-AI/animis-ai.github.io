@@ -53,37 +53,41 @@ i { font-style: normal; }
 
 .shell { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 
-/* ---------------------------------------------------------------- header */
+/* ------------------------- header (shared style with the landing page) */
 .site-header {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 44px 28px 0;
+  padding: 26px 28px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
 }
 .wordmark {
-  font-family: var(--serif);
-  font-size: 28px;
-  font-weight: 500;
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
-.wordmark-logo { width: 30px; height: 30px; display: block; }
-.wordmark-sub { font-size: 22px; color: var(--ink); font-weight: 400; }
-.site-nav { display: flex; gap: 26px; }
+.wordmark-logo { width: 24px; height: 24px; display: block; }
+.wordmark-sub { font-size: 17px; color: var(--ink); font-weight: 400; }
+.header-rule { width: 100%; }
+.header-rule hr { border: 0; border-top: 1px solid var(--faint); }
+.site-nav { display: flex; gap: 28px; }
 .site-nav a {
   font-family: var(--mono);
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.12s;
 }
-.site-nav a:hover { text-decoration-thickness: 2px; }
+.site-nav a:hover { opacity: 0.5; }
 
 /* ----------------------------------------------------------------- intro */
 .hero {
