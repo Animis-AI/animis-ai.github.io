@@ -4,64 +4,36 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Animis AI — The World Engine for Physical AI</title>
-<meta name="description" content="Animis AI builds the world engine for physical AI: simulation-ready assets, articulated objects, physical parameters and scalable scene generation for robot learning.">
+<meta name="description" content="Animis AI builds the world engine for physical AI.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23FAF9F4'/><circle cx='50' cy='50' r='22' fill='none' stroke='%23211D16' stroke-width='9'/><line x1='50' y1='50' x2='86' y2='14' stroke='%23211D16' stroke-width='9' stroke-linecap='round'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Inter:wght@300..600&display=swap">
 <style>
 :root {
-  --paper:#FAF9F4; --card:#F1EEE6; --ink:#211D16; --muted:rgba(33,29,22,.55);
-  --line:#E4E0D4; --line-strong:#D3CEC0;
+  --paper:#FAF9F4; --ink:#211D16; --muted:rgba(33,29,22,.55); --line:#E4E0D4;
   --serif:"Source Serif 4", Georgia, "Songti SC", "STSong", "Times New Roman", serif;
   --sans:"Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
   --maxw:1140px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-html[lang="zh-CN"] body{line-height:1.6}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
 
-.site-header{max-width:var(--maxw);margin:0 auto;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.wordmark{font-weight:600;font-size:17px;text-decoration:none;letter-spacing:-.01em}
+.site-header{width:100%;max-width:var(--maxw);margin:0 auto;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.wordmark{font-weight:600;font-size:17px;text-decoration:none;letter-spacing:-.01em;color:inherit}
 .site-nav{display:flex;gap:28px;font-size:15px}
 .site-nav a{text-decoration:none;color:var(--ink);opacity:.85;transition:opacity .12s}
 .site-nav a:hover{opacity:.5}
 
-.hero{max-width:var(--maxw);margin:0 auto;padding:104px 28px 96px}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,64px);line-height:1.08;letter-spacing:-.02em;max-width:880px}
-.hero h1 em{font-style:italic}
-html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
-.hero .lede{margin-top:30px;max-width:620px;color:var(--muted);font-size:18px;line-height:1.62}
-.cta-row{margin-top:44px;display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;text-decoration:none;font-size:15px;font-weight:500;padding:12px 24px;border-radius:6px;border:1px solid var(--line-strong);background:transparent;transition:background .12s,opacity .12s}
-.btn:hover{background:var(--card)}
-.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.btn.primary:hover{background:var(--ink);opacity:.85}
-
+.rule{width:100%}
 .rule hr{border:0;border-top:1px solid var(--line)}
 
-.section{max-width:var(--maxw);margin:0 auto;padding:88px 28px}
-.section .kicker{display:block;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
-.section h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.2vw,38px);letter-spacing:-.01em;line-height:1.2;margin-bottom:12px}
-html[lang="zh-CN"] .section h2{letter-spacing:0}
-.section .sub{color:var(--muted);max-width:640px;font-size:17px;line-height:1.62;margin-bottom:48px}
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.pillar{background:var(--card);border-radius:10px;padding:30px 28px}
-.pillar .num{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.1em}
-.pillar h3{font-family:var(--serif);font-weight:400;font-size:23px;letter-spacing:-.01em;margin:14px 0 10px}
-.pillar p{color:var(--muted);font-size:15px;line-height:1.62}
+.hero{flex:1 0 auto;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,64px);line-height:1.08;letter-spacing:-.02em;max-width:880px;padding:96px 0 120px}
+.hero h1 em{font-style:italic}
+html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
 
-.strip{max-width:var(--maxw);margin:0 auto;padding:0 28px 88px;display:flex;gap:56px;flex-wrap:wrap}
-.strip b{font-family:var(--serif);font-size:34px;font-weight:400;letter-spacing:-.01em}
-.strip span{display:block;color:var(--muted);font-size:13.5px;margin-top:4px}
-
-.libcard{background:var(--card);border-radius:12px;padding:44px 40px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
-.libcard h3{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:-.01em}
-.libcard p{color:var(--muted);max-width:520px;margin-top:10px;font-size:15px;line-height:1.62}
-
-.site-footer{max-width:var(--maxw);margin:0 auto;padding:40px 28px 48px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.site-footer{width:100%;max-width:var(--maxw);margin:0 auto;padding:36px 28px 44px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:14px}
 .site-footer a{text-decoration:none;color:var(--muted);transition:color .12s}
 .site-footer a:hover{color:var(--ink)}
 .site-footer .fm{font-weight:600;color:var(--ink)}
@@ -72,7 +44,6 @@ html[lang="zh-CN"] .section h2{letter-spacing:0}
 <header class="site-header">
   <a class="wordmark" href="#">Animis&nbsp;AI</a>
   <nav class="site-nav">
-    <a href="#company" data-i18n="nav_company">Company</a>
     <a href="https://animis-ai.github.io/asset-library/" data-i18n="nav_library">Asset Library</a>
     <a href="#" id="lang-toggle">中文</a>
   </nav>
@@ -82,65 +53,6 @@ html[lang="zh-CN"] .section h2{letter-spacing:0}
 
 <section class="hero">
   <h1 data-i18n="hero_h1">We build the <em>world engine</em> for physical AI.</h1>
-  <p class="lede" data-i18n="hero_lede">Robots learn in simulation before they act
-  in the world. Animis AI turns the physical world into its simulatable twin —
-  assets with articulation, mass, friction and collision, generated at scale
-  and validated in physics engines — so embodied intelligence has a world to
-  train in.</p>
-  <div class="cta-row">
-    <a class="btn primary" href="https://animis-ai.github.io/asset-library/" data-i18n="cta_library">Explore the Asset Library →</a>
-    <a class="btn" href="#company" data-i18n="cta_more">What we build</a>
-  </div>
-</section>
-
-<div class="rule"><hr></div>
-
-<section class="section" id="company">
-  <span class="kicker" data-i18n="co_kicker">What we build</span>
-  <h2 data-i18n="co_head">The world engine</h2>
-  <p class="sub" data-i18n="co_sub">Physical AI is not short of models — it is
-  short of data and environments. We supply both.</p>
-  <div class="pillars">
-    <div class="pillar">
-      <div class="num">01</div>
-      <h3 data-i18n="p1_h">Real data</h3>
-      <p data-i18n="p1_p">Captured in the real world — cleaned, annotated, and
-      reconstructed back into simulation.</p>
-    </div>
-    <div class="pillar">
-      <div class="num">02</div>
-      <h3 data-i18n="p2_h">Synthetic data</h3>
-      <p data-i18n="p2_p">Generated at scale in simulation, automatically
-      annotated, ready for training.</p>
-    </div>
-    <div class="pillar">
-      <div class="num">03</div>
-      <h3 data-i18n="p3_h">Environment</h3>
-      <p data-i18n="p3_p">Interactive, high visual fidelity — where robots
-      train, and where they are evaluated.</p>
-    </div>
-  </div>
-</section>
-
-<div class="strip">
-  <div><b>5000+</b><span data-i18n="s1">articulated assets</span></div>
-  <div><b>47</b><span data-i18n="s2">categories</span></div>
-  <div><b>4</b><span data-i18n="s3">source datasets</span></div>
-  <div><b>3</b><span data-i18n="s4">simulators validated</span></div>
-</div>
-
-<div class="rule"><hr></div>
-
-<section class="section">
-  <div class="libcard">
-    <div>
-      <h3 data-i18n="lib_h">SimGen · Asset Library</h3>
-      <p data-i18n="lib_p">Our curated, browser-interactive catalogue of
-      sim-ready assets — orbit them, drive their joints, and license the full
-      packages for your robot-learning stack.</p>
-    </div>
-    <a class="btn primary" href="https://animis-ai.github.io/asset-library/" data-i18n="lib_cta">Open the library →</a>
-  </div>
 </section>
 
 <div class="rule"><hr></div>
@@ -154,42 +66,12 @@ html[lang="zh-CN"] .section h2{letter-spacing:0}
 <script>
 const I18N = {
   en: {
-    nav_company:"Company", nav_library:"Asset Library",
+    nav_library:"Asset Library",
     hero_h1:'We build the <em>world engine</em> for physical AI.',
-    hero_lede:"Robots learn in simulation before they act in the world. Animis AI turns the physical world into its simulatable twin — assets with articulation, mass, friction and collision, generated at scale and validated in physics engines — so embodied intelligence has a world to train in.",
-    cta_library:"Explore the Asset Library →", cta_more:"What we build",
-    co_kicker:"What we build",
-    co_head:"The world engine",
-    co_sub:"Physical AI is not short of models — it is short of data and environments. We supply both.",
-    p1_h:"Real data",
-    p1_p:"Captured in the real world — cleaned, annotated, and reconstructed back into simulation.",
-    p2_h:"Synthetic data",
-    p2_p:"Generated at scale in simulation, automatically annotated, ready for training.",
-    p3_h:"Environment",
-    p3_p:"Interactive, high visual fidelity — where robots train, and where they are evaluated.",
-    s1:"articulated assets", s2:"categories", s3:"source datasets", s4:"simulators validated",
-    lib_h:"SimGen · Asset Library",
-    lib_p:"Our curated, browser-interactive catalogue of sim-ready assets — orbit them, drive their joints, and license the full packages for your robot-learning stack.",
-    lib_cta:"Open the library →",
   },
   zh: {
-    nav_company:"公司", nav_library:"资产库",
+    nav_library:"资产库",
     hero_h1:'我们为物理 AI 构建<em>世界引擎</em>。',
-    hero_lede:"机器人在走进真实世界之前，先在仿真世界里学习。Animis AI 把物理世界变成它的可仿真孪生——带铰接、质量、摩擦与碰撞的资产，规模化生成、并在物理引擎中验证——让具身智能有一个可以训练的世界。",
-    cta_library:"进入资产库 →", cta_more:"我们做什么",
-    co_kicker:"我们做什么",
-    co_head:"世界引擎",
-    co_sub:"物理 AI 缺的不是模型，而是数据与环境。我们两者都提供。",
-    p1_h:"真实数据",
-    p1_p:"从真实世界采集——清洗、标注，并重建回仿真。",
-    p2_h:"合成数据",
-    p2_p:"在仿真中规模化生成，自动标注，可直接用于训练。",
-    p3_h:"环境",
-    p3_p:"可交互、高视觉保真——机器人在这里训练，也在这里被评测。",
-    s1:"铰接资产", s2:"品类", s3:"来源数据集", s4:"已验证仿真器",
-    lib_h:"SimGen · 资产库",
-    lib_p:"我们的精选在线目录：浏览器里即可旋转查看、驱动关节，并为你的机器人学习栈购买完整资产包。",
-    lib_cta:"打开资产库 →",
   },
 };
 let lang = localStorage.getItem("animis-lang") || "en";
