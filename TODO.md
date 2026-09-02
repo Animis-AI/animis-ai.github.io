@@ -1,12 +1,11 @@
-# TODO — animis-ai.github.io(公司落地页)
+# TODO — animis-ai.github.io(公司官网,单仓库)
 
-完整开发清单的单一事实来源在 **asset-library 仓库的 `TODO.md`**:
-https://github.com/Animis-AI/asset-library/blob/main/TODO.md
+资产库已并入本仓库 `asset-library/` 子目录(2026-09-02),线上 URL 不变;
+商店/支付相关待办见 `asset-library/TODO.md`。独立的 Animis-AI/asset-library
+GitHub 仓库已废弃待删。
 
 本仓库自身待办:
 
-- [ ] `[owner]` 首次发布:本仓库在 GitHub 上建好后 `git push -u origin main`,
-      Pages workflow 自动部署到 https://animis-ai.github.io/
 - [ ] `[owner]` AnyEgo 何时重新上线:页面暂时下线(anyego/ 已取消跟踪、
       入口全部移除),本地文件仍在 `anyego/`,恢复 = 删掉 .gitignore 里的
       `/anyego/`、`git add anyego`、加回导航链接。

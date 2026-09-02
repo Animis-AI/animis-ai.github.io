@@ -1,12 +1,14 @@
 # animis-ai.github.io
 
-Animis AI company landing page — "We build the world engine for physical AI."
+Animis AI 的全部官网，单仓库、纯静态、GitHub Pages（Actions）自动部署：
 
-One screen, one message: physical AI is short of data and environments, not
-models; we synthesize data, process real-world capture, and deliver
-interactive, high-fidelity, trainable and evaluatable environments.
+- `/` — 公司落地页：一句 slogan，"We build the world engine for physical AI."，
+  双语（英文默认，导航切换中文）。
+- `/asset-library/` — Sim-Ready Asset Library：仿真资产库（目前空目录占位，
+  购物车/登录/沙盒支付/定制需求功能可用）。资产文件与烘焙管线在构建机
+  `/data/wangyubin/animis/asset-library/`（`assets_staged/` + `pipeline/`），
+  上架流程见 `asset-library/README.md`。
+- `anyego/` — AnyEgo 产品页，暂时下线（未跟踪，见 `.gitignore`）。
 
-Static single page, bilingual EN/ZH (English default, toggle in the nav),
-deployed by GitHub Pages (Actions). The asset library lives in the sibling repo
-`asset-library` and is linked from the nav; `anyego/` is the product page for
-data augmentation and auto-annotation.
+改动后 `git push` 即上线。字体风格：Source Serif 4 标题 + Inter 正文
+（参照 current-robotics.com），中文回退宋体/苹方。
