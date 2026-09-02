@@ -69,7 +69,11 @@ i { font-style: normal; }
   font-size: 28px;
   font-weight: 500;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+.wordmark-logo { width: 30px; height: 30px; display: block; }
 .wordmark-sub { font-size: 22px; color: var(--ink); font-weight: 400; }
 .site-nav { display: flex; gap: 26px; }
 .site-nav a {
