@@ -1,8 +1,44 @@
 {
  "library": {
-  "articulated_total": 0,
-  "categories_total": 0,
-  "curated": 0
+  "articulated_total": 1,
+  "categories_total": 1,
+  "curated": 1
  },
- "assets": []
+ "assets": [
+  {
+   "slug": "giant_scissors",
+   "name_cn": "巨型剪刀",
+   "name_en": "Giant Scissors",
+   "kind": "articulated",
+   "category": "Tool",
+   "dataset": "Animis codegen",
+   "hero": true,
+   "joints": [
+    {
+     "name": "shear",
+     "type": "revolute",
+     "lower": 0.0,
+     "upper": 0.55
+    }
+   ],
+   "dof": 1,
+   "physics": {
+    "mass": 1.93,
+    "friction": 0.6,
+    "restitution": 0.1,
+    "material": "aluminium",
+    "engine": "mujoco · isaac · pybullet"
+   },
+   "formats": [
+    "URDF",
+    "MJCF",
+    "USD",
+    "GLB"
+   ],
+   "poster": true,
+   "demo": false,
+   "model": true,
+   "inspect": true
+  }
+ ]
 }

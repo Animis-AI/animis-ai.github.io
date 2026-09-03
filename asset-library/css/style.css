@@ -334,6 +334,12 @@ i { font-style: normal; }
   padding: 7px 12px;
 }
 .insp-joint-name { font-size: 11px; color: var(--muted); min-width: 90px; }
+.insp-play {
+  font: inherit; font-size: 11px; line-height: 1;
+  padding: 4px 7px; cursor: pointer;
+  border: 1px solid var(--ink); background: var(--box); color: var(--ink);
+}
+.insp-play:hover { box-shadow: 2px 2px 0 0 var(--ink); }
 .insp-joint input { flex: 1; accent-color: var(--ink); }
 .insp-joint-val { font-size: 11px; min-width: 42px; text-align: right; }
 .insp-count {

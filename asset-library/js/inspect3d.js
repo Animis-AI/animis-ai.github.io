@@ -8,6 +8,24 @@ import * as THREE from "three";
 import { OrbitControls } from "../vendor/three/OrbitControls.js";
 import { GLTFLoader } from "../vendor/three/GLTFLoader.js";
 
+// soft top-lit studio gradient, used as the image-based light
+function studioEnvTexture() {
+  const c = document.createElement("canvas");
+  c.width = 32;
+  c.height = 256;
+  const g = c.getContext("2d");
+  const grd = g.createLinearGradient(0, 0, 0, c.height);
+  grd.addColorStop(0.0, "#ffffff");
+  grd.addColorStop(0.5, "#f7f5f1");
+  grd.addColorStop(1.0, "#e4e1db");
+  g.fillStyle = grd;
+  g.fillRect(0, 0, c.width, c.height);
+  const tex = new THREE.CanvasTexture(c);
+  tex.mapping = THREE.EquirectangularReflectionMapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
 const HULL_HUES = [210, 25, 130, 270, 55, 175, 330, 95, 240, 15, 300, 150];
 
 // URDF rpy is fixed-axis XYZ: R = Rz(yaw) * Ry(pitch) * Rx(roll)
@@ -31,11 +49,18 @@ export async function createInspector(container, base, labels) {
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x998f7d, 1.15));
-  const key = new THREE.DirectionalLight(0xffffff, 1.6);
+  // Metals need something to reflect: with no environment map a metallic
+  // material renders black. A soft studio gradient keeps polished assets
+  // reading as clean metal — RoomEnvironment's lit panels mirror onto them
+  // as hard bright/dark rectangles.
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromEquirectangular(studioEnvTexture()).texture;
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x998f7d, 0.65));
+  const key = new THREE.DirectionalLight(0xffffff, 1.1);
   key.position.set(2.5, 4, 3);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xfff4e0, 0.5);
+  const fill = new THREE.DirectionalLight(0xfff4e0, 0.35);
   fill.position.set(-3, 1.5, -2);
   scene.add(fill);
 
@@ -119,6 +144,11 @@ export async function createInspector(container, base, labels) {
             transparent: true,
             opacity: 1,
             shininess: 18,
+            // hulls hug the visual surface (thin blades are coplanar with
+            // theirs): pull them forward so overlay mode cannot z-fight
+            polygonOffset: true,
+            polygonOffsetFactor: -2,
+            polygonOffsetUnits: -2,
           });
           n.material = mat;
           collisionMats.push(mat);
@@ -169,6 +199,7 @@ export async function createInspector(container, base, labels) {
     <div class="insp-joints">
       ${movable.map((j, i) => `
         <label class="insp-joint">
+          ${i === 0 ? `<button class="insp-play" type="button" title="play / pause">❚❚</button>` : ""}
           <span class="insp-joint-name">${j.name}</span>
           <input type="range" min="0" max="1000" value="0" data-j="${i}">
           <span class="insp-joint-val" data-jv="${i}">${fmtVal(j)}</span>
@@ -177,12 +208,31 @@ export async function createInspector(container, base, labels) {
     <span class="insp-count">${labels.hulls(hullTotal)}</span>`;
   container.appendChild(ui);
 
+  const paint = (i) => {
+    const j = movable[i];
+    ui.querySelector(`[data-jv="${i}"]`).textContent = fmtVal(j);
+    ui.querySelector(`input[data-j="${i}"]`).value =
+      Math.round((j.value - j.lower) / ((j.upper - j.lower) || 1) * 1000);
+  };
   ui.querySelectorAll("input[data-j]").forEach((inp) =>
     inp.addEventListener("input", () => {
+      playing = false;
+      const play = ui.querySelector(".insp-play");
+      if (play) play.textContent = "▶";
       const j = movable[+inp.dataset.j];
       setJoint(j, j.lower + (inp.value / 1000) * (j.upper - j.lower));
       ui.querySelector(`[data-jv="${inp.dataset.j}"]`).textContent = fmtVal(j);
     }));
+
+  // sweep every joint closed -> open -> closed so the hulls articulate on their own
+  let playing = movable.length > 0;
+  let sweep = 0;
+  const SWEEP_SECONDS = 3;
+  const playBtn = ui.querySelector(".insp-play");
+  playBtn?.addEventListener("click", () => {
+    playing = !playing;
+    playBtn.textContent = playing ? "❚❚" : "▶";
+  });
   setMode("both");
 
   // -- loop / resize / dispose --------------------------------------------
@@ -196,7 +246,17 @@ export async function createInspector(container, base, labels) {
   resize();
   const ro = new ResizeObserver(resize);
   ro.observe(container);
+  const clock = new THREE.Clock();
   renderer.setAnimationLoop(() => {
+    const dt = clock.getDelta();
+    if (playing && movable.length) {
+      sweep = (sweep + dt / SWEEP_SECONDS) % 1;
+      const frac = sweep <= 0.5 ? sweep * 2 : (1 - sweep) * 2;
+      movable.forEach((j, i) => {
+        setJoint(j, j.lower + frac * (j.upper - j.lower));
+        paint(i);
+      });
+    }
     controls.update();
     renderer.render(scene, camera);
   });
@@ -207,6 +267,8 @@ export async function createInspector(container, base, labels) {
       renderer.setAnimationLoop(null);
       ro.disconnect();
       controls.dispose();
+      scene.environment?.dispose();
+      pmrem.dispose();
       renderer.dispose();
       scene.traverse((n) => {
         n.geometry?.dispose?.();

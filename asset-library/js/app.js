@@ -617,6 +617,7 @@ function openSheet(a) {
     mv.setAttribute("shadow-intensity", "0.9");
     mv.setAttribute("shadow-softness", "0.8");
     mv.setAttribute("exposure", "1.05");
+    mv.setAttribute("environment-image", "neutral");   // even light for metals
     mv.setAttribute("poster", `assets/${a.slug}/poster.jpg`);
     if (a.kind === "articulated") mv.setAttribute("autoplay", "");
     previewStage.appendChild(mv);
