@@ -118,3 +118,14 @@
 - [x] 双语目录站上线:96 件资产、交互查看、关节驱动(2026-08-21)
 - [x] AnyEgo 产品页上线(浏览器内扩增演示 + 标注示例 + API 规格 + 申请入口),
       落地页与资产库导航已互链(2026-08-22)
+
+## 3D 检视器(2026-09-02)
+
+- 检视器代码已合入(js/inspect3d.js + vendor/three);资产带 `inspect: true`
+  且存在 `assets/<slug>/inspect/`(由旧仓 pipeline/build_inspect.py 从
+  simready URDF 包生成)即出现 预览/视觉/碰撞/叠加 四个 tab。
+- 测试资产 oven_0001 已下架(2026-09-03,manifest 恢复空清单);其
+  inspect bundle 仍留在本地 `assets/oven_0001/`(gitignore),本地想再看:
+  往 `data/assets.json` 塞回条目即可(条目模板见 git log 或重新跑管线)。
+- 正式上架时:visual GLB 建议过 gltf-transform 压缩(oven 检视 bundle
+  现在 20 MB);build_manifest.py 需补 `inspect` 字段自动检测。
