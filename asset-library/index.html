@@ -83,11 +83,40 @@
         <input type="email" id="auth-email" required autocomplete="email"></label>
       <label><span data-i18n="auth_password">Password</span>
         <input type="password" id="auth-password" required minlength="6" autocomplete="current-password"></label>
+      <div id="auth-profile" hidden>
+        <label><span data-i18n="auth_name">Full name</span>
+          <input id="auth-name" maxlength="80" autocomplete="name"></label>
+        <label><span data-i18n="auth_org">Institution / school / company</span>
+          <input id="auth-org" maxlength="120" autocomplete="organization"></label>
+        <label class="check-row"><input type="checkbox" id="auth-followup">
+          <span data-i18n="auth_followup">I'm open to a follow-up conversation about how I use the assets.</span></label>
+      </div>
       <p class="form-error" id="auth-error" hidden></p>
       <button class="btn-solid" type="submit" id="auth-submit" data-i18n="auth_signin">Sign in</button>
     </form>
     <p class="modal-switch"><span id="auth-switch-label" data-i18n="auth_noaccount">No account yet?</span>
       <a href="#" id="auth-switch" data-i18n="auth_register">Register</a></p>
+  </div>
+</div>
+
+<!-- license agreement modal (shown before payment; acceptance is recorded) -->
+<div class="modal-overlay" id="lic-overlay" hidden>
+  <div class="modal-backdrop" data-close="lic"></div>
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="sheet-close" data-close="lic" aria-label="close">×</button>
+    <h3 data-i18n="lic_head">License terms</h3>
+    <p class="modal-sub" data-i18n="lic_sub">Please read before purchase — your acceptance is recorded with the order.</p>
+    <ul class="lic-terms">
+      <li data-i18n="lic_t1">The assets are licensed to you (and your immediate team or lab) for your own research, development, training and evaluation.</li>
+      <li data-i18n="lic_t2">No resale, sublicensing, redistribution or public re-hosting of the assets or derivative asset packages.</li>
+      <li data-i18n="lic_t3">Your registration details and this acceptance are kept on record with your purchases.</li>
+    </ul>
+    <form id="lic-form">
+      <label class="check-row"><input type="checkbox" id="lic-agree" required>
+        <span data-i18n="lic_agree_label">I have read and agree to the terms above.</span></label>
+      <p class="form-error" id="lic-error" hidden></p>
+      <button class="btn-solid" type="submit" id="lic-submit" disabled data-i18n="lic_continue">Agree &amp; continue to payment</button>
+    </form>
   </div>
 </div>
 

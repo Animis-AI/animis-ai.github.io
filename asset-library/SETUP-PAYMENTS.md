@@ -24,8 +24,11 @@
 
 服务端三件套(Supabase 侧):
 
-1. 表:`purchases (id, user_id, slugs text[], total numeric, currency text, at timestamptz)`,
-   开 RLS:`user_id = auth.uid()` 只读own。
+1. 表:`purchases (id, user_id, slugs text[], total numeric, currency text,
+   license jsonb, at timestamptz)`,开 RLS:`user_id = auth.uid()` 只读own。
+   `license` 存前端传来的 `{version, acceptedAt}`(许可确认留档);
+   注册档案(姓名/机构/是否接受回访)在 `auth.users.raw_user_meta_data`,
+   前端注册时已通过 `signUp options.data` 写入。
 2. 边缘函数 `checkout`:验证 JWT → 按 slugs 计价 → `stripe.checkout.sessions.create`
    (metadata 带 user_id+slugs)→ 返回 Stripe 支付页 URL。
    Stripe webhook(`checkout.session.completed`)→ 写入 `purchases` 表。
@@ -44,6 +47,20 @@
 - endpoint 留空时的兜底:提交会拉起访客邮件客户端,预填好需求内容发给你。
 - 进阶:走 Supabase 表 + Database Webhook,可同时推**飞书/钉钉群机器人**
   (服务端转发,浏览器直连群机器人会被 CORS 拦)+ 邮件(Resend 免费层)。
+
+## 记录留痕(注册 / 许可确认 / 购买)
+
+前端在三个节点各记一条:注册(邮箱+姓名+机构+是否接受回访)、支付前的许可
+协议确认(版本号+时间+资产清单)、支付完成(订单)。每条记录:
+
+- 永远追加到访客浏览器 `localStorage["simgen-records"]`(demo 档的本地留档);
+- `CONFIG.requests.endpoint` 配置了 Formspree/webhook 时,同步 POST 一份——
+  **配好 endpoint 你的邮箱就有全部注册与购买记录**(强烈建议上线前配好);
+- supabase 档另有服务端留档(user metadata + purchases.license)。
+
+购买流程强制顺序:登录 → 许可协议(勾选"已阅读并同意"才能继续)→ 支付;
+未登录点结算会先弹注册/登录。协议文本版本号在 `js/app.js` 的
+`LICENSE_VERSION`,改协议时同步升版本号,历史记录即可区分新旧协议。
 
 ## 定价
 

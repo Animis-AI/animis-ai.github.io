@@ -22,9 +22,19 @@ const I18N = {
     auth_noaccount: "No account yet?", auth_haveaccount: "Already registered?",
     auth_sub_demo: "Sandbox accounts — stored in this browser only.",
     auth_sub_live: "Sign in to purchase and download assets.",
+    auth_name: "Full name", auth_org: "Institution / school / company",
+    auth_followup: "I'm open to a follow-up conversation about how I use the assets.",
     auth_err_badcreds: "Wrong email or password.",
     auth_err_exists: "This email is already registered — sign in instead.",
     auth_err_generic: "Something went wrong — try again.",
+    auth_err_profile: "Please fill in your name and institution.",
+    lic_head: "License terms",
+    lic_sub: "Please read before purchase — your acceptance is recorded with the order.",
+    lic_t1: "The assets are licensed to you (and your immediate team or lab) for your own research, development, training and evaluation.",
+    lic_t2: "No resale, sublicensing, redistribution or public re-hosting of the assets or derivative asset packages.",
+    lic_t3: "Your registration details and this acceptance are kept on record with your purchases.",
+    lic_agree_label: "I have read and agree to the terms above.",
+    lic_continue: "Agree & continue to payment",
     pay_head: "Checkout",
     pay_sandbox: "SANDBOX PAYMENT — no real charge. Use card 4242 4242 4242 4242.",
     pay_card: "Card number", pay_exp: "Expiry",
@@ -74,9 +84,19 @@ const I18N = {
     auth_noaccount: "还没有账号？", auth_haveaccount: "已有账号？",
     auth_sub_demo: "沙盒账号——仅保存在当前浏览器。",
     auth_sub_live: "登录后即可购买并下载资产。",
+    auth_name: "姓名", auth_org: "机构 / 学校 / 公司",
+    auth_followup: "接受我们后续就资产使用情况进行回访。",
     auth_err_badcreds: "邮箱或密码不正确。",
     auth_err_exists: "该邮箱已注册，请直接登录。",
     auth_err_generic: "出错了，请重试。",
+    auth_err_profile: "请填写姓名和机构/学校。",
+    lic_head: "许可协议",
+    lic_sub: "购买前请阅读——你的确认将随订单一并记录。",
+    lic_t1: "资产仅授权你本人（及你所在团队/课题组）用于自己的研究、开发、训练与评测。",
+    lic_t2: "不得转卖、再授权、二次分发，或公开托管资产及衍生资产包。",
+    lic_t3: "你的注册信息与本次确认将与购买记录一同留档。",
+    lic_agree_label: "我已阅读并同意上述协议。",
+    lic_continue: "同意并继续支付",
     pay_head: "结算",
     pay_sandbox: "沙盒支付——不产生真实扣款。测试卡号 4242 4242 4242 4242。",
     pay_card: "卡号", pay_exp: "有效期",
@@ -207,6 +227,10 @@ async function init() {
   });
   document.getElementById("auth-form").addEventListener("submit", onAuthSubmit);
   document.getElementById("pay-form").addEventListener("submit", onPaySubmit);
+  document.getElementById("lic-form").addEventListener("submit", onLicenseSubmit);
+  document.getElementById("lic-agree").addEventListener("change", (e) => {
+    document.getElementById("lic-submit").disabled = !e.target.checked;
+  });
   document.getElementById("acct-signout").addEventListener("click", async () => {
     await account.signOut();
     closeModal("acct");
@@ -223,7 +247,7 @@ async function init() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    for (const m of ["auth", "pay", "acct", "req"]) {
+    for (const m of ["auth", "lic", "pay", "acct", "req"]) {
       const el = document.getElementById(`${m}-overlay`);
       if (!el.hidden) { el.hidden = true; return; }
     }
@@ -257,6 +281,9 @@ function paintAuthModal() {
   document.getElementById("auth-switch-label").textContent = t(reg ? "auth_haveaccount" : "auth_noaccount");
   document.getElementById("auth-switch").textContent = t(reg ? "auth_signin" : "auth_register");
   document.getElementById("auth-sub").textContent = t(account.isDemo ? "auth_sub_demo" : "auth_sub_live");
+  document.getElementById("auth-profile").hidden = !reg;
+  document.getElementById("auth-name").required = reg;
+  document.getElementById("auth-org").required = reg;
 }
 
 async function onAuthSubmit(e) {
@@ -266,8 +293,22 @@ async function onAuthSubmit(e) {
   const email = document.getElementById("auth-email").value;
   const pw = document.getElementById("auth-password").value;
   try {
-    if (state.authMode === "register") await account.register(email, pw);
-    else await account.signIn(email, pw);
+    if (state.authMode === "register") {
+      const profile = {
+        name: document.getElementById("auth-name").value.trim(),
+        org: document.getElementById("auth-org").value.trim(),
+        followup_ok: document.getElementById("auth-followup").checked,
+      };
+      if (!profile.name || !profile.org) {
+        err.textContent = t("auth_err_profile");
+        err.hidden = false;
+        return;
+      }
+      await account.register(email, pw, profile);
+      record("register", { email: email.trim().toLowerCase(), ...profile });
+    } else {
+      await account.signIn(email, pw);
+    }
     closeModal("auth");
     if (state.afterAuth) { const fn = state.afterAuth; state.afterAuth = null; fn(); }
   } catch (ex) {
@@ -276,6 +317,51 @@ async function onAuthSubmit(e) {
     err.textContent = t(key);
     err.hidden = false;
   }
+}
+
+/* -------------------------------------------- record keeping (see TODO.md)
+   Every registration, license acceptance and purchase is appended to a local
+   log, and mirrored to CONFIG.requests.endpoint (Formspree/webhook -> email)
+   when one is configured, so the owner holds a copy of every record. In
+   supabase mode the backend additionally keeps them server-side. */
+const LICENSE_VERSION = "v1-2026-09-03";
+
+function record(kind, data) {
+  const entry = { kind: `simgen-${kind}`, ...data,
+                  page: location.href, at: new Date().toISOString() };
+  const log = JSON.parse(localStorage.getItem("simgen-records") || "[]");
+  log.push(entry);
+  localStorage.setItem("simgen-records", JSON.stringify(log));
+  if (CONFIG.requests.endpoint) {
+    fetch(CONFIG.requests.endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify(entry),
+    }).catch(() => {});                       // best-effort mirror, never blocks UX
+  }
+}
+
+/* ------------------------------------------------- license agreement gate */
+function openLicenseModal() {
+  const agree = document.getElementById("lic-agree");
+  agree.checked = false;
+  document.getElementById("lic-submit").disabled = true;
+  document.getElementById("lic-error").hidden = true;
+  document.getElementById("lic-overlay").hidden = false;
+}
+
+function onLicenseSubmit(e) {
+  e.preventDefault();
+  if (!document.getElementById("lic-agree").checked) return;
+  state.license = { version: LICENSE_VERSION, acceptedAt: new Date().toISOString() };
+  record("license-accept", {
+    email: account.user.email,
+    version: LICENSE_VERSION,
+    slugs: [...cart.items],
+  });
+  closeModal("lic");
+  if (account.isDemo) openPayModal();
+  else account.startRealCheckout([...cart.items], state.license);
 }
 
 function openPayModal() {
@@ -308,7 +394,16 @@ async function onPaySubmit(e) {
   btn.disabled = true;
   btn.textContent = t("pay_processing");
   await new Promise((r) => setTimeout(r, 900));      // sandbox latency
-  await account.completeSandboxPurchase([...cart.items], state.payTotal);
+  const slugs = [...cart.items];
+  await account.completeSandboxPurchase(slugs, state.payTotal, state.license);
+  record("purchase", {
+    email: account.user.email,
+    slugs,
+    total: state.payTotal,
+    currency: CONFIG.pricing.currency,
+    license: state.license,
+  });
+  state.license = null;
   cart.items = [];
   cart.save();
   renderCart();
@@ -318,7 +413,9 @@ async function onPaySubmit(e) {
 }
 
 async function openAcctModal() {
-  document.getElementById("acct-email").textContent = account.user.email +
+  const p = account.user.profile;
+  document.getElementById("acct-email").textContent =
+    (p?.name ? `${p.name} · ${p.org} · ` : "") + account.user.email +
     (account.isDemo ? " · sandbox" : "");
   const box = document.getElementById("acct-purchases");
   const orders = await account.purchases();
@@ -751,6 +848,5 @@ function renderCart() {
 function checkout() {
   if (!cart.items.length) return;
   if (!account.user) { openAuthModal(checkout); return; }   // login gate
-  if (!account.isDemo) { account.startRealCheckout([...cart.items]); return; }
-  openPayModal();
+  openLicenseModal();                                       // license gate
 }

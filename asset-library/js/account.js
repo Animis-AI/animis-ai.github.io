@@ -22,15 +22,16 @@ const DemoBackend = {
   _users() { return JSON.parse(localStorage.getItem("simgen-users") || "{}"); },
   _saveUsers(u) { localStorage.setItem("simgen-users", JSON.stringify(u)); },
 
-  async register(email, password) {
+  async register(email, password, profile) {
     email = email.trim().toLowerCase();
     const users = this._users();
     if (users[email]) throw new Error("exists");
     const salt = crypto.randomUUID();
-    users[email] = { salt, hash: await sha256(salt + password), created: Date.now() };
+    users[email] = { salt, hash: await sha256(salt + password),
+                     profile: profile || null, created: Date.now() };
     this._saveUsers(users);
     localStorage.setItem("simgen-session", email);
-    return { email };
+    return { email, profile };
   },
 
   async signIn(email, password) {
@@ -38,14 +39,15 @@ const DemoBackend = {
     const u = this._users()[email];
     if (!u || (await sha256(u.salt + password)) !== u.hash) throw new Error("badcreds");
     localStorage.setItem("simgen-session", email);
-    return { email };
+    return { email, profile: u.profile || null };
   },
 
   async signOut() { localStorage.removeItem("simgen-session"); },
 
   async session() {
     const email = localStorage.getItem("simgen-session");
-    return email ? { email } : null;
+    if (!email) return null;
+    return { email, profile: this._users()[email]?.profile || null };
   },
 
   _pkey(email) { return `simgen-purchases-${email}`; },
@@ -53,11 +55,13 @@ const DemoBackend = {
     return JSON.parse(localStorage.getItem(this._pkey(user.email)) || "[]");
   },
 
-  /* Sandbox payment: caller shows the payment modal; this records the result. */
-  async completePurchase(user, slugs, total) {
+  /* Sandbox payment: caller shows the payment modal; this records the result.
+     `license` = {version, acceptedAt} — the buyer's recorded agreement. */
+  async completePurchase(user, slugs, total, license) {
     const orders = await this.purchases(user);
     orders.push({ id: "demo_" + crypto.randomUUID().slice(0, 8), slugs, total,
-                  currency: CONFIG.pricing.currency, at: new Date().toISOString() });
+                  currency: CONFIG.pricing.currency, license: license || null,
+                  at: new Date().toISOString() });
     localStorage.setItem(this._pkey(user.email), JSON.stringify(orders));
   },
 
@@ -79,11 +83,13 @@ const SupabaseBackend = {
     }
     return this._client;
   },
-  async register(email, password) {
+  async register(email, password, profile) {
     const sb = await this._sb();
-    const { data, error } = await sb.auth.signUp({ email, password });
+    // profile lands in auth.users.raw_user_meta_data — the permanent record
+    const { data, error } = await sb.auth.signUp(
+      { email, password, options: { data: profile || {} } });
     if (error) throw new Error(error.message);
-    return { email: data.user.email };
+    return { email: data.user.email, profile };
   },
   async signIn(email, password) {
     const sb = await this._sb();
@@ -103,15 +109,16 @@ const SupabaseBackend = {
     return data.map((r) => ({ id: r.id, slugs: r.slugs, total: r.total,
                               currency: r.currency, at: r.at }));
   },
-  /* Real checkout: redirect to Stripe; the webhook records the purchase. */
-  async startCheckout(_user, slugs) {
+  /* Real checkout: redirect to Stripe; the webhook records the purchase
+     (license acceptance rides along and is stored on the purchase row). */
+  async startCheckout(_user, slugs, license) {
     const sb = await this._sb();
     const { data: { session } } = await sb.auth.getSession();
     const res = await fetch(CONFIG.supabase.checkoutFn, {
       method: "POST",
       headers: { "content-type": "application/json",
                  authorization: `Bearer ${session.access_token}` },
-      body: JSON.stringify({ slugs, return_url: location.href }),
+      body: JSON.stringify({ slugs, license, return_url: location.href }),
     });
     const { url } = await res.json();
     location.href = url;                       // Stripe-hosted payment page
@@ -154,8 +161,8 @@ export const account = {
 
   owns(slug) { return this.owned.has(slug); },
 
-  async register(email, password) {
-    this.user = await backend.register(email, password);
+  async register(email, password, profile) {
+    this.user = await backend.register(email, password, profile);
     await this._refreshOwned(); this._emit();
   },
   async signIn(email, password) {
@@ -170,11 +177,11 @@ export const account = {
   purchases() { return this.user ? backend.purchases(this.user) : []; },
 
   /* demo: record sandbox payment; supabase: redirect to Stripe instead */
-  async completeSandboxPurchase(slugs, total) {
-    await backend.completePurchase(this.user, slugs, total);
+  async completeSandboxPurchase(slugs, total, license) {
+    await backend.completePurchase(this.user, slugs, total, license);
     await this._refreshOwned(); this._emit();
   },
-  startRealCheckout(slugs) { return backend.startCheckout(this.user, slugs); },
+  startRealCheckout(slugs, license) { return backend.startCheckout(this.user, slugs, license); },
 
   downloadUrl(slug) { return backend.downloadUrl(this.user, slug); },
 };
