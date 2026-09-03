@@ -45,7 +45,8 @@ const I18N = {
     acct_head: "Account", acct_purchases: "Purchases",
     acct_none: "No purchases yet.",
     acct_order: (n, total, date) => `${n} asset(s) · ${total} · ${date}`,
-    dl_package: "Download asset", purchased: "Purchased ✓",
+    dl_package: "Get the package", purchased: "Purchased ✓",
+    dl_by_email: "Request logged — we email the full package to your account address.",
     nav_request: "Request an asset",
     req_head: "Request a custom asset",
     req_sub: "Tell us what your sim needs — we build new assets on request and reply by email.",
@@ -60,14 +61,10 @@ const I18N = {
     k_mass: "Mass", k_friction: "Friction", k_restitution: "Restitution",
     k_material: "Material", k_engine: "Engine",
     preview: "Preview GLB", add_cart: "Add to cart", in_cart: "In cart ✓",
-    meta_note: "Purchase unlocks the download. Full packages (URDF, per-link meshes, collision hulls, physics report) ship on the live store; the sandbox delivers the compressed GLB.",
-    hint_orbit: "DRAG TO ORBIT · SCROLL TO ZOOM", hint_video: "JOINT SWEEP RENDER",
-    joint_label: "JOINT DRIVE", rigid_label: "rigid", dof_suffix: "DOF",
-    view_preview: "Preview", view_visual: "Visual mesh",
-    view_collision: "Collision", view_both: "Overlay",
-    insp_hulls: (n) => `${n} convex hulls`,
-    insp_loading: "Loading meshes…",
-    insp_error: "Could not load the inspector — try reopening the asset.",
+    meta_note: "Purchase unlocks delivery of the full package — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics report. Previews on this page are offline renders of that package.",
+    clip_hinge: "Hinge motion", clip_collision: "Collision bodies",
+    clip_physics: "Physics drop",
+    rigid_label: "rigid", dof_suffix: "DOF",
   },
   zh: {
     nav_home: "Animis AI", nav_cart: "选购清单",
@@ -107,7 +104,8 @@ const I18N = {
     acct_head: "账户", acct_purchases: "已购资产",
     acct_none: "还没有购买记录。",
     acct_order: (n, total, date) => `${n} 件 · ${total} · ${date}`,
-    dl_package: "下载资产", purchased: "已购买 ✓",
+    dl_package: "获取资产包", purchased: "已购买 ✓",
+    dl_by_email: "已记录——完整资产包将发送到你的注册邮箱。",
     nav_request: "定制需求",
     req_head: "提交定制资产需求",
     req_sub: "告诉我们你的仿真需要什么——我们按需求新建资产，并通过邮件回复。",
@@ -123,13 +121,9 @@ const I18N = {
     k_material: "材质", k_engine: "引擎",
     preview: "预览 GLB", add_cart: "加入选购", in_cart: "已在清单 ✓",
     meta_note: "购买后解锁下载。正式商店交付完整资产包（URDF + 逐链接网格 + 碰撞凸包 + 物理报告）；沙盒环境交付压缩 GLB。",
-    hint_orbit: "拖动旋转 · 滚轮缩放", hint_video: "关节演示渲染",
-    joint_label: "关节驱动", rigid_label: "刚体", dof_suffix: "DOF",
-    view_preview: "预览", view_visual: "视觉网格",
-    view_collision: "碰撞体", view_both: "叠加",
-    insp_hulls: (n) => `${n} 个碰撞凸包`,
-    insp_loading: "网格加载中…",
-    insp_error: "检视器加载失败——请关闭后重新打开该资产。",
+    clip_hinge: "铰链开合", clip_collision: "碰撞体",
+    clip_physics: "物理掉落",
+    rigid_label: "刚体", dof_suffix: "DOF",
   },
 };
 
@@ -443,9 +437,14 @@ async function openAcctModal() {
 
 async function downloadAsset(slug) {
   const url = await account.downloadUrl(slug);
+  if (!url) {                       // sandbox: packages are not hosted here
+    record("download-request", { email: account.user?.email, slug });
+    toast(t("dl_by_email"));
+    return;
+  }
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${slug}.glb`;
+  a.download = `${slug}.zip`;
   a.click();
 }
 
@@ -564,7 +563,7 @@ function card(a) {
   el.innerHTML = `
     <div class="card-media">
       <img loading="lazy" src="assets/${a.slug}/poster.jpg" alt="${a.name_en}">
-      ${a.demo ? `<video muted loop playsinline preload="none" src="assets/${a.slug}/demo.mp4"></video>` : ""}
+      ${cardClip(a) ? `<video muted loop playsinline preload="none" src="assets/${a.slug}/${cardClip(a)}"></video>` : ""}
     </div>
     <div class="card-body">
       <div class="card-name">${aName(a)}</div>
@@ -590,57 +589,64 @@ function card(a) {
 
 /* ------------------------------------------------------------- the sheet */
 
-// model-viewer is ~1.4 MB: pull it in the first time a 3D asset is opened
-let modelViewerModule = null;
-function loadModelViewer() {
-  modelViewerModule ||= import("../vendor/model-viewer.min.js");
-  return modelViewerModule;
+/* Detail sheet plays the Blender-rendered clips shipped with the asset —
+   the offline renders keep the delivered textures and lighting, which a
+   realtime viewer in the page cannot match. */
+// hover clip for the grid card: first shipped render, else the legacy demo
+function cardClip(a) {
+  return a.media?.[0]?.file || (a.demo ? "demo.mp4" : null);
 }
 
 function openSheet(a) {
-  if (state.sheetTimer) { clearInterval(state.sheetTimer); state.sheetTimer = null; }
-  disposeInspector();
   state.sheetAsset = a;
   sheetViewer.replaceChildren();
   sheetMeta.replaceChildren();
 
-  if (a.model) {
-    loadModelViewer();
-    const previewStage = document.createElement("div");
-    previewStage.className = "stage stage-preview";
-    sheetViewer.appendChild(previewStage);
+  const clips = a.media || [];
+  if (clips.length) {
+    const stage = document.createElement("div");
+    stage.className = "stage";
+    sheetViewer.appendChild(stage);
 
-    const mv = document.createElement("model-viewer");
-    mv.src = `assets/${a.slug}/model.glb`;
-    mv.setAttribute("camera-controls", "");
-    mv.setAttribute("interaction-prompt", "none");
-    mv.setAttribute("shadow-intensity", "0.9");
-    mv.setAttribute("shadow-softness", "0.8");
-    mv.setAttribute("exposure", "1.05");
-    mv.setAttribute("environment-image", "neutral");   // even light for metals
-    mv.setAttribute("poster", `assets/${a.slug}/poster.jpg`);
-    if (a.kind === "articulated") mv.setAttribute("autoplay", "");
-    previewStage.appendChild(mv);
+    const video = document.createElement("video");
+    video.className = "clip";
+    video.muted = video.loop = video.autoplay = true;
+    video.playsInline = true;
+    video.poster = `assets/${a.slug}/poster.jpg`;
+    stage.appendChild(video);
 
-    const hint = document.createElement("span");
-    hint.className = "viewer-hint";
-    hint.textContent = t("hint_orbit");
-    previewStage.appendChild(hint);
+    const caption = document.createElement("span");
+    caption.className = "viewer-hint";
+    stage.appendChild(caption);
 
-    if (a.kind === "articulated") jointBar(mv, previewStage);
-    if (a.inspect) inspectTabs(a, previewStage);
+    const play = (clip) => {
+      video.src = `assets/${a.slug}/${clip.file}`;
+      caption.textContent = t(`clip_${clip.key}`);
+      video.play?.().catch(() => {});
+    };
+
+    if (clips.length > 1) {
+      const tabs = document.createElement("div");
+      tabs.className = "viewer-tabs";
+      tabs.innerHTML = clips.map((c, i) =>
+        `<button class="vtab${i === 0 ? " active" : ""}" data-i="${i}">${t("clip_" + c.key)}</button>`
+      ).join("");
+      tabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".vtab");
+        if (!btn) return;
+        tabs.querySelectorAll(".vtab").forEach((b) => b.classList.toggle("active", b === btn));
+        play(clips[+btn.dataset.i]);
+      });
+      sheetViewer.appendChild(tabs);
+    }
+    play(clips[0]);
   } else if (a.demo) {
     const video = document.createElement("video");
-    video.className = "fallback";
+    video.className = "clip";
     video.src = `assets/${a.slug}/demo.mp4`;
     video.muted = video.loop = video.autoplay = true;
     video.playsInline = true;
-    video.controls = false;
     sheetViewer.appendChild(video);
-    const hint = document.createElement("span");
-    hint.className = "viewer-hint";
-    hint.textContent = t("hint_video");
-    sheetViewer.appendChild(hint);
   }
 
   sheetMeta.innerHTML = metaPanel(a);
@@ -662,100 +668,8 @@ function openSheet(a) {
   document.body.style.overflow = "hidden";
 }
 
-function jointBar(mv, stage) {
-  const bar = document.createElement("div");
-  bar.className = "joint-bar";
-  bar.innerHTML = `
-    <button class="joint-play" title="play / pause">❚❚</button>
-    <input class="joint-slider" type="range" min="0" max="1000" value="0">
-    <span class="joint-label">${t("joint_label")}</span>`;
-  (stage || sheetViewer).appendChild(bar);
 
-  const play = bar.querySelector(".joint-play");
-  const slider = bar.querySelector(".joint-slider");
-  let scrubbing = false;
 
-  mv.addEventListener("load", () => mv.play?.());
-
-  play.addEventListener("click", () => {
-    if (mv.paused) { mv.play(); play.textContent = "❚❚"; }
-    else { mv.pause(); play.textContent = "▶"; }
-  });
-
-  slider.addEventListener("input", () => {
-    scrubbing = true;
-    mv.pause();
-    play.textContent = "▶";
-    const d = mv.duration || 0;
-    // animation runs closed -> open -> closed; the slider drives the opening half
-    mv.currentTime = (slider.value / 1000) * (d / 2);
-    scrubbing = false;
-  });
-
-  state.sheetTimer = setInterval(() => {
-    if (scrubbing || mv.paused || !mv.duration) return;
-    const time = mv.currentTime % mv.duration;
-    const half = mv.duration / 2;
-    const frac = time <= half ? time / half : (mv.duration - time) / half;
-    slider.value = Math.round(frac * 1000);
-  }, 120);
-}
-
-/* mesh × collision inspector: tab row swaps the preview stage for a
-   three.js stage that articulates visual meshes and convex hulls together */
-function inspectTabs(a, previewStage) {
-  const tabs = document.createElement("div");
-  tabs.className = "viewer-tabs";
-  tabs.innerHTML = ["preview", "visual", "collision", "both"]
-    .map((v) => `<button class="vtab${v === "preview" ? " active" : ""}" data-v="${v}">${t("view_" + v)}</button>`)
-    .join("");
-  sheetViewer.appendChild(tabs);
-
-  const inspStage = document.createElement("div");
-  inspStage.className = "stage stage-insp";
-  inspStage.hidden = true;
-  sheetViewer.appendChild(inspStage);
-
-  tabs.addEventListener("click", async (e) => {
-    const btn = e.target.closest(".vtab");
-    if (!btn) return;
-    const v = btn.dataset.v;
-    tabs.querySelectorAll(".vtab").forEach((b) => b.classList.toggle("active", b === btn));
-    if (v === "preview") {
-      inspStage.hidden = true;
-      previewStage.hidden = false;
-      return;
-    }
-    previewStage.hidden = true;
-    inspStage.hidden = false;
-    if (!state.inspector) {
-      if (state.inspectorLoading) return;
-      state.inspectorLoading = true;
-      inspStage.innerHTML = `<span class="insp-loading">${t("insp_loading")}</span>`;
-      try {
-        const { createInspector } = await import("./inspect3d.js");
-        const handle = await createInspector(inspStage, `assets/${a.slug}/inspect/`, {
-          hulls: (n) => t("insp_hulls")(n),
-        });
-        inspStage.querySelector(".insp-loading")?.remove();
-        state.inspector = handle;
-      } catch (err) {
-        inspStage.innerHTML = `<span class="insp-loading">${t("insp_error")}</span>`;
-        console.error("inspector failed:", err);
-        return;
-      } finally {
-        state.inspectorLoading = false;
-      }
-    }
-    state.inspector.setMode(v);
-  });
-}
-
-function disposeInspector() {
-  state.inspector?.dispose();
-  state.inspector = null;
-  state.inspectorLoading = false;
-}
 
 function metaPanel(a) {
   const phys = a.physics || {};
@@ -806,7 +720,6 @@ function metaPanel(a) {
 function closeSheet() {
   overlay.hidden = true;
   document.body.style.overflow = "";
-  disposeInspector();
   sheetViewer.replaceChildren();
   state.sheetAsset = null;
   if (state.sheetTimer) { clearInterval(state.sheetTimer); state.sheetTimer = null; }

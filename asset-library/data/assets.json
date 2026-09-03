@@ -33,12 +33,23 @@
     "URDF",
     "MJCF",
     "USD",
-    "GLB"
+    "OBJ"
    ],
    "poster": true,
-   "demo": false,
-   "model": true,
-   "inspect": true
+   "media": [
+    {
+     "key": "hinge",
+     "file": "hinge_anim.mp4"
+    },
+    {
+     "key": "collision",
+     "file": "collision_anim.mp4"
+    },
+    {
+     "key": "physics",
+     "file": "physics_demo.mp4"
+    }
+   ]
   }
  ]
 }

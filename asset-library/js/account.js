@@ -66,8 +66,9 @@ const DemoBackend = {
   },
 
   async downloadUrl(_user, slug) {
-    // Demo mode has only the compressed preview GLB hosted on the static site.
-    return `assets/${slug}/model.glb`;
+    // Sandbox mode hosts only the preview renders — the asset packages are not
+    // on the static site. Callers treat null as "delivered by email instead".
+    return null;
   },
 };
 
