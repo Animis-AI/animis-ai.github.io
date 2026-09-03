@@ -115,7 +115,8 @@ const I18N = {
 
 const state = {
   assets: [], filter: "all", query: "", sheetTimer: null, sheetAsset: null,
-  lang: localStorage.getItem("simgen-lang") || "en",
+  lang: localStorage.getItem("simgen-lang")
+    || ((navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en"),
 };
 const t = (key) => I18N[state.lang][key];
 
@@ -137,7 +138,7 @@ init();
 
 async function init() {
   applyLang();
-  const manifest = await fetch("data/assets.json")
+  const manifest = await fetch("data/assets.json", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : null))
     .catch(() => null);
   state.assets = manifest?.assets ?? [];
