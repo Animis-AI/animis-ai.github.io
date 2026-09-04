@@ -189,7 +189,8 @@ i { font-style: normal; }
 }
 .card-media {
   position: relative;
-  aspect-ratio: 1 / 1;
+  /* matches the 1200x780 renders the deliverables ship */
+  aspect-ratio: 3 / 2;
   border-bottom: 1px solid var(--ink);
   overflow: hidden;
   background: #E8E6DD;
