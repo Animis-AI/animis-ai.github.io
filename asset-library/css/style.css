@@ -197,7 +197,9 @@ i { font-style: normal; }
 .card-media img, .card-media video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
+  /* contain, not cover: the renders are framed to hold the whole asset
+     through its full joint travel — cropping would cut the blades off */
+  object-fit: contain;
   display: block;
 }
 .card-media video { opacity: 0; transition: opacity .2s ease; }
@@ -271,13 +273,25 @@ i { font-style: normal; }
   flex-direction: column;
 }
 /* ---------------------------- detail sheet: Blender-rendered clips */
-.stage { flex: 1; min-height: 0; position: relative; display: flex; }
+.stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--paper);
+}
+/* max-* rather than width/height 100%: a square clip in a wider stage would
+   otherwise be sized by the width and have its bottom cropped away */
 .clip {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
-  background: var(--paper);
 }
 .viewer-tabs {
   position: absolute;

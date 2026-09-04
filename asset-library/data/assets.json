@@ -6,9 +6,9 @@
  },
  "assets": [
   {
-   "slug": "giant_scissors",
-   "name_cn": "巨型剪刀",
-   "name_en": "Giant Scissors",
+   "slug": "scissors",
+   "name_cn": "剪刀",
+   "name_en": "Scissors",
    "kind": "articulated",
    "category": "Tool",
    "dataset": "Animis codegen",
@@ -23,10 +23,10 @@
    ],
    "dof": 1,
    "physics": {
-    "mass": 1.93,
+    "mass": 0.139,
     "friction": 0.6,
     "restitution": 0.1,
-    "material": "aluminium",
+    "material": "steel",
     "engine": "mujoco · isaac · pybullet"
    },
    "formats": [
