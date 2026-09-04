@@ -539,7 +539,7 @@ function matches(a) {
   if (state.filter === "articulated" && a.kind !== "articulated") return false;
   if (state.filter === "rigid" && a.kind !== "rigid") return false;
   if (state.query) {
-    const hay = `${a.slug} ${a.name_cn} ${a.name_en} ${a.category} ${a.dataset}`.toLowerCase();
+    const hay = `${a.slug} ${a.name_cn} ${a.name_en} ${a.category} ${a.dataset || ""}`.toLowerCase();
     if (!hay.includes(state.query)) return false;
   }
   return true;
@@ -693,7 +693,7 @@ function metaPanel(a) {
     <div class="meta-section">
       <h4>${t("overview")}</h4>
       ${kv(t("k_category"), a.category)}
-      ${kv(t("k_source"), a.dataset)}
+      ${a.dataset ? kv(t("k_source"), a.dataset) : ""}
       ${kv(t("k_dof"), a.dof || t("rigid_label"))}
       ${kv(t("k_formats"), a.formats.join(" · "))}
     </div>

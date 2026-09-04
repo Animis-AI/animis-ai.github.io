@@ -11,7 +11,6 @@
    "name_en": "Scissors",
    "kind": "articulated",
    "category": "Tool",
-   "dataset": "Animis codegen",
    "hero": true,
    "joints": [
     {
@@ -27,7 +26,7 @@
     "friction": 0.6,
     "restitution": 0.1,
     "material": "steel",
-    "engine": "mujoco · isaac · pybullet"
+    "engine": "Isaac Sim · MuJoCo · Genesis"
    },
    "formats": [
     "URDF",
