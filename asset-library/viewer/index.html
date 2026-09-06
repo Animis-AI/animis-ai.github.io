@@ -7,58 +7,75 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap" rel="stylesheet">
 <style>
-  :root{--accent:#CBFF36;--bg:#030303;--panel:rgba(16,16,18,.72);--line:rgba(255,255,255,.08);
-        --fg:#ececec;--fg2:#8a8a8a;--font:"Host Grotesk",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  :root{--accent:#cbff36;--accent2:#afdb00;--bg:#000;--surface:#1a1a1a;--elev:#232323;--hover:#2c2c2c;--border:#494949;
+    --fg:#ededed;--fg2:#a0a0a0;--fg3:#898989;
+    --font:"Host Grotesk",Lato,system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    --disp:"Eurostile Extd","Host Grotesk",system-ui,sans-serif}
   html,body{margin:0;height:100%;background:var(--bg);overflow:hidden;font-family:var(--font);color:var(--fg)}
   canvas{display:block;width:100%;height:100%}
-  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;
-    background:var(--bg);color:var(--fg2);font-size:13px;z-index:9;transition:opacity .5s}
-  #loading i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1s infinite}
-  @keyframes pulse{50%{opacity:.25}}
+  #vignette{position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(ellipse at 50% 55%,transparent 38%,rgba(0,0,0,.62) 100%)}
+  #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    background:var(--bg);z-index:9;transition:opacity .6s}
+  #loading .bar{position:absolute;top:0;left:0;height:2px;width:0;background:var(--accent);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+  #loading .name{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg)}
+  #loading .sub{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg3)}
+  @keyframes in{to{opacity:1;transform:none}}
+  @keyframes fade{to{opacity:1}}
   #topbar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
-    padding:14px 16px;z-index:6;pointer-events:none}
+    padding:16px 20px;z-index:6;pointer-events:none;opacity:0;transform:translateY(-10px)}
+  .ready #topbar{animation:in .7s .15s cubic-bezier(.2,.8,.2,1) forwards}
   #topbar>*{pointer-events:auto}
-  .tb-left{display:flex;align-items:center;gap:10px;font-size:13px}
-  .tb-left .brand{font-weight:700;letter-spacing:.02em;color:var(--fg)}
-  .tb-left .sep{color:var(--fg2)}
-  .tb-left .asset{color:var(--fg2);font-weight:500}
-  .tb-right{display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
-    padding:4px;backdrop-filter:blur(10px)}
-  .tb-right button{font:500 12px/1 var(--font);color:var(--fg);background:transparent;border:1px solid transparent;
-    border-radius:7px;padding:8px 11px;cursor:pointer;transition:background .12s,color .12s;white-space:nowrap}
-  .tb-right button:hover{background:rgba(255,255,255,.07)}
-  .tb-right button.on{background:var(--accent);color:#0a0a0a;font-weight:700}
-  #tip{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:5;font-size:12px;color:var(--fg2);
-    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;
-    backdrop-filter:blur(8px);pointer-events:none;transition:opacity .4s}
-  #joints{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;
-    min-width:340px;max-width:min(560px,92vw);z-index:5}
-  #joints label{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:10px;
-    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;backdrop-filter:blur(10px)}
-  #joints label.hot{border-color:rgba(203,255,54,.45)}
-  #joints .jn{font-size:12.5px;font-weight:600}
-  #joints .jt{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg2);
-    border:1px solid var(--line);border-radius:4px;padding:2px 5px}
-  #joints input[type=range]{width:100%;accent-color:var(--accent);height:3px;cursor:pointer}
-  #joints b{font-size:12px;font-weight:600;min-width:44px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}
-  #hud{position:fixed;left:16px;bottom:16px;font:11px/1.5 ui-monospace,monospace;color:#5c5c5c}
+  .tb-left{display:flex;align-items:center;gap:11px}
+  .tb-left img{width:22px;height:22px;display:block}
+  .tb-left .brand{font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase}
+  .tb-right{display:flex;gap:6px}
+  .tb-right button{display:inline-flex;align-items:center;gap:7px;font:500 12px/1 var(--font);color:var(--fg2);
+    background:rgba(26,26,26,.78);border:1px solid var(--border);border-radius:999px;padding:8px 13px 8px 10px;
+    cursor:pointer;backdrop-filter:blur(12px);transition:background .15s,color .15s,border-color .15s,transform .15s}
+  .tb-right button svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .tb-right button:hover{background:var(--hover);color:var(--fg);border-color:#5f5f5f}
+  .tb-right button:active{transform:scale(.97)}
+  .tb-right button.on{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+  #title{position:fixed;left:20px;bottom:24px;z-index:5;opacity:0;transform:translateY(10px);pointer-events:none}
+  .ready #title{animation:in .7s .35s cubic-bezier(.2,.8,.2,1) forwards}
+  #title h1{margin:0;font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:.2em;text-transform:uppercase;line-height:1}
+  #title p{margin:9px 0 0;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg3)}
+  #joints{position:fixed;right:20px;top:70px;display:flex;flex-direction:column;gap:8px;width:250px;z-index:5;
+    opacity:0;transform:translateX(10px)}
+  .ready #joints{animation:in .7s .5s cubic-bezier(.2,.8,.2,1) forwards}
+  #joints label{display:block;background:rgba(26,26,26,.78);border:1px solid var(--border);border-radius:12px;
+    padding:12px 14px 11px;backdrop-filter:blur(12px);transition:border-color .15s}
+  #joints label.hot{border-color:var(--accent)}
+  #joints .jh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+  #joints .jn{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
+  #joints b{font-family:var(--disp);font-size:18px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+  #joints input[type=range]{width:100%;accent-color:var(--accent);height:2px;cursor:pointer;margin:0}
+  #joints .jr{display:flex;justify-content:space-between;font-size:10px;color:var(--fg3);margin-top:7px;letter-spacing:.08em}
+  #tip{position:fixed;left:50%;top:70px;transform:translateX(-50%);z-index:5;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--fg3);pointer-events:none;opacity:0;transition:opacity .6s}
+  .ready #tip{animation:fade 1s 1.1s forwards}
+  #hud{display:none;position:fixed;left:20px;top:62px;font:10px/1.5 ui-monospace,monospace;color:#5c5c5c;z-index:5}
+  .debug #hud{display:block}
   #toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%) translateY(8px);opacity:0;
-    background:var(--accent);color:#0a0a0a;font-size:12px;font-weight:600;border-radius:8px;padding:8px 14px;
-    transition:opacity .2s,transform .2s;pointer-events:none;z-index:8}
+    background:var(--accent);color:#000;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    border-radius:999px;padding:9px 16px;transition:opacity .2s,transform .2s;pointer-events:none;z-index:8}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
-<div id="loading"><i></i><span></span></div>
+<div id="loading"><div class="bar"></div><div class="name"></div><div class="sub"></div></div>
+<div id="vignette"></div>
 <header id="topbar">
-  <div class="tb-left"><span class="brand">ANIMIS</span><span class="sep">/</span><span class="asset" id="asset-name"></span></div>
+  <div class="tb-left"><img src="../logo.png" alt=""><span class="brand">Animis</span></div>
   <div class="tb-right">
-    <button data-act="reset"></button>
-    <button data-act="collision"></button>
-    <button data-act="wireframe"></button>
-    <button data-act="grid"></button>
-    <button data-act="spin"></button>
-    <button data-act="share"></button>
+    <button data-act="reset"><svg viewBox="0 0 16 16"><path d="M3 8a5 5 0 1 0 1.6-3.7"/><path d="M3 3v3h3"/></svg><span></span></button>
+    <button data-act="collision"><svg viewBox="0 0 16 16"><rect x="2" y="5" width="9" height="9" rx="1.5"/><path d="M5 5V3.5A1.5 1.5 0 0 1 6.5 2h6A1.5 1.5 0 0 1 14 3.5v6a1.5 1.5 0 0 1-1.5 1.5H11"/></svg><span></span></button>
+    <button data-act="wireframe"><svg viewBox="0 0 16 16"><path d="M8 2l6 11H2z"/><path d="M8 2v11M2 13l6-5.5 6 5.5"/></svg><span></span></button>
+    <button data-act="grid"><svg viewBox="0 0 16 16"><path d="M2 6h12M2 10h12M6 2v12M10 2v12"/></svg><span></span></button>
+    <button data-act="spin"><svg viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.6-3.7"/><path d="M13 3v3h-3"/></svg><span></span></button>
+    <button data-act="share"><svg viewBox="0 0 16 16"><path d="M8 10V2M5 5l3-3 3 3"/><path d="M3 9v4h10V9"/></svg><span></span></button>
   </div>
 </header>
+<div id="title"><h1></h1><p></p></div>
 <div id="tip"></div>
 <div id="joints"></div>
 <div id="hud"></div>
@@ -79,6 +96,9 @@ import { OutputPass } from "./vendor/three/jsm/postprocessing/OutputPass.js";
 import { BokehPass } from "./vendor/three/jsm/postprocessing/BokehPass.js";
 import { Reflector } from "./vendor/three/jsm/objects/Reflector.js";
 import { OutlinePass } from "./vendor/three/jsm/postprocessing/OutlinePass.js";
+import { Line2 } from "./vendor/three/jsm/lines/Line2.js";
+import { LineMaterial } from "./vendor/three/jsm/lines/LineMaterial.js";
+import { LineGeometry } from "./vendor/three/jsm/lines/LineGeometry.js";
 
 const q = new URLSearchParams(location.search);
 const MODE = q.get("mode") || "visual";
@@ -130,17 +150,22 @@ controls.autoRotateSpeed = 0.8;
 const LANG = q.get("lang") === "zh" ? "zh" : "en";
 document.documentElement.lang = LANG === "zh" ? "zh-CN" : "en";
 const T = LANG === "zh" ? {
-  tip: "拖动部件驱动关节 · 空白处拖动转视角 · 滚轮缩放", loading: "加载中",
+  tip: "拖动部件驱动关节 · 空白处拖动转视角 · 滚轮缩放", loading: "载入资产",
+  meta: (h, j, l) => `${h} 个凸包 · ${j} 个关节 · ${l} 个连杆`,
   reset: "复位", collision: ["碰撞体", "碰撞体 · 叠加", "碰撞体 · 仅凸包"], wireframe: "线框",
   grid: "网格", spin: "自转", share: "分享", copied: "链接已复制", revolute: "转动", prismatic: "移动",
 } : {
-  tip: "Drag a part to move its joint · drag empty space to orbit · scroll to zoom", loading: "Loading",
+  tip: "Drag a part to move its joint · drag empty space to orbit · scroll to zoom", loading: "Loading asset",
+  meta: (h, j, l) => `${h} convex hulls · ${j} joint${j === 1 ? "" : "s"} · ${l} links`,
   reset: "Reset", collision: ["Collision", "Collision · overlay", "Collision · hulls"], wireframe: "Wireframe",
   grid: "Grid", spin: "Auto-rotate", share: "Share", copied: "Link copied", revolute: "revolute", prismatic: "prismatic",
 };
 document.getElementById("tip").textContent = T.tip;
-document.querySelector("#loading span").textContent = T.loading + "…";
-document.getElementById("asset-name").textContent = SLUG.replace(/[_-]+/g, " ");
+document.querySelector("#loading .name").textContent = SLUG.replace(/[_-]+/g, " ");
+document.querySelector("#loading .sub").textContent = T.loading;
+const setProgress = (pct) => { const b = document.querySelector("#loading .bar"); if (b) b.style.width = pct + "%"; };
+setProgress(12);
+if (q.get("debug") === "1") document.documentElement.classList.add("debug");
 const ACCENT = 0xCBFF36;
 function toast(msg) {
   const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("show");
@@ -155,6 +180,7 @@ const envTex = await new Promise((res, rej) =>
   new RGBELoader().load(`hdri/${HDRI}.hdr`, res, undefined, rej));
 envTex.mapping = THREE.EquirectangularReflectionMapping;
 scene.environment = pmrem.fromEquirectangular(envTex).texture;
+setProgress(40);
 scene.environmentIntensity = ENVI;
 scene.environmentRotation = new THREE.Euler(0, THREE.MathUtils.degToRad(ENVROT), 0);
 
@@ -203,7 +229,7 @@ for (const l of spec.links) if (!childLinks.has(l.name)) root.add(linkGroups[l.n
 
 // ---- 关节控件(Palatial 的 proxy widget):转动关节 = 半透明圆盘 + 限位弧 + 指针 ----
 // 挂在 pivot 下(不随 motion 转),法线 = 关节轴;半径按相机距离每帧重算,屏幕上大小恒定
-const proxies = [];
+const proxies = [], fatMats = [];
 for (const j of movable) {
   const pivot = j.motion.parent;
   const axis = new THREE.Vector3().fromArray(j.axis).normalize();
@@ -212,12 +238,17 @@ for (const j of movable) {
   pivot.add(g);
   const mat = (op) => new THREE.MeshBasicMaterial({ color: ACCENT, transparent: true, opacity: op,
                         side: THREE.DoubleSide, depthTest: false, depthWrite: false });
-  const lineMat = (op) => new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: op,
-                        depthTest: false, depthWrite: false });
+  // 粗线(Line2):像素宽度,WebGL 原生线只有 1px,表盘看起来会很寒酸
+  const fat = (pts, op, w) => {
+    const g = new LineGeometry(); g.setPositions(pts.flatMap((v) => [v.x, v.y, v.z]));
+    const m = new LineMaterial({ color: ACCENT, linewidth: w, transparent: true, opacity: op,
+                                 depthTest: false, depthWrite: false });
+    m.resolution.set(innerWidth, innerHeight); fatMats.push(m);
+    const l = new Line2(g, m); l.computeLineDistances(); return l;
+  };
   let disc, arc, needle, knob;
   if (j.type === "prismatic") {
-    arc = new THREE.Line(new THREE.BufferGeometry().setFromPoints(
-      [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 1)]), lineMat(0.9));
+    arc = fat([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 1)], 0.9, 2);
     knob = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 12), mat(0.9));
     disc = new THREE.Mesh(new THREE.RingGeometry(0.16, 0.2, 32), mat(0.4));
     g.add(arc, knob, disc);
@@ -225,9 +256,8 @@ for (const j of movable) {
     disc = new THREE.Mesh(new THREE.CircleGeometry(1, 64), mat(0.22));
     const span = j.upper - j.lower, N = Math.max(8, Math.round(span / 0.05));
     const pts = []; for (let i = 0; i <= N; i++) { const a = j.lower + span * i / N; pts.push(new THREE.Vector3(Math.cos(a), Math.sin(a), 0)); }
-    arc = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(0.95));
-    needle = new THREE.Line(new THREE.BufferGeometry().setFromPoints(
-      [new THREE.Vector3(0, 0, 0), new THREE.Vector3(1, 0, 0)]), lineMat(0.95));
+    arc = fat(pts, 0.95, 2.5);
+    needle = fat([new THREE.Vector3(0, 0, 0), new THREE.Vector3(1, 0, 0)], 0.95, 2);
     knob = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 12), mat(0.95));
     knob.position.set(1, 0, 0); needle.add(knob);
     const rim = new THREE.Mesh(new THREE.RingGeometry(0.97, 1.0, 64), mat(0.5));
@@ -304,6 +334,7 @@ jobs.push(loadGlb(BASE + "inspect/collision.glb").then((g) => {
   }
 }));
 await Promise.all(jobs);
+setProgress(85);
 
 // ---- FK ----
 function setJoint(j, v) {
@@ -391,6 +422,17 @@ if (MIRROR) {
   veil.renderOrder = 5;
   scene.add(veil);
 }
+{ // 暗色台面:径向渐变盘,让物体"落在"什么上面,而不是悬在纯黑里
+  const cv = document.createElement("canvas"); cv.width = cv.height = 512;
+  const g2 = cv.getContext("2d"), grd = g2.createRadialGradient(256, 256, 0, 256, 256, 256);
+  grd.addColorStop(0, "rgba(28,28,28,1)"); grd.addColorStop(0.45, "rgba(16,16,16,.85)"); grd.addColorStop(1, "rgba(0,0,0,0)");
+  g2.fillStyle = grd; g2.fillRect(0, 0, 512, 512);
+  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace;
+  const pad = new THREE.Mesh(new THREE.PlaneGeometry(radius * 7, radius * 7),
+    new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, toneMapped: false }));
+  pad.rotation.x = -Math.PI / 2; pad.position.set(c.x, groundY - radius * 0.004, c.z); pad.renderOrder = -2;
+  scene.add(pad);
+}
 gridHelper = new THREE.GridHelper(radius * 8, 32, 0x8a8a8a, 0x454545);   // AgX 会压暗,给亮一点
 gridHelper.position.set(c.x, groundY + radius * 0.001, c.z);
 gridHelper.material.transparent = true; gridHelper.material.opacity = 0.9;
@@ -459,11 +501,23 @@ await new Promise((r) => requestAnimationFrame(r));
 renderer.render(scene, camera);
 log(`${QUALITY} · mode=${MODE} · hulls=${hullN} · links=${spec.links.length}`);
 document.title = "ready";
-{ const l = document.getElementById("loading"); l.style.opacity = "0"; l.style.pointerEvents = "none"; setTimeout(() => l.remove(), 500); }
+setProgress(100);
+document.getElementById("title").querySelector("h1").textContent = SLUG.replace(/[_-]+/g, " ");
+document.getElementById("title").querySelector("p").textContent = T.meta(hullN, movable.length, spec.links.length);
+document.documentElement.classList.add("ready");
+setTimeout(() => { const t = document.getElementById("tip"); if (t) t.style.opacity = "0"; }, 6500);
+// 入场:相机从 1.35 倍距离缓缓推到位
+const introFrom = camera.position.clone().sub(controls.target).multiplyScalar(1.35).add(controls.target);
+const introTo = camera.position.clone();
+let intro = 1;
+camera.position.copy(introFrom);
+if (bokeh) bokeh.enabled = false; if (ssaaPass) ssaaPass.sampleLevel = 0; clearTimeout(stillTimer);
+{ const l = document.getElementById("loading"); setTimeout(() => { l.style.opacity = "0"; l.style.pointerEvents = "none"; setTimeout(() => l.remove(), 650); }, 250); }
 addEventListener("resize", () => {
   renderer.setSize(innerWidth, innerHeight, false);
   composer?.setSize(innerWidth, innerHeight);
   outline?.setSize(innerWidth, innerHeight);
+  fatMats.forEach((m) => m.resolution.set(innerWidth, innerHeight));
   camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
 });
 // ---- 关节控制:滑杆 + 直接拖拽 ----
@@ -472,10 +526,13 @@ for (const j of movable) jointByLink[j.child] = j;
 
 const panel = document.createElement("div");
 panel.id = "joints";
+const fmtLim = (j, v) => j.type === "prismatic" ? `${(v * 100).toFixed(1)} cm` : `${Math.round(v * 180 / Math.PI)}°`;
 panel.innerHTML = movable.map((j, i) => `
-  <label><span class="jn">${j.name}</span><span class="jt">${T[j.type] || j.type}</span>
+  <label>
+    <div class="jh"><span class="jn">${j.name} · ${T[j.type] || j.type}</span><b data-v="${i}"></b></div>
     <input type="range" min="0" max="1000" data-j="${i}">
-    <b data-v="${i}"></b></label>`).join("");
+    <div class="jr"><span>${fmtLim(j, j.lower)}</span><span>${fmtLim(j, j.upper)}</span></div>
+  </label>`).join("");
 document.body.appendChild(panel);
 
 const frac = (j) => (j.value - j.lower) / ((j.upper - j.lower) || 1);
@@ -619,22 +676,27 @@ renderer.setAnimationLoop(() => {
     }
     syncUI();
   }
+  if (intro > 0.001) {                         // 入场推镜:期间不做静止超采样/景深,到位后重新对焦
+    intro *= 0.9; camera.position.lerpVectors(introTo, introFrom, intro);
+    if (intro <= 0.001) { camera.position.copy(introTo); wake(); }
+  }
   controls.update();
   updateProxies();
   if (composer) composer.render(); else renderer.render(scene, camera);
 });
 // 调试用:让测试脚本能读到关节状态
 // ---- 顶栏 ----
-const camHome = { pos: camera.position.clone(), target: controls.target.clone() };
+const camHome = { pos: introTo.clone(), target: controls.target.clone() };
 let wire = false, modeIdx = ["visual", "both", "collision"].indexOf(curMode);
 const btn = (a) => document.querySelector(`#topbar button[data-act="${a}"]`);
+const lbl = (a, t) => { btn(a).querySelector("span").textContent = t; };
 const paintBar = () => {
-  btn("reset").textContent = T.reset;
-  btn("collision").textContent = T.collision[modeIdx]; btn("collision").classList.toggle("on", modeIdx > 0);
-  btn("wireframe").textContent = T.wireframe; btn("wireframe").classList.toggle("on", wire);
-  btn("grid").textContent = T.grid; btn("grid").classList.toggle("on", !!gridHelper?.visible);
-  btn("spin").textContent = T.spin; btn("spin").classList.toggle("on", controls.autoRotate);
-  btn("share").textContent = T.share;
+  lbl("reset", T.reset);
+  lbl("collision", T.collision[modeIdx]); btn("collision").classList.toggle("on", modeIdx > 0);
+  lbl("wireframe", T.wireframe); btn("wireframe").classList.toggle("on", wire);
+  lbl("grid", T.grid); btn("grid").classList.toggle("on", !!gridHelper?.visible);
+  lbl("spin", T.spin); btn("spin").classList.toggle("on", controls.autoRotate);
+  lbl("share", T.share);
 };
 btn("reset").addEventListener("click", () => {
   stopIdle();
@@ -650,7 +712,7 @@ btn("wireframe").addEventListener("click", () => {
 btn("grid").addEventListener("click", () => { gridHelper.visible = !gridHelper.visible; paintBar(); wake(); });
 btn("spin").addEventListener("click", () => { controls.autoRotate = !controls.autoRotate; paintBar(); });
 btn("share").addEventListener("click", async () => {
-  const url = new URL(location.href); url.searchParams.delete("spin"); url.searchParams.delete("idle");
+  const url = new URL(location.href); url.searchParams.delete("spin"); url.searchParams.delete("idle"); url.searchParams.delete("debug");
   try { await navigator.clipboard.writeText(url.toString()); toast(T.copied); } catch { prompt("URL", url.toString()); }
 });
 paintBar();
