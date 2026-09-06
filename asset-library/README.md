@@ -31,7 +31,10 @@ three.js r179 本地 WebGL 渲染,思路照 Palatial(见 `PALATIAL_VIEWER_REFERE
   + 轻微景深;`?quality=low` 或触屏/低核数设备自动降级(关 GTAO/景深/倒影,4×)。
 - 材质:各向异性拉丝金属(`MeshPhysicalMaterial.anisotropy`,切线由管线显式给出)
   + 离线烘焙的 AO(glTF `occlusionTexture`)。
-- 交互:拖部件驱动关节(关节轴平面投影解法)、滑杆、idle 正弦往复、视觉/碰撞/叠加切换。
+- 交互:拖部件驱动关节(关节轴平面投影解法)、滑杆、idle 正弦往复;悬停 OutlinePass 描边
+  (强度 3,拖拽时 12 + glow)、关节表盘控件(半透明圆盘 + 限位弧 + 指针,屏幕尺寸恒定)。
+- 界面对齐 Palatial:强调色 `#CBFF36`、深色玻璃面板、Host Grotesk;顶栏 复位 / 碰撞体(三态:
+  关 → 叠加 → 仅凸包)/ 线框 / 网格 / 自转 / 分享,底部关节卡片。镜面倒影默认关(`?mirror=1`)。
 
 资产接入(构建机 `/data/wangyubin/animis/asset-library/pipeline/`):
 

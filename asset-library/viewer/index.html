@@ -3,35 +3,66 @@
 <meta http-equiv="cache-control" content="no-store, must-revalidate">
 <meta http-equiv="pragma" content="no-cache">
 <title>Animis · 3D viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap" rel="stylesheet">
 <style>
-  html,body{margin:0;height:100%;background:#030303;overflow:hidden}
+  :root{--accent:#CBFF36;--bg:#030303;--panel:rgba(16,16,18,.72);--line:rgba(255,255,255,.08);
+        --fg:#ececec;--fg2:#8a8a8a;--font:"Host Grotesk",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  html,body{margin:0;height:100%;background:var(--bg);overflow:hidden;font-family:var(--font);color:var(--fg)}
   canvas{display:block;width:100%;height:100%}
-  #tip{position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:5;
-    font:13px/1.4 ui-monospace,monospace;color:#d8d5ce;background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 16px;
-    backdrop-filter:blur(6px);pointer-events:none;transition:opacity .4s}
-  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-    background:#030303;color:#8a8780;font:13px ui-monospace,monospace;z-index:9;transition:opacity .5s}
-  #modes{position:fixed;left:14px;bottom:14px;display:flex;gap:6px;z-index:5}
-  #modes button{font:12px/1 ui-monospace,monospace;color:#d8d5ce;background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:8px 12px;cursor:pointer;backdrop-filter:blur(6px)}
-  #modes button:hover{background:rgba(255,255,255,.12)}
-  #modes button.on{background:#e8e5de;color:#111;border-color:#e8e5de}
-  #hud{position:fixed;left:12px;bottom:44px;font:12px/1.5 ui-monospace,monospace;color:#8a8780}
-  #joints{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:8px;
-    font:12px/1.4 ui-monospace,monospace;color:#e8e5de}
-  #joints label{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:7px 12px;backdrop-filter:blur(6px)}
-  #joints span{min-width:64px;color:#a9a69f}
-  #joints input{width:170px;accent-color:#e8e5de}
-  #joints b{min-width:44px;text-align:right;font-weight:500}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--bg);color:var(--fg2);font-size:13px;z-index:9;transition:opacity .5s}
+  #loading i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1s infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  #topbar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;z-index:6;pointer-events:none}
+  #topbar>*{pointer-events:auto}
+  .tb-left{display:flex;align-items:center;gap:10px;font-size:13px}
+  .tb-left .brand{font-weight:700;letter-spacing:.02em;color:var(--fg)}
+  .tb-left .sep{color:var(--fg2)}
+  .tb-left .asset{color:var(--fg2);font-weight:500}
+  .tb-right{display:flex;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:4px;backdrop-filter:blur(10px)}
+  .tb-right button{font:500 12px/1 var(--font);color:var(--fg);background:transparent;border:1px solid transparent;
+    border-radius:7px;padding:8px 11px;cursor:pointer;transition:background .12s,color .12s;white-space:nowrap}
+  .tb-right button:hover{background:rgba(255,255,255,.07)}
+  .tb-right button.on{background:var(--accent);color:#0a0a0a;font-weight:700}
+  #tip{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:5;font-size:12px;color:var(--fg2);
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;
+    backdrop-filter:blur(8px);pointer-events:none;transition:opacity .4s}
+  #joints{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;
+    min-width:340px;max-width:min(560px,92vw);z-index:5}
+  #joints label{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:10px;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;backdrop-filter:blur(10px)}
+  #joints label.hot{border-color:rgba(203,255,54,.45)}
+  #joints .jn{font-size:12.5px;font-weight:600}
+  #joints .jt{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg2);
+    border:1px solid var(--line);border-radius:4px;padding:2px 5px}
+  #joints input[type=range]{width:100%;accent-color:var(--accent);height:3px;cursor:pointer}
+  #joints b{font-size:12px;font-weight:600;min-width:44px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}
+  #hud{position:fixed;left:16px;bottom:16px;font:11px/1.5 ui-monospace,monospace;color:#5c5c5c}
+  #toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%) translateY(8px);opacity:0;
+    background:var(--accent);color:#0a0a0a;font-size:12px;font-weight:600;border-radius:8px;padding:8px 14px;
+    transition:opacity .2s,transform .2s;pointer-events:none;z-index:8}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
-<div id="loading">加载中…</div>
+<div id="loading"><i></i><span></span></div>
+<header id="topbar">
+  <div class="tb-left"><span class="brand">ANIMIS</span><span class="sep">/</span><span class="asset" id="asset-name"></span></div>
+  <div class="tb-right">
+    <button data-act="reset"></button>
+    <button data-act="collision"></button>
+    <button data-act="wireframe"></button>
+    <button data-act="grid"></button>
+    <button data-act="spin"></button>
+    <button data-act="share"></button>
+  </div>
+</header>
 <div id="tip"></div>
-<div id="modes">
-  <button data-m="visual"></button><button data-m="collision"></button><button data-m="both"></button>
-</div>
+<div id="joints"></div>
 <div id="hud"></div>
+<div id="toast"></div>
 <script type="importmap">
 {"imports":{"three":"./vendor/three/three.module.min.js"}}
 </script>
@@ -47,6 +78,7 @@ import { UnrealBloomPass } from "./vendor/three/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from "./vendor/three/jsm/postprocessing/OutputPass.js";
 import { BokehPass } from "./vendor/three/jsm/postprocessing/BokehPass.js";
 import { Reflector } from "./vendor/three/jsm/objects/Reflector.js";
+import { OutlinePass } from "./vendor/three/jsm/postprocessing/OutlinePass.js";
 
 const q = new URLSearchParams(location.search);
 const MODE = q.get("mode") || "visual";
@@ -63,7 +95,7 @@ const HIGH = QUALITY === "high";
 const PP = q.get("pp") !== "0";          // 后处理总开关
 const DOF = q.get("dof") !== "0" && HIGH; // 静止时景深
 const DOF_K = parseFloat(q.get("dof_k") ?? "0.10");   // 0.15 已明显,0.10 是产品照那种轻微虚化
-const MIRROR = q.get("mirror") !== "0" && HIGH; // 镜面地面
+const MIRROR = q.get("mirror") === "1" && HIGH; // 镜面地面,默认关(?mirror=1 开)
 const MIRROR_STRENGTH = parseFloat(q.get("mirror_k") ?? "0.08"); // 倒影中心强度(本体是 HDR 值,4% 已够显眼)
 const HDRI = q.get("hdri") || "studio_small_09";   // 1k 已够,2k 要 6 MB
 const ANISO = parseFloat(q.get("aniso") ?? "0.35");  // 资产 UV 在刀尖分段,再高就出条纹   // 拉丝金属各向异性
@@ -97,17 +129,22 @@ controls.autoRotateSpeed = 0.8;
 
 const LANG = q.get("lang") === "zh" ? "zh" : "en";
 document.documentElement.lang = LANG === "zh" ? "zh-CN" : "en";
-document.getElementById("tip").textContent = LANG === "zh"
-  ? "拖动部件驱动关节 · 空白处拖动转视角 · 滚轮缩放"
-  : "Drag a part to move its joint · drag empty space to orbit · scroll to zoom";
-document.getElementById("loading").textContent = LANG === "zh" ? "加载中…" : "Loading…";
-{
-  const names = LANG === "zh" ? { visual: "视觉网格", collision: "碰撞体", both: "叠加" }
-                              : { visual: "Visual", collision: "Collision", both: "Overlay" };
-  document.querySelectorAll("#modes button").forEach((b) => {
-    b.textContent = names[b.dataset.m];
-    b.addEventListener("click", () => applyMode(b.dataset.m));
-  });
+const T = LANG === "zh" ? {
+  tip: "拖动部件驱动关节 · 空白处拖动转视角 · 滚轮缩放", loading: "加载中",
+  reset: "复位", collision: ["碰撞体", "碰撞体 · 叠加", "碰撞体 · 仅凸包"], wireframe: "线框",
+  grid: "网格", spin: "自转", share: "分享", copied: "链接已复制", revolute: "转动", prismatic: "移动",
+} : {
+  tip: "Drag a part to move its joint · drag empty space to orbit · scroll to zoom", loading: "Loading",
+  reset: "Reset", collision: ["Collision", "Collision · overlay", "Collision · hulls"], wireframe: "Wireframe",
+  grid: "Grid", spin: "Auto-rotate", share: "Share", copied: "Link copied", revolute: "revolute", prismatic: "prismatic",
+};
+document.getElementById("tip").textContent = T.tip;
+document.querySelector("#loading span").textContent = T.loading + "…";
+document.getElementById("asset-name").textContent = SLUG.replace(/[_-]+/g, " ");
+const ACCENT = 0xCBFF36;
+function toast(msg) {
+  const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove("show"), 1600);
 }
 const hud = document.getElementById("hud");
 const log = (m) => { hud.textContent = m; console.log("HUD", m); };
@@ -163,6 +200,59 @@ for (const j of spec.joints) {
   if (["revolute", "continuous", "prismatic"].includes(j.type)) movable.push({ ...j, motion });
 }
 for (const l of spec.links) if (!childLinks.has(l.name)) root.add(linkGroups[l.name]);
+
+// ---- 关节控件(Palatial 的 proxy widget):转动关节 = 半透明圆盘 + 限位弧 + 指针 ----
+// 挂在 pivot 下(不随 motion 转),法线 = 关节轴;半径按相机距离每帧重算,屏幕上大小恒定
+const proxies = [];
+for (const j of movable) {
+  const pivot = j.motion.parent;
+  const axis = new THREE.Vector3().fromArray(j.axis).normalize();
+  const g = new THREE.Group();
+  g.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), axis);   // 局部 +Z 对齐轴
+  pivot.add(g);
+  const mat = (op) => new THREE.MeshBasicMaterial({ color: ACCENT, transparent: true, opacity: op,
+                        side: THREE.DoubleSide, depthTest: false, depthWrite: false });
+  const lineMat = (op) => new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: op,
+                        depthTest: false, depthWrite: false });
+  let disc, arc, needle, knob;
+  if (j.type === "prismatic") {
+    arc = new THREE.Line(new THREE.BufferGeometry().setFromPoints(
+      [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 1)]), lineMat(0.9));
+    knob = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 12), mat(0.9));
+    disc = new THREE.Mesh(new THREE.RingGeometry(0.16, 0.2, 32), mat(0.4));
+    g.add(arc, knob, disc);
+  } else {
+    disc = new THREE.Mesh(new THREE.CircleGeometry(1, 64), mat(0.22));
+    const span = j.upper - j.lower, N = Math.max(8, Math.round(span / 0.05));
+    const pts = []; for (let i = 0; i <= N; i++) { const a = j.lower + span * i / N; pts.push(new THREE.Vector3(Math.cos(a), Math.sin(a), 0)); }
+    arc = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(0.95));
+    needle = new THREE.Line(new THREE.BufferGeometry().setFromPoints(
+      [new THREE.Vector3(0, 0, 0), new THREE.Vector3(1, 0, 0)]), lineMat(0.95));
+    knob = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 12), mat(0.95));
+    knob.position.set(1, 0, 0); needle.add(knob);
+    const rim = new THREE.Mesh(new THREE.RingGeometry(0.97, 1.0, 64), mat(0.5));
+    g.add(disc, rim, arc, needle);
+  }
+  g.traverse((n) => { n.renderOrder = 999; n.userData.link = j.child; n.userData.proxy = true; });
+  proxies.push({ joint: j, group: g, disc, arc, needle, knob, hot: false });
+}
+function updateProxies() {
+  for (const px of proxies) {
+    const wp = new THREE.Vector3(); px.group.getWorldPosition(wp);
+    const d = camera.position.distanceTo(wp);
+    // Palatial 的公式:控件在屏幕上大小恒定,约视口高的 ~7%
+    const r = d * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * 0.13 * (px.joint.type === "prismatic" ? 1.4 : 1);
+    px.group.scale.setScalar(r);
+    const j = px.joint;
+    if (j.type === "prismatic") { px.arc.scale.z = (j.upper - j.lower) / r; px.knob.position.z = (j.value - j.lower) / r; }
+    else px.needle.rotation.z = j.value;
+    const k = px.hot ? 1.0 : 0.8;
+    px.disc.material.opacity = (j.type === "prismatic" ? 0.4 : 0.22) * k;
+    px.arc.material.opacity = 0.95 * k; if (px.needle) px.needle.material.opacity = 0.95 * k;
+    px.knob.material.opacity = 0.95 * k;
+  }
+}
+let gridHelper = null;
 
 const jobs = [];
 for (const l of spec.links) {
@@ -236,20 +326,22 @@ function applyMode(m) {
   Object.values(colHolders).forEach((n) => (n.visible = showC));
   scene.traverse((n) => {
     if (n.isMesh && n.material?.polygonOffset) {
-      n.material.opacity = m === "both" ? 0.5 : 1;
+      n.material.opacity = m === "both" ? 0.25 : 1;
       n.material.depthWrite = m !== "both";
     }
   });
   // 凸包靠纯色区分,AgX 会冲淡;碰撞相关模式整帧改 Neutral
   renderer.toneMapping = (m === "visual" || q.get("tone")) ? baseTone : THREE.NeutralToneMapping;
-  document.querySelectorAll("#modes button").forEach((b) => b.classList.toggle("on", b.dataset.m === m));
+  if (typeof hullN === "number") log(`${QUALITY} · mode=${m} · hulls=${hullN} · links=${spec.links.length}`);
   wake();
 }
 applyMode(MODE);
 
 // ---- 取景 + 地面 ----
 root.updateMatrixWorld(true);
-const box = new THREE.Box3().setFromObject(root);
+// 包围盒只算资产本体:关节控件挂在树里但是屏幕空间尺寸,不能参与取景
+const box = new THREE.Box3();
+root.traverse((n) => { if (n.isMesh && !n.userData.proxy) box.expandByObject(n); });
 const c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
 const radius = size.length() / 2;
 controls.target.copy(c);
@@ -299,6 +391,11 @@ if (MIRROR) {
   veil.renderOrder = 5;
   scene.add(veil);
 }
+gridHelper = new THREE.GridHelper(radius * 8, 32, 0x8a8a8a, 0x454545);   // AgX 会压暗,给亮一点
+gridHelper.position.set(c.x, groundY + radius * 0.001, c.z);
+gridHelper.material.transparent = true; gridHelper.material.opacity = 0.9;
+gridHelper.visible = q.get("grid") === "1";
+scene.add(gridHelper);
 const ground = new THREE.Mesh(
   new THREE.PlaneGeometry(radius * 40, radius * 40),
   // 阴影层只画阴影,绝不能写深度:它在遮罩层上方且先渲染,写了深度就把镜面遮罩挡掉了
@@ -309,12 +406,17 @@ ground.receiveShadow = true;
 scene.add(ground);
 
 // ---- 后处理:GTAO(接触阴影) + 轻微 Bloom + 输出;交互停下后升 8x 超采样 ----
-let composer = null, ssaaPass = null, bokeh = null, stillTimer = 0, isStill = false;
+let composer = null, ssaaPass = null, bokeh = null, outline = null, stillTimer = 0, isStill = false;
 if (PP) {
   composer = new EffectComposer(renderer);
   ssaaPass = new SSAARenderPass(scene, camera);
   ssaaPass.sampleLevel = 0;                       // 交互时 1x,静止后 3(=8x)
   composer.addPass(ssaaPass);
+  // 悬停/拖拽描边:Palatial 参数 —— 悬停 strength 3,选中 12 + glow
+  outline = new OutlinePass(new THREE.Vector2(innerWidth, innerHeight), scene, camera);
+  outline.edgeStrength = 3; outline.edgeGlow = 0; outline.edgeThickness = 1; outline.pulsePeriod = 0;
+  outline.visibleEdgeColor.set(ACCENT); outline.hiddenEdgeColor.set(ACCENT).multiplyScalar(0.35);
+  composer.addPass(outline);
   if (HIGH) {
     const gtao = new GTAOPass(scene, camera, innerWidth, innerHeight);
     gtao.updateGtaoMaterial({ radius: radius * 0.12, distanceExponent: 1, thickness: radius * 0.04,
@@ -361,6 +463,7 @@ document.title = "ready";
 addEventListener("resize", () => {
   renderer.setSize(innerWidth, innerHeight, false);
   composer?.setSize(innerWidth, innerHeight);
+  outline?.setSize(innerWidth, innerHeight);
   camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
 });
 // ---- 关节控制:滑杆 + 直接拖拽 ----
@@ -370,7 +473,7 @@ for (const j of movable) jointByLink[j.child] = j;
 const panel = document.createElement("div");
 panel.id = "joints";
 panel.innerHTML = movable.map((j, i) => `
-  <label><span>${j.name}</span>
+  <label><span class="jn">${j.name}</span><span class="jt">${T[j.type] || j.type}</span>
     <input type="range" min="0" max="1000" data-j="${i}">
     <b data-v="${i}"></b></label>`).join("");
 document.body.appendChild(panel);
@@ -411,6 +514,17 @@ const pickJoint = (e) => {
   return null;
 };
 
+const linkMeshes = (link) => { const out = []; visHolders[link]?.traverse((n) => { if (n.isMesh) out.push(n); }); return out; };
+function setHover(j, active) {
+  if (outline) {
+    outline.selectedObjects = j ? linkMeshes(j.child) : [];
+    outline.edgeStrength = active ? 12 : 3;
+    outline.edgeGlow = active ? 1 : 0;
+  }
+  for (const px of proxies) px.hot = !!j && px.joint === j;
+  panel.querySelectorAll("label").forEach((l, i) => l.classList.toggle("hot", !!j && movable[i] === j));
+}
+
 renderer.domElement.addEventListener("pointerdown", (e) => {
   const hit = pickJoint(e);
   if (!hit) return;
@@ -419,11 +533,14 @@ renderer.domElement.addEventListener("pointerdown", (e) => {
   renderer.domElement.setPointerCapture(e.pointerId);
   drag = { ...hit, prevRay: raycaster.ray.clone() };
   renderer.domElement.style.cursor = "grabbing";
+  setHover(hit.joint, true);
 });
 
 renderer.domElement.addEventListener("pointermove", (e) => {
-  if (!drag) {                                    // 只做悬停光标
-    renderer.domElement.style.cursor = pickJoint(e) ? "grab" : "default";
+  if (!drag) {                                    // 悬停:光标 + 描边 + 控件提亮
+    const hit = pickJoint(e);
+    renderer.domElement.style.cursor = hit ? "grab" : "default";
+    setHover(hit ? hit.joint : null, false);
     return;
   }
   setNdc(e);
@@ -475,6 +592,7 @@ const endDrag = (e) => {
   drag = null;
   controls.enabled = true;
   renderer.domElement.style.cursor = "default";
+  setHover(null, false);
   if (e && e.pointerId != null && renderer.domElement.hasPointerCapture?.(e.pointerId))
     renderer.domElement.releasePointerCapture(e.pointerId);
 };
@@ -485,7 +603,7 @@ renderer.domElement.addEventListener("pointercancel", endDrag);
 let idle = q.get("idle") !== "0";
 const t0 = performance.now();
 function stopIdle() {
-  idle = false; controls.autoRotate = false;
+  idle = false; controls.autoRotate = false; if (typeof paintBar === "function") paintBar();
   const tip = document.getElementById("tip");
   if (tip) tip.style.opacity = "0";
 }
@@ -502,10 +620,42 @@ renderer.setAnimationLoop(() => {
     syncUI();
   }
   controls.update();
+  updateProxies();
   if (composer) composer.render(); else renderer.render(scene, camera);
 });
 // 调试用:让测试脚本能读到关节状态
+// ---- 顶栏 ----
+const camHome = { pos: camera.position.clone(), target: controls.target.clone() };
+let wire = false, modeIdx = ["visual", "both", "collision"].indexOf(curMode);
+const btn = (a) => document.querySelector(`#topbar button[data-act="${a}"]`);
+const paintBar = () => {
+  btn("reset").textContent = T.reset;
+  btn("collision").textContent = T.collision[modeIdx]; btn("collision").classList.toggle("on", modeIdx > 0);
+  btn("wireframe").textContent = T.wireframe; btn("wireframe").classList.toggle("on", wire);
+  btn("grid").textContent = T.grid; btn("grid").classList.toggle("on", !!gridHelper?.visible);
+  btn("spin").textContent = T.spin; btn("spin").classList.toggle("on", controls.autoRotate);
+  btn("share").textContent = T.share;
+};
+btn("reset").addEventListener("click", () => {
+  stopIdle();
+  movable.forEach((j) => setJoint(j, j.lower)); syncUI();
+  camera.position.copy(camHome.pos); controls.target.copy(camHome.target); controls.update(); wake();
+});
+btn("collision").addEventListener("click", () => { modeIdx = (modeIdx + 1) % 3; applyMode(["visual", "both", "collision"][modeIdx]); paintBar(); });
+btn("wireframe").addEventListener("click", () => {
+  wire = !wire;
+  Object.values(visHolders).forEach((h) => h.traverse((n) => { if (n.isMesh) n.material.wireframe = wire; }));
+  paintBar(); wake();
+});
+btn("grid").addEventListener("click", () => { gridHelper.visible = !gridHelper.visible; paintBar(); wake(); });
+btn("spin").addEventListener("click", () => { controls.autoRotate = !controls.autoRotate; paintBar(); });
+btn("share").addEventListener("click", async () => {
+  const url = new URL(location.href); url.searchParams.delete("spin"); url.searchParams.delete("idle");
+  try { await navigator.clipboard.writeText(url.toString()); toast(T.copied); } catch { prompt("URL", url.toString()); }
+});
+paintBar();
 window.__joints = movable;
 window.__pick = pickJoint;
+window.__outlineCount = () => outline ? outline.selectedObjects.length : -1;
 window.__THREE = THREE;
 </script>
