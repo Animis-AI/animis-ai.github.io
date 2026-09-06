@@ -63,7 +63,7 @@ const I18N = {
     preview: "Preview GLB", add_cart: "Add to cart", in_cart: "In cart ✓",
     meta_note: "Purchase unlocks delivery of the full package — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics report. Previews on this page are offline renders of that package.",
     clip_hinge: "Hinge motion", clip_collision: "Collision bodies",
-    clip_physics: "Physics drop",
+    clip_physics: "Physics drop", clip_interactive: "Interactive 3D",
     rigid_label: "rigid", dof_suffix: "DOF",
   },
   zh: {
@@ -122,7 +122,7 @@ const I18N = {
     preview: "预览 GLB", add_cart: "加入选购", in_cart: "已在清单 ✓",
     meta_note: "购买后解锁下载。正式商店交付完整资产包（URDF + 逐链接网格 + 碰撞凸包 + 物理报告）；沙盒环境交付压缩 GLB。",
     clip_hinge: "铰链开合", clip_collision: "碰撞体",
-    clip_physics: "物理掉落",
+    clip_physics: "物理掉落", clip_interactive: "交互查看",
     rigid_label: "刚体", dof_suffix: "DOF",
   },
 };
@@ -602,7 +602,10 @@ function openSheet(a) {
   sheetViewer.replaceChildren();
   sheetMeta.replaceChildren();
 
-  const clips = a.media || [];
+  const clips = [...(a.media || [])];
+  // 带 inspect bundle 的资产多一个交互查看标签:iframe 里跑 viewer/(three.js),
+  // 按需加载,不打开这个标签不付 3D 的成本
+  if (a.inspect) clips.push({ key: "interactive", iframe: `viewer/?asset=${a.slug}` });
   if (clips.length) {
     const stage = document.createElement("div");
     stage.className = "stage";
@@ -615,11 +618,28 @@ function openSheet(a) {
     video.poster = `assets/${a.slug}/poster.jpg`;
     stage.appendChild(video);
 
+    const frame = document.createElement("iframe");
+    frame.className = "clip-frame";
+    frame.hidden = true;
+    frame.allow = "fullscreen";
+    frame.title = "3D viewer";
+    stage.appendChild(frame);
+
     const caption = document.createElement("span");
     caption.className = "viewer-hint";
     stage.appendChild(caption);
 
     const play = (clip) => {
+      if (clip.iframe) {
+        video.pause();
+        video.hidden = true;
+        frame.hidden = false;
+        if (!frame.src) frame.src = `${clip.iframe}&lang=${state.lang}`;
+        caption.textContent = "";
+        return;
+      }
+      frame.hidden = true;
+      video.hidden = false;
       video.src = `assets/${a.slug}/${clip.file}`;
       caption.textContent = t(`clip_${clip.key}`);
       video.play?.().catch(() => {});

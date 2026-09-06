@@ -129,3 +129,12 @@
   往 `data/assets.json` 塞回条目即可(条目模板见 git log 或重新跑管线)。
 - 正式上架时:visual GLB 建议过 gltf-transform 压缩(oven 检视 bundle
   现在 20 MB);build_manifest.py 需补 `inspect` 字段自动检测。
+
+## 3D viewer(2026-09-06 上线)
+
+- [ ] 关节表盘/滑轨控件(Palatial §5)、悬停 OutlinePass 描边、undo/redo
+- [ ] KTX2/Basis 贴图压缩、HDRI 换 RGBM PNG 省体积
+- [ ] 资产侧:让出资产的人给干净的 roughness/normal 贴图 + 连续 UV,
+      各向异性就能拉到 0.8 以上(现在 0.35 是迁就分段 UV)
+- [ ] 真机验证:所有质量参数是在无 GPU 的 SwiftShader 下调的,GPU 上只会更好,
+      但帧率/发热要在真机上看一眼再定 high 档默认

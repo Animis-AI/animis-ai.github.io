@@ -48,7 +48,8 @@
      "key": "physics",
      "file": "physics_demo.mp4"
     }
-   ]
+   ],
+   "inspect": true
   }
  ]
 }

@@ -1,0 +1,511 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="cache-control" content="no-store, must-revalidate">
+<meta http-equiv="pragma" content="no-cache">
+<title>Animis · 3D viewer</title>
+<style>
+  html,body{margin:0;height:100%;background:#030303;overflow:hidden}
+  canvas{display:block;width:100%;height:100%}
+  #tip{position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:5;
+    font:13px/1.4 ui-monospace,monospace;color:#d8d5ce;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 16px;
+    backdrop-filter:blur(6px);pointer-events:none;transition:opacity .4s}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    background:#030303;color:#8a8780;font:13px ui-monospace,monospace;z-index:9;transition:opacity .5s}
+  #modes{position:fixed;left:14px;bottom:14px;display:flex;gap:6px;z-index:5}
+  #modes button{font:12px/1 ui-monospace,monospace;color:#d8d5ce;background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:8px 12px;cursor:pointer;backdrop-filter:blur(6px)}
+  #modes button:hover{background:rgba(255,255,255,.12)}
+  #modes button.on{background:#e8e5de;color:#111;border-color:#e8e5de}
+  #hud{position:fixed;left:12px;bottom:44px;font:12px/1.5 ui-monospace,monospace;color:#8a8780}
+  #joints{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:8px;
+    font:12px/1.4 ui-monospace,monospace;color:#e8e5de}
+  #joints label{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:7px 12px;backdrop-filter:blur(6px)}
+  #joints span{min-width:64px;color:#a9a69f}
+  #joints input{width:170px;accent-color:#e8e5de}
+  #joints b{min-width:44px;text-align:right;font-weight:500}
+</style>
+<div id="loading">加载中…</div>
+<div id="tip"></div>
+<div id="modes">
+  <button data-m="visual"></button><button data-m="collision"></button><button data-m="both"></button>
+</div>
+<div id="hud"></div>
+<script type="importmap">
+{"imports":{"three":"./vendor/three/three.module.min.js"}}
+</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "./vendor/three/OrbitControls.js";
+import { GLTFLoader } from "./vendor/three/GLTFLoader.js";
+import { RGBELoader } from "./vendor/three/RGBELoader.js";
+import { EffectComposer } from "./vendor/three/jsm/postprocessing/EffectComposer.js";
+import { SSAARenderPass } from "./vendor/three/jsm/postprocessing/SSAARenderPass.js";
+import { GTAOPass } from "./vendor/three/jsm/postprocessing/GTAOPass.js";
+import { UnrealBloomPass } from "./vendor/three/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "./vendor/three/jsm/postprocessing/OutputPass.js";
+import { BokehPass } from "./vendor/three/jsm/postprocessing/BokehPass.js";
+import { Reflector } from "./vendor/three/jsm/objects/Reflector.js";
+
+const q = new URLSearchParams(location.search);
+const MODE = q.get("mode") || "visual";
+const FIX = q.get("fix") !== "0";      // 丢掉交付件那张迷彩 roughness 贴图
+const ROUGH = parseFloat(q.get("rough") ?? "0.22");
+const ENVI = parseFloat(q.get("envi") ?? "5.0");
+const ENVROT = parseFloat(q.get("envrot") ?? "0");  // 环境绕 Y 旋转(度)
+// 质量分档:high = GTAO + 景深 + 镜面地面 + 静止 8x;low = 只保留 IBL/阴影 + 静止 4x。
+// 触屏 / 低核数 / 高 DPR 的设备自动走 low,?quality=high|low 强制。
+const coarse = matchMedia("(pointer: coarse)").matches;
+const weak = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+const QUALITY = q.get("quality") || ((coarse || weak) ? "low" : "high");
+const HIGH = QUALITY === "high";
+const PP = q.get("pp") !== "0";          // 后处理总开关
+const DOF = q.get("dof") !== "0" && HIGH; // 静止时景深
+const DOF_K = parseFloat(q.get("dof_k") ?? "0.10");   // 0.15 已明显,0.10 是产品照那种轻微虚化
+const MIRROR = q.get("mirror") !== "0" && HIGH; // 镜面地面
+const MIRROR_STRENGTH = parseFloat(q.get("mirror_k") ?? "0.08"); // 倒影中心强度(本体是 HDR 值,4% 已够显眼)
+const HDRI = q.get("hdri") || "studio_small_09";   // 1k 已够,2k 要 6 MB
+const ANISO = parseFloat(q.get("aniso") ?? "0.35");  // 资产 UV 在刀尖分段,再高就出条纹   // 拉丝金属各向异性
+const TONE = q.get("tone") || "agx";     // agx | aces | neutral
+const BLOOM = parseFloat(q.get("bloom") ?? "0");     // 金属高光是 HDR 值,黑底上会晕成一圈
+const AO = parseFloat(q.get("ao") ?? "0.9");
+const OPEN = parseFloat(q.get("open") ?? "0.5"); // 关节开度 0..1
+const SLUG = (q.get("asset") || "scissors").replace(/[^a-z0-9_-]/gi, "");
+const BASE = `../assets/${SLUG}/`;
+
+// ---- 渲染器:照抄 Palatial 的配置 ----
+const canvas = document.createElement("canvas");
+document.body.appendChild(canvas);
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, HIGH ? 2 : 1.5));
+renderer.setSize(innerWidth, innerHeight, false);
+renderer.toneMapping = { agx: THREE.AgXToneMapping, aces: THREE.ACESFilmicToneMapping,
+                         neutral: THREE.NeutralToneMapping }[TONE] ?? THREE.AgXToneMapping;
+renderer.toneMappingExposure = 1;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x030303);
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.001, 100);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.autoRotate = q.get("spin") !== "0";
+controls.autoRotateSpeed = 0.8;
+
+const LANG = q.get("lang") === "zh" ? "zh" : "en";
+document.documentElement.lang = LANG === "zh" ? "zh-CN" : "en";
+document.getElementById("tip").textContent = LANG === "zh"
+  ? "拖动部件驱动关节 · 空白处拖动转视角 · 滚轮缩放"
+  : "Drag a part to move its joint · drag empty space to orbit · scroll to zoom";
+document.getElementById("loading").textContent = LANG === "zh" ? "加载中…" : "Loading…";
+{
+  const names = LANG === "zh" ? { visual: "视觉网格", collision: "碰撞体", both: "叠加" }
+                              : { visual: "Visual", collision: "Collision", both: "Overlay" };
+  document.querySelectorAll("#modes button").forEach((b) => {
+    b.textContent = names[b.dataset.m];
+    b.addEventListener("click", () => applyMode(b.dataset.m));
+  });
+}
+const hud = document.getElementById("hud");
+const log = (m) => { hud.textContent = m; console.log("HUD", m); };
+
+// ---- HDRI IBL ----
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envTex = await new Promise((res, rej) =>
+  new RGBELoader().load(`hdri/${HDRI}.hdr`, res, undefined, rej));
+envTex.mapping = THREE.EquirectangularReflectionMapping;
+scene.environment = pmrem.fromEquirectangular(envTex).texture;
+scene.environmentIntensity = ENVI;
+scene.environmentRotation = new THREE.Euler(0, THREE.MathUtils.degToRad(ENVROT), 0);
+
+// 一盏方向光只为了投影(IBL 不产生阴影)
+const sun = new THREE.DirectionalLight(0xffffff, 1.2);
+sun.position.set(1.2, 2.4, 1.0);
+sun.castShadow = true;
+sun.shadow.mapSize.set(HIGH ? 4096 : 2048, HIGH ? 4096 : 2048);
+sun.shadow.bias = -0.0002;
+sun.shadow.normalBias = 0.002;
+scene.add(sun);
+
+// ---- 资产 ----
+const spec = await fetch(BASE + "inspect/inspect.json").then((r) => r.json());
+const loader = new GLTFLoader();
+const loadGlb = (u) => new Promise((res, rej) => loader.load(u, res, undefined, rej));
+
+function rpyQuat(rpy) {
+  const m = new THREE.Matrix4().makeRotationZ(rpy[2]);
+  m.multiply(new THREE.Matrix4().makeRotationY(rpy[1]));
+  m.multiply(new THREE.Matrix4().makeRotationX(rpy[0]));
+  return new THREE.Quaternion().setFromRotationMatrix(m);
+}
+
+const root = new THREE.Group();
+root.rotation.x = -Math.PI / 2;                 // URDF Z-up -> three Y-up
+scene.add(root);
+
+const linkGroups = {}, visHolders = {}, colHolders = {};
+for (const l of spec.links) {
+  const g = new THREE.Group(); const v = new THREE.Group(); const c = new THREE.Group();
+  g.add(v, c); linkGroups[l.name] = g; visHolders[l.name] = v; colHolders[l.name] = c;
+}
+const childLinks = new Set(); const movable = [];
+for (const j of spec.joints) {
+  const pivot = new THREE.Group();
+  pivot.position.fromArray(j.xyz);
+  pivot.quaternion.copy(rpyQuat(j.rpy));
+  const motion = new THREE.Group();
+  pivot.add(motion); motion.add(linkGroups[j.child]);
+  linkGroups[j.parent].add(pivot);
+  childLinks.add(j.child);
+  if (["revolute", "continuous", "prismatic"].includes(j.type)) movable.push({ ...j, motion });
+}
+for (const l of spec.links) if (!childLinks.has(l.name)) root.add(linkGroups[l.name]);
+
+const jobs = [];
+for (const l of spec.links) {
+  for (const vis of l.visuals) {
+    jobs.push(loadGlb(BASE + "inspect/" + vis.file).then((g) => {
+      g.scene.traverse((n) => {
+        if (!n.isMesh) return;
+        n.castShadow = true; n.receiveShadow = true;
+        if (FIX) {                     // albedo 留着,金属度/粗糙度用常量
+          // 拉丝金属:沿加工方向拉长的各向异性高光,钢制品的关键质感
+          n.material = new THREE.MeshPhysicalMaterial({
+            map: n.material.map,
+            color: n.material.color.clone(),
+            metalness: 1.0, roughness: ROUGH,
+            anisotropy: ANISO,
+            aoMap: n.material.aoMap, aoMapIntensity: 1.0,   // 离线烘的 AO(若有)
+          });
+        }
+      });
+      g.scene.traverse((n) => { if (n.isMesh) n.userData.link = l.name; });
+      visHolders[l.name].add(g.scene);
+    }));
+  }
+}
+const HUES = [210, 25, 130, 270, 55, 175, 330, 95, 240, 15, 300, 150];
+let hullN = 0;
+jobs.push(loadGlb(BASE + "inspect/collision.glb").then((g) => {
+  for (const ln of [...g.scene.children]) {
+    const holder = colHolders[ln.name]; if (!holder) continue;
+    for (const hull of [...ln.children]) {
+      hull.traverse((n) => {
+        if (!n.isMesh) return;
+        n.geometry.computeVertexNormals();
+        const hc = new THREE.Color(`hsl(${HUES[hullN % HUES.length]},85%,46%)`);
+        n.material = new THREE.MeshStandardMaterial({
+          color: hc,
+          // 凸包靠颜色区分:环境光几乎不吃,底色用自发光托住,再靠方向光出体积
+          emissive: hc.clone().multiplyScalar(0.28),
+          envMapIntensity: 0.0,
+          flatShading: true, roughness: 0.9, metalness: 0.0,
+          transparent: true, opacity: 1,
+          polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+        });
+        hullN++;
+      });
+      hull.traverse((n) => { if (n.isMesh) n.userData.link = ln.name; });
+      holder.add(hull);
+    }
+  }
+}));
+await Promise.all(jobs);
+
+// ---- FK ----
+function setJoint(j, v) {
+  j.value = v;
+  if (j.type === "prismatic") j.motion.position.set(j.axis[0]*v, j.axis[1]*v, j.axis[2]*v);
+  else j.motion.quaternion.setFromAxisAngle(
+    new THREE.Vector3().fromArray(j.axis).normalize(), v);
+}
+movable.forEach((j) => setJoint(j, j.lower + OPEN * (j.upper - j.lower)));
+
+// ---- 模式:视觉 / 碰撞体 / 叠加,运行时可切 ----
+const baseTone = { agx: THREE.AgXToneMapping, aces: THREE.ACESFilmicToneMapping,
+                   neutral: THREE.NeutralToneMapping }[TONE] ?? THREE.AgXToneMapping;
+let curMode = MODE;
+let wake = () => {};                              // 后处理就绪后会被替换
+function applyMode(m) {
+  curMode = m;
+  const showV = m !== "collision", showC = m !== "visual";
+  Object.values(visHolders).forEach((n) => (n.visible = showV));
+  Object.values(colHolders).forEach((n) => (n.visible = showC));
+  scene.traverse((n) => {
+    if (n.isMesh && n.material?.polygonOffset) {
+      n.material.opacity = m === "both" ? 0.5 : 1;
+      n.material.depthWrite = m !== "both";
+    }
+  });
+  // 凸包靠纯色区分,AgX 会冲淡;碰撞相关模式整帧改 Neutral
+  renderer.toneMapping = (m === "visual" || q.get("tone")) ? baseTone : THREE.NeutralToneMapping;
+  document.querySelectorAll("#modes button").forEach((b) => b.classList.toggle("on", b.dataset.m === m));
+  wake();
+}
+applyMode(MODE);
+
+// ---- 取景 + 地面 ----
+root.updateMatrixWorld(true);
+const box = new THREE.Box3().setFromObject(root);
+const c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+const radius = size.length() / 2;
+controls.target.copy(c);
+camera.position.set(c.x + radius * 1.5, c.y + radius * 1.15, c.z + radius * 1.5);
+camera.near = radius / 20; camera.far = radius * 60;   // 近平面别太小,地面几层要靠深度分开
+controls.minDistance = radius * 0.6; controls.maxDistance = radius * 8;
+camera.updateProjectionMatrix(); controls.update();
+sun.position.set(c.x + radius * 2, c.y + radius * 4, c.z + radius * 2);
+sun.target.position.copy(c); scene.add(sun.target);
+const d = radius * 3;
+Object.assign(sun.shadow.camera, { left: -d, right: d, top: d, bottom: -d, near: 0.001, far: d * 6 });
+sun.shadow.camera.updateProjectionMatrix();
+
+const groundY = box.min.y - radius * 0.02;
+if (MIRROR) {
+  // 镜面层在最下;上面盖一层径向渐变的黑色遮罩控制倒影强度(中心 MIRROR_STRENGTH,
+  // 外圈全黑)。层距要拉开到 1% 物体尺度,否则三层共面 z-fighting,遮罩会被镜面压掉。
+  const mirror = new Reflector(new THREE.PlaneGeometry(radius * 40, radius * 40), {
+    color: 0xffffff,
+    textureWidth: Math.round(innerWidth * Math.min(devicePixelRatio, 2)),
+    textureHeight: Math.round(innerHeight * Math.min(devicePixelRatio, 2)),
+    clipBias: 0.002,
+  });
+  mirror.rotation.x = -Math.PI / 2;
+  mirror.position.y = groundY - radius * 0.06;
+  scene.add(mirror);
+
+  const cv = document.createElement("canvas"); cv.width = cv.height = 1024;
+  const g2 = cv.getContext("2d");
+  const grd = g2.createRadialGradient(512, 512, 0, 512, 512, 512);
+  grd.addColorStop(0.0, `rgba(0,0,0,${1 - MIRROR_STRENGTH})`);
+  grd.addColorStop(0.25, `rgba(0,0,0,${1 - MIRROR_STRENGTH * 0.6})`);
+  grd.addColorStop(0.55, "rgba(0,0,0,1)");
+  grd.addColorStop(1.0, "rgba(0,0,0,1)");
+  g2.fillStyle = grd; g2.fillRect(0, 0, 1024, 1024);
+  const veilTex = new THREE.CanvasTexture(cv);
+  veilTex.colorSpace = THREE.SRGBColorSpace;
+  const V = q.get("veil");
+  const veilMat = V === "solid" ? new THREE.MeshBasicMaterial({ color: 0x000000 })
+    : V === "opacity" ? new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 1 - MIRROR_STRENGTH, depthWrite: false })
+    : V === "nodepth" ? new THREE.MeshBasicMaterial({ map: veilTex, transparent: true, depthWrite: false, depthTest: false })
+    : new THREE.MeshBasicMaterial({ map: veilTex, transparent: true, depthWrite: false });
+  const veil = new THREE.Mesh(new THREE.PlaneGeometry(radius * 40, radius * 40), veilMat);
+  window.__veil = veil; window.__mirror = mirror;
+  veil.rotation.x = -Math.PI / 2;
+  veil.position.set(c.x, groundY - radius * 0.03, c.z);
+  veil.renderOrder = 5;
+  scene.add(veil);
+}
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(radius * 40, radius * 40),
+  // 阴影层只画阴影,绝不能写深度:它在遮罩层上方且先渲染,写了深度就把镜面遮罩挡掉了
+  new THREE.ShadowMaterial({ opacity: MIRROR ? 0.5 : 0.35, depthWrite: false }));
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = groundY;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// ---- 后处理:GTAO(接触阴影) + 轻微 Bloom + 输出;交互停下后升 8x 超采样 ----
+let composer = null, ssaaPass = null, bokeh = null, stillTimer = 0, isStill = false;
+if (PP) {
+  composer = new EffectComposer(renderer);
+  ssaaPass = new SSAARenderPass(scene, camera);
+  ssaaPass.sampleLevel = 0;                       // 交互时 1x,静止后 3(=8x)
+  composer.addPass(ssaaPass);
+  if (HIGH) {
+    const gtao = new GTAOPass(scene, camera, innerWidth, innerHeight);
+    gtao.updateGtaoMaterial({ radius: radius * 0.12, distanceExponent: 1, thickness: radius * 0.04,
+                              scale: 1.2, samples: 16, distanceFallOff: 1 });
+    gtao.blendIntensity = AO;
+    composer.addPass(gtao);
+  }
+  if (BLOOM > 0) {                                 // 金属高光是 HDR 值,bloom 一重就成一片白
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), BLOOM, 0.5, 1.1));
+  }
+  if (DOF) {
+    // 景深只在静止时开:焦点锁在轨道中心,光圈按物体尺度给,远端轻微虚化
+    bokeh = new BokehPass(scene, camera, { focus: 1, aperture: 0.0008, maxblur: 0.006 });
+    bokeh.enabled = false;
+    composer.addPass(bokeh);
+  }
+  composer.addPass(new OutputPass());
+  wake = () => {                                  // 任何交互回到快速档
+    isStill = false; ssaaPass.sampleLevel = 0;
+    if (bokeh) bokeh.enabled = false;
+    clearTimeout(stillTimer);
+    stillTimer = setTimeout(() => {
+      isStill = true;
+      ssaaPass.sampleLevel = HIGH ? 3 : 2;
+      if (bokeh) {
+        bokeh.uniforms.focus.value = camera.position.distanceTo(controls.target);
+        bokeh.uniforms.aperture.value = DOF_K / Math.max(radius * 10, 1e-3);
+        bokeh.uniforms.maxblur.value = 0.01;
+        bokeh.enabled = true;
+      }
+    }, 350);
+  };
+  ["pointerdown","pointermove","wheel"].forEach((ev) =>
+    renderer.domElement.addEventListener(ev, wake, { passive: true }));
+  wake();
+}
+
+renderer.render(scene, camera);
+await new Promise((r) => requestAnimationFrame(r));
+renderer.render(scene, camera);
+log(`${QUALITY} · mode=${MODE} · hulls=${hullN} · links=${spec.links.length}`);
+document.title = "ready";
+{ const l = document.getElementById("loading"); l.style.opacity = "0"; l.style.pointerEvents = "none"; setTimeout(() => l.remove(), 500); }
+addEventListener("resize", () => {
+  renderer.setSize(innerWidth, innerHeight, false);
+  composer?.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+});
+// ---- 关节控制:滑杆 + 直接拖拽 ----
+const jointByLink = {};                 // 被驱动的 link -> 关节
+for (const j of movable) jointByLink[j.child] = j;
+
+const panel = document.createElement("div");
+panel.id = "joints";
+panel.innerHTML = movable.map((j, i) => `
+  <label><span>${j.name}</span>
+    <input type="range" min="0" max="1000" data-j="${i}">
+    <b data-v="${i}"></b></label>`).join("");
+document.body.appendChild(panel);
+
+const frac = (j) => (j.value - j.lower) / ((j.upper - j.lower) || 1);
+function syncUI() {
+  movable.forEach((j, i) => {
+    panel.querySelector(`input[data-j="${i}"]`).value = Math.round(frac(j) * 1000);
+    panel.querySelector(`b[data-v="${i}"]`).textContent =
+      j.type === "prismatic" ? `${(j.value * 100).toFixed(1)} cm`
+                             : `${Math.round(j.value * 180 / Math.PI)}°`;
+  });
+}
+panel.addEventListener("input", (e) => {
+  const i = +e.target.dataset.j;
+  stopIdle();
+  setJoint(movable[i], movable[i].lower + (e.target.value / 1000) * (movable[i].upper - movable[i].lower));
+  syncUI();
+});
+
+// 拖拽:射线命中某个 link 的网格 -> 拖它绕所属关节转(Palatial §4 的平面投影解法)
+const raycaster = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+const DRAG_SENSITIVITY = 1.5;
+let drag = null;
+
+const setNdc = (e) => {
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+};
+const pickJoint = (e) => {
+  setNdc(e);
+  raycaster.setFromCamera(ndc, camera);
+  for (const hit of raycaster.intersectObject(root, true)) {
+    const j = jointByLink[hit.object.userData.link];
+    if (j) return { joint: j, point: hit.point.clone(), distance: hit.distance };
+  }
+  return null;
+};
+
+renderer.domElement.addEventListener("pointerdown", (e) => {
+  const hit = pickJoint(e);
+  if (!hit) return;
+  stopIdle();
+  controls.enabled = false;                       // 别同时转视角
+  renderer.domElement.setPointerCapture(e.pointerId);
+  drag = { ...hit, prevRay: raycaster.ray.clone() };
+  renderer.domElement.style.cursor = "grabbing";
+});
+
+renderer.domElement.addEventListener("pointermove", (e) => {
+  if (!drag) {                                    // 只做悬停光标
+    renderer.domElement.style.cursor = pickJoint(e) ? "grab" : "default";
+    return;
+  }
+  setNdc(e);
+  raycaster.setFromCamera(ndc, camera);
+  const j = drag.joint;
+  const pivot = j.motion.parent;
+  pivot.updateMatrixWorld();
+  const origin = new THREE.Vector3().setFromMatrixPosition(pivot.matrixWorld);
+  const axis = new THREE.Vector3().fromArray(j.axis).normalize()
+    .transformDirection(pivot.matrixWorld).normalize();
+
+  let delta = 0;
+  if (j.type === "prismatic") {
+    const p0 = drag.prevRay.at(drag.distance, new THREE.Vector3());
+    const p1 = raycaster.ray.at(drag.distance, new THREE.Vector3());
+    delta = p1.sub(p0).dot(axis);
+  } else {
+    const view = camera.position.clone().sub(drag.point).normalize();
+    const plane = new THREE.Plane().setFromNormalAndCoplanarPoint(axis, origin);
+    if (Math.abs(view.dot(axis)) > 0.3) {
+      // 常规:上一帧与当前帧的射线点投影到关节平面,夹角即转角增量
+      const p0 = plane.projectPoint(drag.prevRay.at(drag.distance, new THREE.Vector3()), new THREE.Vector3()).sub(origin);
+      const p1 = plane.projectPoint(raycaster.ray.at(drag.distance, new THREE.Vector3()), new THREE.Vector3()).sub(origin);
+      if (p0.lengthSq() > 1e-12 && p1.lengthSq() > 1e-12) {
+        const sign = Math.sign(new THREE.Vector3().crossVectors(p0, p1).dot(axis)) || 1;
+        delta = sign * p0.angleTo(p1);
+      }
+    } else {
+      // 退化(视线几乎垂直于转轴):用切线方向的位移近似,避免数值爆炸
+      const arm = drag.point.clone().sub(origin);
+      const tangent = new THREE.Vector3().crossVectors(axis, arm);
+      const r = arm.length();
+      if (tangent.lengthSq() > 1e-12 && r > 1e-9) {
+        tangent.normalize();
+        const p0 = drag.prevRay.at(drag.distance, new THREE.Vector3());
+        const p1 = raycaster.ray.at(drag.distance, new THREE.Vector3());
+        delta = p1.sub(p0).dot(tangent) / r;
+      }
+    }
+  }
+
+  setJoint(j, THREE.MathUtils.clamp(j.value + delta * DRAG_SENSITIVITY, j.lower, j.upper));
+  syncUI();
+  drag.prevRay = raycaster.ray.clone();
+});
+
+const endDrag = (e) => {
+  if (!drag) return;
+  drag = null;
+  controls.enabled = true;
+  renderer.domElement.style.cursor = "default";
+  if (e && e.pointerId != null && renderer.domElement.hasPointerCapture?.(e.pointerId))
+    renderer.domElement.releasePointerCapture(e.pointerId);
+};
+renderer.domElement.addEventListener("pointerup", endDrag);
+renderer.domElement.addEventListener("pointercancel", endDrag);
+
+// ---- idle 演示:关节在限位内正弦往复,一交互就停(Palatial §6) ----
+let idle = q.get("idle") !== "0";
+const t0 = performance.now();
+function stopIdle() {
+  idle = false; controls.autoRotate = false;
+  const tip = document.getElementById("tip");
+  if (tip) tip.style.opacity = "0";
+}
+controls.addEventListener("start", stopIdle);
+
+syncUI();
+renderer.setAnimationLoop(() => {
+  if (idle && movable.length) {
+    const t = (performance.now() - t0) / 1000 * 0.8;
+    for (const j of movable) {
+      if (j.lower === j.upper) continue;
+      setJoint(j, j.lower + (Math.sin(t) + 1) / 2 * (j.upper - j.lower));
+    }
+    syncUI();
+  }
+  controls.update();
+  if (composer) composer.render(); else renderer.render(scene, camera);
+});
+// 调试用:让测试脚本能读到关节状态
+window.__joints = movable;
+window.__pick = pickJoint;
+window.__THREE = THREE;
+</script>
