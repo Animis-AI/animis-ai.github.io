@@ -634,7 +634,7 @@ function openSheet(a) {
         video.pause();
         video.hidden = true;
         frame.hidden = false;
-        if (!frame.src) frame.src = `${clip.iframe}&lang=${state.lang}`;
+        if (!frame.src) frame.src = clip.iframe;   // viewer 一律英文(对标 Palatial),?lang=zh 仍可手动指定
         caption.textContent = "";
         return;
       }
