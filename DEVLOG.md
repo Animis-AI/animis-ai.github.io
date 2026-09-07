@@ -9,7 +9,7 @@
 
 | 路径 | 内容 | 状态 |
 |---|---|---|
-| `/` | 公司落地页,只有一句 slogan,中英自动切换 | 上线 |
+| `/` | 公司落地页:slogan + SimGallery 宣传片区块,中英自动切换 | 上线 |
 | `/asset-library/` | **SimGallery**(副标题 Sim-Ready Asset Library),资产目录 + 账号 + 购物车 + 许可门禁 | 上线,1 件资产 |
 | `/asset-library/viewer/` | 浏览器内 3D 查看器(three.js),铰接可拖拽,Details 面板 | 上线 |
 | 账号 / 支付 | demo 档(浏览器 localStorage),Supabase + Stripe 接口已预留 | 收款前必须切正式,见 `SECURITY.md` |
@@ -63,6 +63,8 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
 - 安全(`9315013`):CI 前置 `scripts/check-public-tree.sh`,拦可售格式、assets 白名单、
   密钥;`robots.txt`;`SECURITY.md` 写清威胁模型与收款前清单。
 - 剪刀详情页只留交互 3D:三段视频与标签栏移除,点开卡片即查看器。
+- 公司主页 slogan 下新增 SimGallery 介绍区块:MacBook Pro 铰接资产的 27 秒 Blender 宣传片
+  (网页版 1280p、1.8 MB,`media/`)+ 双语文案 + 入口链接。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。

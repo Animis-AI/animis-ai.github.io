@@ -30,8 +30,20 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:
 .rule{width:100%}
 .rule hr{border:0;border-top:1px solid var(--line)}
 
-.hero{flex:1 0 auto;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,64px);line-height:1.08;letter-spacing:-.02em;max-width:880px;padding:96px 0 120px}
+.hero{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,64px);line-height:1.08;letter-spacing:-.02em;max-width:880px;padding:96px 0 88px}
+
+.feature{flex:1 0 auto;width:100%;max-width:var(--maxw);margin:0 auto;padding:56px 28px 96px}
+.feature-media{border-radius:14px;overflow:hidden;background:#0a0a0a;aspect-ratio:16/9;box-shadow:0 30px 60px -30px rgba(33,29,22,.35)}
+.feature-media video{width:100%;height:100%;display:block;object-fit:cover}
+.feature-text{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding-top:40px;align-items:start}
+.kicker{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:500}
+.feature h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.15;letter-spacing:-.015em}
+html[lang="zh-CN"] .feature h2{letter-spacing:0;line-height:1.3}
+.feature .lede{color:var(--muted);font-size:16px;line-height:1.7;max-width:520px;padding-top:6px}
+.cta{display:inline-block;margin-top:20px;color:var(--ink);text-decoration:none;font-weight:500;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:opacity .12s}
+.cta:hover{opacity:.55}
+@media(max-width:760px){.feature-text{grid-template-columns:1fr;gap:20px}.hero h1{padding:64px 0 48px}}
 .hero h1 em{font-style:italic}
 html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
 
@@ -59,6 +71,26 @@ html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
 
 <div class="rule"><hr></div>
 
+<section class="feature">
+  <div class="feature-media">
+    <video autoplay muted loop playsinline preload="metadata" poster="media/simgallery_poster.jpg">
+      <source src="media/simgallery_promo.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="feature-text">
+    <div>
+      <p class="kicker">SimGallery</p>
+      <h2 data-i18n="feat_h2">Sim-ready assets, articulated and physics-complete.</h2>
+    </div>
+    <div>
+      <p class="lede" data-i18n="feat_lede">A MacBook Pro built as a simulation asset: one revolute lid, 78 prismatic keys, PBR materials, convex collision bodies and full mass and inertia data, delivered for Isaac Sim, MuJoCo and Genesis.</p>
+      <a class="cta" href="https://animis-ai.github.io/asset-library/" data-i18n="feat_cta">Browse SimGallery →</a>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr></div>
+
 <footer class="site-footer">
   <span class="fm">Animis AI</span>
   <a href="mailto:animislab@gmail.com">animislab@gmail.com</a>
@@ -70,10 +102,16 @@ const I18N = {
   en: {
     nav_library:"SimGallery",
     hero_h1:'We build the <em>world engine</em> for physical AI.',
+    feat_h2:"Sim-ready assets, articulated and physics-complete.",
+    feat_lede:"A MacBook Pro built as a simulation asset: one revolute lid, 78 prismatic keys, PBR materials, convex collision bodies and full mass and inertia data, delivered for Isaac Sim, MuJoCo and Genesis.",
+    feat_cta:"Browse SimGallery →",
   },
   zh: {
     nav_library:"SimGallery",
     hero_h1:'我们为物理 AI 构建<em>世界引擎</em>。',
+    feat_h2:"仿真就绪资产：可铰接、物理参数完整。",
+    feat_lede:"一台按仿真资产标准构建的 MacBook Pro：1 个转动关节的上盖、78 个移动关节的键帽、PBR 材质、凸包碰撞体与完整的质量和惯量数据,可直接用于 Isaac Sim、MuJoCo 与 Genesis。",
+    feat_cta:"进入 SimGallery →",
   },
 };
 let lang = localStorage.getItem("animis-lang")
