@@ -1,55 +1,42 @@
 {
- "library": {
-  "articulated_total": 1,
-  "categories_total": 1,
-  "curated": 1
- },
- "assets": [
-  {
-   "slug": "scissors",
-   "name_cn": "剪刀",
-   "name_en": "Scissors",
-   "kind": "articulated",
-   "category": "Tool",
-   "hero": true,
-   "joints": [
+  "library": {
+    "articulated_total": 1,
+    "categories_total": 1,
+    "curated": 1
+  },
+  "assets": [
     {
-     "name": "shear",
-     "type": "revolute",
-     "lower": 0.0,
-     "upper": 0.55
+      "slug": "scissors",
+      "name_cn": "剪刀",
+      "name_en": "Scissors",
+      "kind": "articulated",
+      "category": "Tool",
+      "hero": true,
+      "joints": [
+        {
+          "name": "shear",
+          "type": "revolute",
+          "lower": 0.0,
+          "upper": 0.55
+        }
+      ],
+      "dof": 1,
+      "physics": {
+        "mass": 0.139,
+        "friction": 0.6,
+        "restitution": 0.1,
+        "material": "steel",
+        "engine": "Isaac Sim · MuJoCo · Genesis"
+      },
+      "formats": [
+        "URDF",
+        "MJCF",
+        "USD",
+        "OBJ"
+      ],
+      "poster": true,
+      "media": [],
+      "inspect": true
     }
-   ],
-   "dof": 1,
-   "physics": {
-    "mass": 0.139,
-    "friction": 0.6,
-    "restitution": 0.1,
-    "material": "steel",
-    "engine": "Isaac Sim · MuJoCo · Genesis"
-   },
-   "formats": [
-    "URDF",
-    "MJCF",
-    "USD",
-    "OBJ"
-   ],
-   "poster": true,
-   "media": [
-    {
-     "key": "hinge",
-     "file": "hinge_anim.mp4"
-    },
-    {
-     "key": "collision",
-     "file": "collision_anim.mp4"
-    },
-    {
-     "key": "physics",
-     "file": "physics_demo.mp4"
-    }
-   ],
-   "inspect": true
-  }
- ]
+  ]
 }

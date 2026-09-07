@@ -39,6 +39,7 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
   配置 `CONFIG.requests.endpoint` 后同步 POST 一份)。
 - 剪刀资产上架(`80d999e`):最初做了实时渲染,纹理丢失、观感差,用户否决;改为
   展示 Blender 离线渲染的三段视频:铰链开合、碰撞体、物理掉落(`4cdc8b9`)。
+  (09-07 查看器成熟后三段视频下线,点开卡片直接进 3D。)
 
 ### 2026-09-04 交付件替换
 - 交付件重打包后整体替换(`7d96e9a`、`d53dc6f`)。**视频取景必须覆盖关节全行程**:
@@ -61,6 +62,7 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
 - 改名 **SimGallery**,Sim-Ready Asset Library 降为副标题(`e138b9b`)。
 - 安全(`9315013`):CI 前置 `scripts/check-public-tree.sh`,拦可售格式、assets 白名单、
   密钥;`robots.txt`;`SECURITY.md` 写清威胁模型与收款前清单。
+- 剪刀详情页只留交互 3D:三段视频与标签栏移除,点开卡片即查看器。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。
@@ -104,15 +106,15 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
 
 ## 5. 上架一件新资产
 
-1. 用 Blender 渲三段视频(铰链、碰撞体、物理),`pipeline/render_collision_anim.py`
-   自动按关节全行程取景。
+1. (可选)用 Blender 渲预览视频,`pipeline/render_collision_anim.py` 自动按关节全行程取景;
+   在 manifest 的 `media` 里列出才会显示,现在剪刀不用视频,点开即 3D。
 2. `pipeline/bake_ao.py` 重展 UV + 逐 link 烘 AO;`pipeline/build_web_asset.py`
    产出 `inspect/`(逐 link 视觉 GLB + 碰撞 GLB + `inspect.json`)。
 3. `pipeline/inspect_physics.py <交付包> inspect.json --material … --formats … --engines …`
    写入物理与几何统计。
 4. 放到 `asset-library/assets/<slug>/`,在 `.gitignore` 里显式放行,`data/assets.json`
    加一条(`inspect: true`)。
-5. 本地起 `python3 -m http.server` 预览,确认卡片、三段视频、交互查看都对。
+5. 本地起 `python3 -m http.server` 预览,确认卡片与交互查看都对。
 6. `bash scripts/check-public-tree.sh` 通过后 push,Actions 约 20 秒上线。
 
 ## 6. 未完成

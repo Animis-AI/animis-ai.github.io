@@ -61,7 +61,7 @@ const I18N = {
     k_mass: "Mass", k_friction: "Friction", k_restitution: "Restitution",
     k_material: "Material", k_engine: "Engine",
     preview: "Preview GLB", add_cart: "Add to cart", in_cart: "In cart ✓",
-    meta_note: "Purchase unlocks delivery of the full package — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics report. Previews on this page are offline renders of that package.",
+    meta_note: "Purchase unlocks delivery of the full package — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics report. The 3D view on this page is the same package, rendered in your browser.",
     clip_hinge: "Hinge motion", clip_collision: "Collision bodies",
     clip_physics: "Physics drop", clip_interactive: "Interactive 3D",
     rigid_label: "rigid", dof_suffix: "DOF",
@@ -120,7 +120,7 @@ const I18N = {
     k_mass: "质量", k_friction: "摩擦", k_restitution: "恢复系数",
     k_material: "材质", k_engine: "引擎",
     preview: "预览 GLB", add_cart: "加入选购", in_cart: "已在清单 ✓",
-    meta_note: "购买后解锁下载。正式商店交付完整资产包（URDF + 逐链接网格 + 碰撞凸包 + 物理报告）；沙盒环境交付压缩 GLB。",
+    meta_note: "购买后交付完整资产包：URDF / MJCF / USD、带 PBR 贴图的视觉网格、碰撞凸包与物理报告。本页的 3D 视图就是这个包在浏览器里的实时渲染。",
     clip_hinge: "铰链开合", clip_collision: "碰撞体",
     clip_physics: "物理掉落", clip_interactive: "交互查看",
     rigid_label: "刚体", dof_suffix: "DOF",
@@ -589,9 +589,9 @@ function card(a) {
 
 /* ------------------------------------------------------------- the sheet */
 
-/* Detail sheet plays the Blender-rendered clips shipped with the asset —
-   the offline renders keep the delivered textures and lighting, which a
-   realtime viewer in the page cannot match. */
+/* Detail sheet: plays whatever clips the manifest lists under `media`, plus an
+   "interactive" iframe (viewer/) when `inspect` is true. With `media` empty the
+   sheet opens straight into the 3D viewer, no tab bar. */
 // hover clip for the grid card: first shipped render, else the legacy demo
 function cardClip(a) {
   return a.media?.[0]?.file || (a.demo ? "demo.mp4" : null);
