@@ -1,4 +1,4 @@
-/* Sim-Ready Asset Library store configuration.
+/* SimGallery (Sim-Ready Asset Library) store configuration.
  *
  * mode: "demo"     — sandbox accounts + sandbox payment, everything stored in
  *                    this browser's localStorage. Works out of the box on any

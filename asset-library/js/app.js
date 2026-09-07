@@ -1,4 +1,4 @@
-/* Sim-Ready Asset Library — grid, filters, viewer sheet, cart, accounts,
+/* SimGallery (Sim-Ready Asset Library) — grid, filters, viewer sheet, cart, accounts,
    payment-gated downloads, i18n (EN default). */
 import { CONFIG } from "./config.js";
 import { account } from "./account.js";

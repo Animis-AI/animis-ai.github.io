@@ -1,4 +1,4 @@
-/* Sim-Ready Asset Library accounts + purchases.
+/* SimGallery (Sim-Ready Asset Library) accounts + purchases.
  *
  * One interface, two backends:
  *   DemoBackend     — localStorage users/purchases, sandbox payment. Default.

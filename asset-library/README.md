@@ -1,4 +1,4 @@
-# Sim-Ready Asset Library · 仿真资产库
+# SimGallery · Sim-Ready Asset Library · 仿真资产库
 
 Interactive web catalogue of Animis AI's simulation-ready assets — articulated
 appliances and furniture from the Sketch2Arti pipeline, plus rigid logistics

@@ -1,4 +1,4 @@
-/* Sim-Ready Asset Library — current-robotics.com type pairing on the
+/* SimGallery (Sim-Ready Asset Library) — current-robotics.com type pairing on the
    pi.website skeleton: warm cream paper, Inter body, Source Serif 4
    headings, 1px ink borders with hard offset shadows, zero color. */
 
@@ -75,7 +75,7 @@ i { font-style: normal; }
   gap: 10px;
 }
 .wordmark-logo { width: 24px; height: 24px; display: block; }
-.wordmark-sub { font-size: 17px; color: var(--ink); font-weight: 400; }
+.wordmark-sub { font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 6px; padding-left: 12px; border-left: 1px solid var(--faint); }
 .header-rule { width: 100%; }
 .header-rule hr { border: 0; border-top: 1px solid var(--faint); }
 .site-nav { display: flex; gap: 28px; }
