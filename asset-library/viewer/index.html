@@ -436,7 +436,7 @@ if (MIRROR) {
 gridHelper = new THREE.GridHelper(radius * 8, 32, 0x8a8a8a, 0x454545);   // AgX 会压暗,给亮一点
 gridHelper.position.set(c.x, groundY + radius * 0.001, c.z);
 gridHelper.material.transparent = true; gridHelper.material.opacity = 0.9;
-gridHelper.visible = q.get("grid") === "1";
+gridHelper.visible = q.get("grid") !== "0";   // 默认开,?grid=0 关
 scene.add(gridHelper);
 const ground = new THREE.Mesh(
   new THREE.PlaneGeometry(radius * 40, radius * 40),
