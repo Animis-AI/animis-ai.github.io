@@ -33,17 +33,34 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:
 .hero{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,64px);line-height:1.08;letter-spacing:-.02em;max-width:880px;padding:96px 0 88px}
 
-.feature{flex:1 0 auto;width:100%;max-width:var(--maxw);margin:0 auto;padding:56px 28px 96px}
+.feature{flex:1 0 auto;width:100%;max-width:var(--maxw);margin:0 auto;padding:56px 28px 40px}
 .feature-media{border-radius:14px;overflow:hidden;background:#0a0a0a;aspect-ratio:16/9;box-shadow:0 30px 60px -30px rgba(33,29,22,.35)}
 .feature-media video{width:100%;height:100%;display:block;object-fit:cover}
-.feature-text{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding-top:40px;align-items:start}
+.feature-text{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding-top:44px;align-items:start}
 .kicker{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:500}
-.feature h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.15;letter-spacing:-.015em}
+.feature h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.2vw,42px);line-height:1.12;letter-spacing:-.015em}
 html[lang="zh-CN"] .feature h2{letter-spacing:0;line-height:1.3}
-.feature .lede{color:var(--muted);font-size:16px;line-height:1.7;max-width:520px;padding-top:6px}
-.cta{display:inline-block;margin-top:20px;color:var(--ink);text-decoration:none;font-weight:500;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:opacity .12s}
+.feature .lede{color:var(--muted);font-size:16px;line-height:1.7;max-width:540px;padding-top:6px}
+.cta{display:inline-block;margin-top:20px;margin-right:28px;color:var(--ink);text-decoration:none;font-weight:500;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:opacity .12s}
 .cta:hover{opacity:.55}
-@media(max-width:760px){.feature-text{grid-template-columns:1fr;gap:20px}.hero h1{padding:64px 0 48px}}
+
+.included{width:100%;max-width:var(--maxw);margin:0 auto;padding:8px 28px 72px;display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start}
+.included h3{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em;padding-top:4px}
+.included ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 36px}
+.included li{position:relative;padding-left:22px;font-size:15.5px;line-height:1.55}
+.included li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+
+.cases{width:100%;max-width:var(--maxw);margin:0 auto;padding:64px 28px 96px}
+.cases-head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.cases-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,34px);letter-spacing:-.015em}
+.cases-head p{color:var(--muted);font-size:15px;max-width:460px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 32px}
+.case img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-radius:12px;background:#e9e6dc}
+.case .eyebrow{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px;font-weight:500}
+.case h4{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em;margin-bottom:8px}
+.case p.desc{color:var(--muted);font-size:15px;line-height:1.65;max-width:520px}
+.case .cta{margin-top:12px;font-size:15px}
+@media(max-width:760px){.feature-text,.included,.case-grid,.included ul{grid-template-columns:1fr;gap:20px}.hero h1{padding:64px 0 48px}}
 .hero h1 em{font-style:italic}
 html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
 
@@ -80,12 +97,64 @@ html[lang="zh-CN"] .hero h1{letter-spacing:0;line-height:1.22}
   <div class="feature-text">
     <div>
       <p class="kicker">SimGallery</p>
-      <h2 data-i18n="feat_h2">Sim-ready assets, articulated and physics-complete.</h2>
+      <h2 data-i18n="feat_h2">Sim-ready assets, made to order.</h2>
     </div>
     <div>
-      <p class="lede" data-i18n="feat_lede">A MacBook Pro built as a simulation asset: one revolute lid, 78 prismatic keys, PBR materials, convex collision bodies and full mass and inertia data, delivered for Isaac Sim, MuJoCo and Genesis.</p>
+      <p class="lede" data-i18n="feat_lede">Give us a reference photo, a scan or a spec. We deliver articulated, physics-complete assets that load straight into Isaac Sim, MuJoCo and Genesis — no cleanup, no re-rigging. The film above is rendered from one of them.</p>
       <a class="cta" href="https://animis-ai.github.io/asset-library/" data-i18n="feat_cta">Browse SimGallery →</a>
+      <a class="cta" href="https://animis-ai.github.io/asset-library/#request" data-i18n="feat_req">Request a custom asset →</a>
     </div>
+  </div>
+</section>
+
+<section class="included">
+  <h3 data-i18n="inc_h3">What's included</h3>
+  <ul>
+    <li data-i18n="inc_1">Watertight visual meshes with PBR materials</li>
+    <li data-i18n="inc_2">Articulation with joint limits, damping and friction</li>
+    <li data-i18n="inc_3">Convex collision bodies fitted to the visual shape</li>
+    <li data-i18n="inc_4">Mass, centre of mass and inertia for every link</li>
+    <li data-i18n="inc_5">URDF, MJCF and USD from one source, validated in all three engines</li>
+    <li data-i18n="inc_6">Commercial licence, delivered with a physics audit report</li>
+  </ul>
+</section>
+
+<div class="rule"><hr></div>
+
+<section class="cases">
+  <div class="cases-head">
+    <h3 data-i18n="cases_h3">Built for the tasks robots train on</h3>
+    <p data-i18n="cases_p">A few of the assets we have built. Every one passed the same gates: watertight geometry, verified articulation, stable physics in Isaac Sim and MuJoCo.</p>
+  </div>
+  <div class="case-grid">
+    <article class="case">
+      <img src="media/case_macbook.jpg" alt="MacBook Pro 16 sim-ready asset">
+      <p class="eyebrow" data-i18n="c1_eye">Consumer electronics for desktop manipulation</p>
+      <h4 data-i18n="c1_h4">MacBook Pro 16</h4>
+      <p class="desc" data-i18n="c1_p">One revolute lid and 78 prismatic keys with real 0.8 mm travel, PBR aluminium and glass, convex collision bodies and full inertial data. Open it, type on it, close it — in simulation.</p>
+      <a class="cta" href="https://animis-ai.github.io/asset-library/#request" data-i18n="get_custom">Get a custom asset →</a>
+    </article>
+    <article class="case">
+      <img src="media/case_scissors.jpg" alt="Scissors sim-ready asset">
+      <p class="eyebrow" data-i18n="c2_eye">Hand tools for dexterous manipulation</p>
+      <h4 data-i18n="c2_h4">Household scissors</h4>
+      <p class="desc" data-i18n="c2_p">Two stamped-steel links on a single pivot, 27 convex hulls that leave the finger holes open for grasping, steel-density mass and inertia. Validated in Isaac Sim PhysX and MuJoCo; live in SimGallery.</p>
+      <a class="cta" href="https://animis-ai.github.io/asset-library/#request" data-i18n="get_custom">Get a custom asset →</a>
+    </article>
+    <article class="case">
+      <img src="media/case_hemostat.jpg" alt="Hemostat sim-ready asset">
+      <p class="eyebrow" data-i18n="c3_eye">Surgical instruments for medical robots</p>
+      <h4 data-i18n="c3_h4">Hemostat</h4>
+      <p class="desc" data-i18n="c3_p">Two rigid links on a hinge with serrated jaws and finger rings, joint limits and damping tuned so actuator targets track to the thousandth of a degree in Isaac Sim.</p>
+      <a class="cta" href="https://animis-ai.github.io/asset-library/#request" data-i18n="get_custom">Get a custom asset →</a>
+    </article>
+    <article class="case">
+      <img src="media/case_gpu.jpg" alt="GPU module sim-ready asset">
+      <p class="eyebrow" data-i18n="c4_eye">Electronics for assembly and inspection</p>
+      <h4 data-i18n="c4_h4">GPU module</h4>
+      <p class="desc" data-i18n="c4_p">A rigid board with 17 collision bodies fitted to die, memory and passives, accurate mass, and a settle-on-contact drop test passed in Isaac Sim — ready for pick-and-place and inspection tasks.</p>
+      <a class="cta" href="https://animis-ai.github.io/asset-library/#request" data-i18n="get_custom">Get a custom asset →</a>
+    </article>
   </div>
 </section>
 
@@ -102,16 +171,50 @@ const I18N = {
   en: {
     nav_library:"SimGallery",
     hero_h1:'We build the <em>world engine</em> for physical AI.',
-    feat_h2:"Sim-ready assets, articulated and physics-complete.",
-    feat_lede:"A MacBook Pro built as a simulation asset: one revolute lid, 78 prismatic keys, PBR materials, convex collision bodies and full mass and inertia data, delivered for Isaac Sim, MuJoCo and Genesis.",
-    feat_cta:"Browse SimGallery →",
+    feat_h2:"Sim-ready assets, made to order.",
+    feat_lede:"Give us a reference photo, a scan or a spec. We deliver articulated, physics-complete assets that load straight into Isaac Sim, MuJoCo and Genesis — no cleanup, no re-rigging. The film above is rendered from one of them.",
+    feat_cta:"Browse SimGallery →", feat_req:"Request a custom asset →", get_custom:"Get a custom asset →",
+    inc_h3:"What's included",
+    inc_1:"Watertight visual meshes with PBR materials",
+    inc_2:"Articulation with joint limits, damping and friction",
+    inc_3:"Convex collision bodies fitted to the visual shape",
+    inc_4:"Mass, centre of mass and inertia for every link",
+    inc_5:"URDF, MJCF and USD from one source, validated in all three engines",
+    inc_6:"Commercial licence, delivered with a physics audit report",
+    cases_h3:"Built for the tasks robots train on",
+    cases_p:"A few of the assets we have built. Every one passed the same gates: watertight geometry, verified articulation, stable physics in Isaac Sim and MuJoCo.",
+    c1_eye:"Consumer electronics for desktop manipulation", c1_h4:"MacBook Pro 16",
+    c1_p:"One revolute lid and 78 prismatic keys with real 0.8 mm travel, PBR aluminium and glass, convex collision bodies and full inertial data. Open it, type on it, close it — in simulation.",
+    c2_eye:"Hand tools for dexterous manipulation", c2_h4:"Household scissors",
+    c2_p:"Two stamped-steel links on a single pivot, 27 convex hulls that leave the finger holes open for grasping, steel-density mass and inertia. Validated in Isaac Sim PhysX and MuJoCo; live in SimGallery.",
+    c3_eye:"Surgical instruments for medical robots", c3_h4:"Hemostat",
+    c3_p:"Two rigid links on a hinge with serrated jaws and finger rings, joint limits and damping tuned so actuator targets track to the thousandth of a degree in Isaac Sim.",
+    c4_eye:"Electronics for assembly and inspection", c4_h4:"GPU module",
+    c4_p:"A rigid board with 17 collision bodies fitted to die, memory and passives, accurate mass, and a settle-on-contact drop test passed in Isaac Sim — ready for pick-and-place and inspection tasks.",
   },
   zh: {
     nav_library:"SimGallery",
     hero_h1:'我们为物理 AI 构建<em>世界引擎</em>。',
-    feat_h2:"仿真就绪资产：可铰接、物理参数完整。",
-    feat_lede:"一台按仿真资产标准构建的 MacBook Pro：1 个转动关节的上盖、78 个移动关节的键帽、PBR 材质、凸包碰撞体与完整的质量和惯量数据,可直接用于 Isaac Sim、MuJoCo 与 Genesis。",
-    feat_cta:"进入 SimGallery →",
+    feat_h2:"仿真就绪资产，按需制作。",
+    feat_lede:"给我们一张参考照片、一次扫描或一份规格，我们交付可铰接、物理参数完整的资产，直接载入 Isaac Sim、MuJoCo 与 Genesis，不需要二次清理或重新绑定。上面这支片子就是用其中一件资产渲染的。",
+    feat_cta:"进入 SimGallery →", feat_req:"定制资产 →", get_custom:"定制同类资产 →",
+    inc_h3:"交付内容",
+    inc_1:"水密视觉网格与 PBR 材质",
+    inc_2:"铰接关节，含限位、阻尼与摩擦",
+    inc_3:"贴合外形的凸包碰撞体",
+    inc_4:"逐连杆的质量、质心与惯量",
+    inc_5:"同一来源导出 URDF、MJCF、USD，三引擎验证",
+    inc_6:"商用许可，随附物理审计报告",
+    cases_h3:"为机器人训练任务而建",
+    cases_p:"我们做过的一部分资产。每一件都过同一套闸门：水密几何、铰接验证、在 Isaac Sim 与 MuJoCo 中物理稳定。",
+    c1_eye:"桌面操作 · 消费电子", c1_h4:"MacBook Pro 16",
+    c1_p:"1 个转动关节的上盖、78 个移动关节的键帽（真实 0.8 mm 键程）、PBR 铝合金与玻璃材质、凸包碰撞体与完整惯量数据。在仿真里打开、敲击、合上。",
+    c2_eye:"灵巧操作 · 手持工具", c2_h4:"家用剪刀",
+    c2_p:"两片冲压钢连杆、一个枢轴，27 个凸包并保留指环真孔以便抓取，按钢密度校核的质量与惯量。已在 Isaac Sim PhysX 与 MuJoCo 验证，现已上架 SimGallery。",
+    c3_eye:"医疗机器人 · 手术器械", c3_h4:"止血钳",
+    c3_p:"两片刚体连杆、一个铰链，带锯齿钳口与指环；关节限位与阻尼经过调校，在 Isaac Sim 中驱动目标跟踪误差在千分之一度以内。",
+    c4_eye:"装配与检测 · 电子件", c4_h4:"GPU 模块",
+    c4_p:"刚体电路板，17 个碰撞体贴合芯片、显存与贴片元件，质量准确，在 Isaac Sim 中通过接触静置跌落测试，可直接用于抓放与检测任务。",
   },
 };
 let lang = localStorage.getItem("animis-lang")

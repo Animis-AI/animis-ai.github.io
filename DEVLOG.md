@@ -63,8 +63,10 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
 - 安全(`9315013`):CI 前置 `scripts/check-public-tree.sh`,拦可售格式、assets 白名单、
   密钥;`robots.txt`;`SECURITY.md` 写清威胁模型与收款前清单。
 - 剪刀详情页只留交互 3D:三段视频与标签栏移除,点开卡片即查看器。
-- 公司主页 slogan 下新增 SimGallery 介绍区块:MacBook Pro 铰接资产的 27 秒 Blender 宣传片
-  (网页版 1280p、1.8 MB,`media/`)+ 双语文案 + 入口链接。
+- 公司主页改成产品介绍页(信息架构参照 lightwheel.ai/asset-library):MacBook Pro 宣传片开场
+  (网页版 1280p、1.8 MB,`media/`)→「按需制作仿真就绪资产」+ What's included 六条 →
+  四个案例卡片(MacBook / 剪刀 / 止血钳 / GPU 模块)各带「定制同类资产」→ 资产库 `#request`
+  直接打开定制表单(未登录先登录)。文案里的数字全部来自实测记录,没有的不写。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。

@@ -238,6 +238,8 @@ async function init() {
   document.getElementById("request-link").addEventListener("click", requestFlow);
   document.getElementById("empty-request").addEventListener("click", requestFlow);
   document.getElementById("req-form").addEventListener("submit", onReqSubmit);
+  // 主页「定制资产」入口直接落到表单:asset-library/#request
+  if (location.hash === "#request") requestFlow({ preventDefault() {} });
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
