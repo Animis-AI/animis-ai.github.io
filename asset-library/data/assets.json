@@ -504,7 +504,9 @@
       ],
       "poster": true,
       "media": [],
-      "inspect": true
+      "inspect": true,
+      "download": "packages/029746bb24ed/laptop_16_v1.zip",
+      "download_size_mb": 14.2
     }
   ]
 }

@@ -49,6 +49,7 @@ const I18N = {
     acct_order: (n, total, date) => `${n} asset(s) · ${total} · ${date}`,
     dl_package: "Get the package", purchased: "Purchased ✓",
     dl_by_email: "Request logged — we email the full package to your account address.",
+    dl_started: "Download started — URDF / MJCF / USD, meshes, textures and the physics data are in the zip.",
     nav_request: "Request an asset",
     req_head: "Request a custom asset",
     req_sub: "Tell us what your sim needs — we build new assets on request and reply by email.",
@@ -57,7 +58,7 @@ const I18N = {
     req_sending: "Submitting…",
     req_ok: "Request received — we will get back to you by email.",
     req_err: "Could not submit — try again or email us directly.",
-    beta_banner: "Beta: every asset is free to claim. Sign in, accept the licence and fill in a short survey — we email you the full package.",
+    beta_banner: "Beta: every asset is free. Sign in, accept the licence and fill in a short survey — then download the full package right here.",
     beta_free: "Free · beta",
     beta_head: "Beta access",
     beta_sub: "During the beta the full package is free. Tell us a little about your work first — your answers are kept on record with your account.",
@@ -71,10 +72,10 @@ const I18N = {
     beta_submit: "Submit & get the assets", beta_sending: "Submitting…",
     beta_err_price: "The price range is not valid.",
     beta_err_send: "Could not save your answers — check your connection and try again.",
-    beta_ok: "Thanks — access granted. We email the full package to your account address.",
+    beta_ok: "Thanks — access granted. Use “Get the package” on the asset to download it.",
     lic_continue_beta: "Agree & continue",
     cart_checkout_beta: "Get for free", cart_note_beta: "Free during the beta. Sign-in, licence acceptance and a short survey are required.",
-    meta_note_beta: "Free during the beta: sign in, accept the licence and fill in a short survey, and we email you the full package — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics report.",
+    meta_note_beta: "Free during the beta: sign in, accept the licence and fill in a short survey, then download the full package here — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics data.",
     kind_articulated: "ARTICULATED", kind_rigid: "RIGID", featured: "FEATURED",
     overview: "OVERVIEW", joints: "JOINTS", physics: "PHYSICS", files: "FILES",
     k_category: "Category", k_source: "Source", k_dof: "DOF", k_formats: "Formats",
@@ -126,6 +127,7 @@ const I18N = {
     acct_order: (n, total, date) => `${n} 件 · ${total} · ${date}`,
     dl_package: "获取资产包", purchased: "已购买 ✓",
     dl_by_email: "已记录——完整资产包将发送到你的注册邮箱。",
+    dl_started: "下载已开始——zip 内含 URDF / MJCF / USD、网格、贴图与物理数据。",
     nav_request: "定制需求",
     req_head: "提交定制资产需求",
     req_sub: "告诉我们你的仿真需要什么——我们按需求新建资产，并通过邮件回复。",
@@ -134,7 +136,7 @@ const I18N = {
     req_sending: "提交中…",
     req_ok: "需求已收到——我们会尽快邮件回复。",
     req_err: "提交失败——请重试或直接给我们发邮件。",
-    beta_banner: "内测期间所有资产免费领取。登录、确认许可协议并填写一份简短问卷后，完整资产包将发送到你的注册邮箱。",
+    beta_banner: "内测期间所有资产免费。登录、确认许可协议并填写一份简短问卷后，即可在本站直接下载完整资产包。",
     beta_free: "内测免费",
     beta_head: "内测领取",
     beta_sub: "内测期间完整资产包免费。请先告诉我们你的使用情况——这些信息会随账号一并留档。",
@@ -148,10 +150,10 @@ const I18N = {
     beta_submit: "提交并领取资产", beta_sending: "提交中…",
     beta_err_price: "售价区间不合法。",
     beta_err_send: "问卷未能保存——请检查网络后重试。",
-    beta_ok: "已领取——完整资产包将发送到你的注册邮箱。",
+    beta_ok: "已领取——在资产页点「获取资产包」即可下载。",
     lic_continue_beta: "同意并继续",
     cart_checkout_beta: "免费领取", cart_note_beta: "内测期间免费。需登录、确认许可协议并填写一份简短问卷。",
-    meta_note_beta: "内测期间免费：登录、确认许可协议并填写一份简短问卷后，我们把完整资产包发到你的注册邮箱——URDF / MJCF / USD、带 PBR 贴图的视觉网格、碰撞凸包与物理报告。",
+    meta_note_beta: "内测期间免费：登录、确认许可协议并填写一份简短问卷后，即可在本站下载完整资产包——URDF / MJCF / USD、带 PBR 贴图的视觉网格、碰撞凸包与物理数据。",
     kind_articulated: "铰接", kind_rigid: "刚体", featured: "精选",
     overview: "概览", joints: "关节", physics: "物理", files: "文件",
     k_category: "品类", k_source: "来源", k_dof: "自由度", k_formats: "格式",
@@ -571,16 +573,19 @@ async function openAcctModal() {
 }
 
 async function downloadAsset(slug) {
-  const url = await account.downloadUrl(slug);
-  if (!url) {                       // sandbox: packages are not hosted here
+  const asset = state.assets.find((x) => x.slug === slug);
+  const url = await account.downloadUrl(slug, asset);
+  if (!url) {                       // no package hosted for this asset: deliver by email
     record("download-request", { email: account.user?.email, slug });
     toast(t("dl_by_email"));
     return;
   }
+  record("download", { email: account.user?.email, slug, file: url.split("/").pop() });
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${slug}.zip`;
-  a.click();
+  a.download = url.split("/").pop();
+  document.body.appendChild(a); a.click(); a.remove();
+  toast(t("dl_started"));
 }
 
 /* --------------------------------------------------- custom asset requests */
@@ -871,7 +876,7 @@ function metaPanel(a) {
     <div class="meta-section">
       <h4>${t("files")} · <span class="price-tag">${account.owns(a.slug) ? t("purchased") : priceLabel(a)}</span></h4>
       ${account.owns(a.slug)
-        ? `<a class="dl" href="#" data-dl="${a.slug}">${t("dl_package")}</a>`
+        ? `<a class="dl" href="#" data-dl="${a.slug}">${t("dl_package")}${a.download_size_mb ? ` · ${a.download_size_mb} MB` : ""}</a>`
         : `<button class="add-cart" data-slug="${a.slug}">${cart.has(a.slug) ? t("in_cart") : t("add_cart")}</button>`}
       <p class="meta-note">${t(BETA ? "meta_note_beta" : "meta_note")}</p>
     </div>`;

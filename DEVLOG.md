@@ -92,6 +92,9 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
   环境 1.0 / 方向光 0.8 / 曝光 0.9,并可在 inspect.json `look.{env_intensity,sun,exposure,
   env_rotation}` 逐资产覆盖(`build_web_asset_mtl.py --look-env/--look-sun/--look-exposure`);
   笔记本定为 0.7 / 0.7 / 0.85。
+- **站内直接下载**(用户决定,内测期间):`laptop_16_v1.zip`(14.2 MB,去掉两支宣传视频,加 LICENSE.txt)
+  放在 `asset-library/packages/<随机串>/`,manifest `download` 指向它,领取后点「获取资产包」直接下载,
+  记 `download`。公开 URL 的风险与压法写在 `SECURITY.md`「内测例外」,CI 闸门对该目录只放行 zip。
 - 问卷的规划周期 / 需求量 / 币种改成胶囊按钮(用户反馈原生下拉选不了,根因是发布后 10 分钟内
   浏览器仍用旧 app.js,下拉选项是 JS 填的所以为空)。同时给 `?v=dev` 的脚本 / 样式 URL 在
   Actions 部署时替换成提交号,以后每次发布浏览器都强制取新文件。

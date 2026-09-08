@@ -67,7 +67,8 @@ function doPost(e) {
 | `license-accept` | 领取前确认许可协议 | email、version(协议版本)、slugs |
 | `beta-survey` | 内测问卷(每个账号一次) | email、name、followup、**org(单位)、title(职位)、horizon_years(规划年数)、demand_count(资产需求量档位)、price_min / price_max / currency(可接受售价区间)、requirements(资产要求)**、slugs |
 | `beta-claim` | 每次免费领取 | email、name、org、title、survey(问卷快照)、slugs、license |
-| `download-request` | 点「获取资产包」 | email、slug |
+| `download` | 站上直接下载 | email、slug、file |
+| `download-request` | 没有站内包的资产点「获取资产包」 | email、slug |
 | `asset-request` | 定制需求表单 | user、title、detail、reference |
 
 每条都带 `at`(UTC 时间)、`page`(来源页)、`lang`。问卷答案同时写进用户档案
@@ -76,8 +77,9 @@ function doPost(e) {
 ## 3. 内测流程
 
 选购 → 「免费领取」→ 登录/注册(邮箱、姓名、单位、回访意愿)→ 许可协议 → 内测问卷 →
-领取成功(价签变「已领取」,出现「获取资产包」)→ 点击即记 `download-request`,资产包由我们
-人工邮件发送。`CONFIG.beta.enabled=false` 即恢复付费流程(问卷环节跳过,回到支付)。
+领取成功(价签变「已领取」,出现「获取资产包 · 14.2 MB」)→ 点击直接从站上下载 zip
+(manifest `download` 字段指向 `packages/<随机串>/…zip`),同时记一条 `download`;没有
+`download` 字段的资产仍走人工邮件交付(记 `download-request`)。`CONFIG.beta.enabled=false` 即恢复付费流程(问卷环节跳过,回到支付)。
 
 问卷提交时如果端点已配置但 POST 失败,**不放行**,提示用户重试——保证每一次领取都有对应的
 问卷记录。端点未配置时走 mailto 兜底并放行(这是过渡态,不要长期停留)。

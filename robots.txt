@@ -4,3 +4,4 @@ Allow: /asset-library/
 # 预览文件与查看器不进搜索引擎索引(不是访问控制,只是不主动分发直链)
 Disallow: /asset-library/assets/
 Disallow: /asset-library/viewer/
+Disallow: /asset-library/packages/

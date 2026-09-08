@@ -73,10 +73,10 @@ const DemoBackend = {
     this._saveUsers(users);
   },
 
-  async downloadUrl(_user, slug) {
-    // Sandbox mode hosts only the preview renders — the asset packages are not
-    // on the static site. Callers treat null as "delivered by email instead".
-    return null;
+  async downloadUrl(_user, slug, asset) {
+    // 内测:manifest 里 `download` 指向站内的资产包(随机串路径,页面上不明文出现)。
+    // 没有 download 字段的资产仍走"邮件交付"(返回 null)。
+    return asset?.download || null;
   },
 };
 
@@ -203,5 +203,5 @@ export const account = {
   },
   startRealCheckout(slugs, license) { return backend.startCheckout(this.user, slugs, license); },
 
-  downloadUrl(slug) { return backend.downloadUrl(this.user, slug); },
+  downloadUrl(slug, asset) { return backend.downloadUrl(this.user, slug, asset); },
 };

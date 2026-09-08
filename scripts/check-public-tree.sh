@@ -10,8 +10,13 @@ fail=0
 
 # 1) 可售格式,全树(排除 .git 与第三方库)
 hits=$(git ls-files | grep -Ei '\.(urdf|mjcf|xml|usd[acz]?|obj|mtl|stl|dae|fbx|ply|tar\.gz|tgz|zip|7z|rar)$' \
-       | grep -Ev '^(asset-library/viewer/vendor/|\.github/)' || true)
+       | grep -Ev '^(asset-library/viewer/vendor/|\.github/|asset-library/packages/)' || true)
 if [ -n "$hits" ]; then echo "::error::可售/源格式文件不能进公开仓库:"; echo "$hits"; fail=1; fi
+
+# 1b) 内测例外:asset-library/packages/<随机串>/*.zip 是有意公开的免费下载包(见 SECURITY.md「内测例外」)。
+#     只允许 zip,且必须在 12 位十六进制随机目录下;其它一律拦。
+badpkg=$(git ls-files asset-library/packages | grep -Ev '^asset-library/packages/[0-9a-f]{12}/[A-Za-z0-9_.-]+\.zip$' || true)
+if [ -n "$badpkg" ]; then echo "::error::packages/ 只允许 <12位随机串>/<名字>.zip:"; echo "$badpkg"; fail=1; fi
 
 # 2) assets/ 白名单
 bad=$(git ls-files asset-library/assets | grep -Evi '\.(mp4|webm|jpg|jpeg|png|webp|glb|json)$' || true)
