@@ -6,9 +6,9 @@
  },
  "assets": [
   {
-   "slug": "macbook_pro_16",
+   "slug": "laptop_16",
    "name_cn": "16 英寸笔记本电脑",
-   "name_en": "MacBook Pro 16",
+   "name_en": "16-inch Laptop",
    "kind": "articulated",
    "category": "Laptop",
    "hero": true,
