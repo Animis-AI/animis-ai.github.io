@@ -253,6 +253,18 @@ scene.add(sun);
 // ---- 资产 ----
 const spec = await fetch(BASE + "inspect/inspect.json").then((r) => r.json());
 if (q.get("fix") === null && spec.look && spec.look.material_override === false) FIX = false;
+// 每件资产自己的曝光:inspect.json look.{env_intensity, sun, exposure, env_rotation}。
+// 默认值(环境 5 / 方向光 1.2)是给丢掉贴图、金属度拉满的深色钢调的;保留自带材质的
+// 浅色铝壳在这个强度下整体过曝。URL 参数仍可临时覆盖用来调参。
+const LOOK = spec.look || {};
+// 保留自带材质(FIX=false)的资产默认走低曝光档:HDRI 里的柔光箱是高动态范围的白,强度 5 会把
+// 近黑的塑料反射成中灰、把深空灰铝壳打成浅灰
+const SUN = parseFloat(q.get("sun") ?? LOOK.sun ?? (FIX ? "1.2" : "0.8"));
+const EXPOSURE = parseFloat(q.get("exposure") ?? LOOK.exposure ?? (FIX ? "1" : "0.9"));
+if (q.get("envi") === null) scene.environmentIntensity = LOOK.env_intensity ?? (FIX ? 5.0 : 1.0);
+if (q.get("envrot") === null && LOOK.env_rotation != null) scene.environmentRotation = new THREE.Euler(0, THREE.MathUtils.degToRad(LOOK.env_rotation), 0);
+sun.intensity = SUN;
+renderer.toneMappingExposure = EXPOSURE;
 const loader = new GLTFLoader();
 const loadGlb = (u) => new Promise((res, rej) => loader.load(u, res, undefined, rej));
 

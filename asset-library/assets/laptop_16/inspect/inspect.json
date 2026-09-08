@@ -6029,6 +6029,9 @@
  },
  "look": {
   "material_override": false,
-  "note": "multi-material constant PBR from the package MTL; keep as authored"
+  "note": "multi-material constant PBR from the package MTL; keep as authored",
+  "env_intensity": 0.7,
+  "sun": 0.7,
+  "exposure": 0.85
  }
 }
