@@ -79,6 +79,12 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
   前缀的关节合成一张卡片(`key × 78`),一根滑杆驱动整组,拖某个键时卡片切到该键;长度单位按
   行程自适应(0.8 mm 键程不再显示成 "-0.0 cm");idle 时键帽按 X 位置错相位走波浪。
 - **剪刀下架**:从 manifest 与仓库移除(交付件仍在构建机),SimGallery 只保留笔记本。
+- **内测模式**(`CONFIG.beta.enabled`):所有资产免费领取,支付环节换成内测问卷——单位、职位、
+  规划年数与资产需求量、可接受售价区间(含币种)、资产要求;一个账号填一次,答案写进用户档案,
+  每次领取另记一条 `beta-claim`。价签 / 购物车 / 按钮文案全部切到「内测免费」。
+- **留痕收口统一**:新增 `sendRecord()`,注册 / 许可 / 问卷 / 领取 / 下载申请 / 定制需求全部
+  POST 到 `CONFIG.records.endpoint`;问卷环节必须送达才放行。收口用 Google 表格 + Apps Script
+  (脚本与步骤在 `asset-library/RECORDS.md`),**端点还没配,配好前记录只在访客浏览器里**。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。

@@ -59,7 +59,7 @@ Palatial 也一样。所以策略不是"防提取",而是**让独占价值留在
 6. **密钥只放 Supabase Secrets / GitHub Environment Secrets**:仓库里只允许
    `anonKey`(设计上可公开,靠 RLS 保护)。Stripe secret、`service_role` 永远不进仓库,
    闸门脚本会扫。
-7. **定制需求表单换成有校验的函数**:Formspree 直连是公开端点,会被刷;
+7. **记录端点加校验**:`records.endpoint`(Apps Script / Formspree)是公开端点,会被刷;
    改为 Edge Function + Turnstile 人机验证 + 每 IP 限流。
 8. **页面加 CSP**:GitHub Pages 不能设响应头,用
    `<meta http-equiv="Content-Security-Policy">` 把 `script-src` 锁到

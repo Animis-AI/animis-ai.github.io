@@ -22,6 +22,15 @@ export const CONFIG = {
     downloadFn: "",     // edge function URL minting signed download URLs
   },
 
+  /* 内测:所有资产免费领取。前提是领取前填写一份问卷(单位 / 职位 / 未来几年的资产需求量 /
+   * 可接受售价区间 / 资产要求),并与注册信息、许可确认一起留痕。enabled=false 即恢复付费流程。 */
+  beta: { enabled: true },
+
+  /* 留痕收口:注册 / 许可确认 / 内测问卷 / 免费领取 / 下载申请 / 定制需求,每条记录都 POST 到这里。
+   * 推荐 Google Apps Script 网页应用(直接写进 Google 表格,配置步骤见 RECORDS.md);Formspree 也可。
+   * 为空时记录只存访客自己的浏览器(localStorage),问卷走 mailto 兜底——不会自动到我们手里。 */
+  records: { endpoint: "", notifyEmail: "animislab@gmail.com" },
+
   /* Custom-asset requests. endpoint: a Formspree form URL (or any webhook
    * accepting JSON POST) — every submission is emailed to the owner within
    * seconds. Empty endpoint = fall back to a pre-filled mailto so requests

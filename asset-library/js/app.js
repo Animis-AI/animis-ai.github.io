@@ -4,6 +4,8 @@ import { CONFIG } from "./config.js";
 import { account } from "./account.js";
 
 const priceOf = (a) => a.price ?? CONFIG.pricing[a.kind] ?? CONFIG.pricing.rigid;
+const BETA = CONFIG.beta?.enabled === true;          // 内测:免费领取,问卷留痕
+const priceLabel = (a) => BETA ? t("beta_free") : fmt(priceOf(a));
 const fmt = (n) => `${CONFIG.pricing.symbol}${n}`;
 
 const I18N = {
@@ -55,6 +57,24 @@ const I18N = {
     req_sending: "Submitting…",
     req_ok: "Request received — we will get back to you by email.",
     req_err: "Could not submit — try again or email us directly.",
+    beta_banner: "Beta: every asset is free to claim. Sign in, accept the licence and fill in a short survey — we email you the full package.",
+    beta_free: "Free · beta",
+    beta_head: "Beta access",
+    beta_sub: "During the beta the full package is free. Tell us a little about your work first — your answers are kept on record with your account.",
+    beta_org: "Affiliation (institution / company)", beta_title: "Job title / role",
+    beta_years: "Planning horizon", beta_count: "Assets you expect to need in that time",
+    beta_years_opt: (n) => n === 1 ? "next 1 year" : `next ${n} years`,
+    beta_count_opts: ["fewer than 10", "10 – 50", "50 – 200", "200 – 1,000", "more than 1,000"],
+    beta_pmin: "Acceptable price per asset · from", beta_pmax: "to", beta_cur: "Currency",
+    beta_req: "What do the assets need to be like?",
+    beta_req_ph: "object categories, articulation, physics accuracy, formats, target simulator, delivery time…",
+    beta_submit: "Submit & get the assets", beta_sending: "Submitting…",
+    beta_err_price: "The price range is not valid.",
+    beta_err_send: "Could not save your answers — check your connection and try again.",
+    beta_ok: "Thanks — access granted. We email the full package to your account address.",
+    lic_continue_beta: "Agree & continue",
+    cart_checkout_beta: "Get for free", cart_note_beta: "Free during the beta. Sign-in, licence acceptance and a short survey are required.",
+    meta_note_beta: "Free during the beta: sign in, accept the licence and fill in a short survey, and we email you the full package — URDF / MJCF / USD, visual meshes with PBR textures, convex collision bodies and the physics report.",
     kind_articulated: "ARTICULATED", kind_rigid: "RIGID", featured: "FEATURED",
     overview: "OVERVIEW", joints: "JOINTS", physics: "PHYSICS", files: "FILES",
     k_category: "Category", k_source: "Source", k_dof: "DOF", k_formats: "Formats",
@@ -114,6 +134,24 @@ const I18N = {
     req_sending: "提交中…",
     req_ok: "需求已收到——我们会尽快邮件回复。",
     req_err: "提交失败——请重试或直接给我们发邮件。",
+    beta_banner: "内测期间所有资产免费领取。登录、确认许可协议并填写一份简短问卷后，完整资产包将发送到你的注册邮箱。",
+    beta_free: "内测免费",
+    beta_head: "内测领取",
+    beta_sub: "内测期间完整资产包免费。请先告诉我们你的使用情况——这些信息会随账号一并留档。",
+    beta_org: "单位（机构 / 学校 / 公司）", beta_title: "职位 / 角色",
+    beta_years: "规划周期", beta_count: "这段时间内预计需要的资产数量",
+    beta_years_opt: (n) => `未来 ${n} 年`,
+    beta_count_opts: ["10 件以内", "10 – 50 件", "50 – 200 件", "200 – 1000 件", "1000 件以上"],
+    beta_pmin: "可接受的单件售价 · 从", beta_pmax: "到", beta_cur: "币种",
+    beta_req: "对资产的要求",
+    beta_req_ph: "物体类别、铰接、物理精度、格式、目标仿真器、交付周期……",
+    beta_submit: "提交并领取资产", beta_sending: "提交中…",
+    beta_err_price: "售价区间不合法。",
+    beta_err_send: "问卷未能保存——请检查网络后重试。",
+    beta_ok: "已领取——完整资产包将发送到你的注册邮箱。",
+    lic_continue_beta: "同意并继续",
+    cart_checkout_beta: "免费领取", cart_note_beta: "内测期间免费。需登录、确认许可协议并填写一份简短问卷。",
+    meta_note_beta: "内测期间免费：登录、确认许可协议并填写一份简短问卷后，我们把完整资产包发到你的注册邮箱——URDF / MJCF / USD、带 PBR 贴图的视觉网格、碰撞凸包与物理报告。",
     kind_articulated: "铰接", kind_rigid: "刚体", featured: "精选",
     overview: "概览", joints: "关节", physics: "物理", files: "文件",
     k_category: "品类", k_source: "来源", k_dof: "自由度", k_formats: "格式",
@@ -222,6 +260,7 @@ async function init() {
   document.getElementById("auth-form").addEventListener("submit", onAuthSubmit);
   document.getElementById("pay-form").addEventListener("submit", onPaySubmit);
   document.getElementById("lic-form").addEventListener("submit", onLicenseSubmit);
+  document.getElementById("beta-form").addEventListener("submit", onBetaSubmit);
   document.getElementById("lic-agree").addEventListener("change", (e) => {
     document.getElementById("lic-submit").disabled = !e.target.checked;
   });
@@ -243,7 +282,7 @@ async function init() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    for (const m of ["auth", "lic", "pay", "acct", "req"]) {
+    for (const m of ["auth", "lic", "beta", "pay", "acct", "req"]) {
       const el = document.getElementById(`${m}-overlay`);
       if (!el.hidden) { el.hidden = true; return; }
     }
@@ -322,20 +361,34 @@ async function onAuthSubmit(e) {
    supabase mode the backend additionally keeps them server-side. */
 const LICENSE_VERSION = "v1-2026-09-03";
 
-function record(kind, data) {
-  const entry = { kind: `simgen-${kind}`, ...data,
-                  page: location.href, at: new Date().toISOString() };
+const RECORDS_ENDPOINT = CONFIG.records?.endpoint || localStorage.getItem("simgen-records-endpoint")
+  || CONFIG.requests.endpoint || "";                 // localStorage 键仅供本地联调
+const NOTIFY_EMAIL = CONFIG.records?.notifyEmail || CONFIG.requests.notifyEmail;
+
+/* 一条记录 = 本地日志一行 + POST 到收口端点。返回 {ok} 让调用方决定要不要等它成功
+   (内测问卷必须成功才放行;其余留痕尽力而为)。Apps Script 网页应用只接受简单请求,
+   所以对它用 text/plain 发 JSON,避免 CORS 预检。 */
+async function sendRecord(kind, data) {
+  const entry = { kind: `simgen-${kind}`, ...data, page: location.href,
+                  at: new Date().toISOString(), lang: state.lang };
   const log = JSON.parse(localStorage.getItem("simgen-records") || "[]");
   log.push(entry);
   localStorage.setItem("simgen-records", JSON.stringify(log));
-  if (CONFIG.requests.endpoint) {
-    fetch(CONFIG.requests.endpoint, {
+  if (!RECORDS_ENDPOINT) return { ok: false, reason: "no-endpoint", entry };
+  try {
+    const gas = /script\.google(usercontent)?\.com/.test(RECORDS_ENDPOINT);
+    const res = await fetch(RECORDS_ENDPOINT, {
       method: "POST",
-      headers: { "content-type": "application/json", accept: "application/json" },
+      headers: gas ? { "content-type": "text/plain;charset=utf-8" }
+                   : { "content-type": "application/json", accept: "application/json" },
       body: JSON.stringify(entry),
-    }).catch(() => {});                       // best-effort mirror, never blocks UX
+    });
+    return { ok: res.ok, status: res.status, entry };
+  } catch (e) {
+    return { ok: false, reason: String(e), entry };
   }
 }
+function record(kind, data) { sendRecord(kind, data); }   // best-effort mirror, never blocks UX
 
 /* ------------------------------------------------- license agreement gate */
 function openLicenseModal() {
@@ -356,8 +409,74 @@ function onLicenseSubmit(e) {
     slugs: [...cart.items],
   });
   closeModal("lic");
+  if (BETA) { openBetaModal(); return; }                    // 内测:问卷 → 免费领取
   if (account.isDemo) openPayModal();
   else account.startRealCheckout([...cart.items], state.license);
+}
+
+/* ------------------------------------------------ beta: survey + free claim
+   问卷一个账号填一次(存进用户档案 profile.survey);之后每次领取只留 beta-claim 记录。 */
+function fillBetaOptions() {
+  const y = document.getElementById("beta-years"), c = document.getElementById("beta-count");
+  const T = I18N[state.lang];
+  y.innerHTML = [1, 2, 3, 5, 10].map((n) => `<option value="${n}">${T.beta_years_opt(n)}</option>`).join("");
+  c.innerHTML = ["<10", "10-50", "50-200", "200-1000", ">1000"].map((v, i) => `<option value="${v}">${T.beta_count_opts[i]}</option>`).join("");
+}
+function openBetaModal() {
+  const p = account.user?.profile || {};
+  if (p.survey) { claimBeta(); return; }                    // 已填过:直接领取
+  fillBetaOptions();
+  document.getElementById("beta-org").value = p.org || "";
+  document.getElementById("beta-title").value = p.title || "";
+  document.getElementById("beta-error").hidden = true;
+  document.getElementById("beta-overlay").hidden = false;
+  document.getElementById(p.org ? "beta-title" : "beta-org").focus();
+}
+async function onBetaSubmit(e) {
+  e.preventDefault();
+  const err = document.getElementById("beta-error"), btn = document.getElementById("beta-submit");
+  err.hidden = true;
+  const v = (id) => document.getElementById(id).value.trim();
+  const pmin = Number(v("beta-pmin")), pmax = Number(v("beta-pmax"));
+  if (!(pmin >= 0 && pmax >= pmin)) { err.textContent = t("beta_err_price"); err.hidden = false; return; }
+  const survey = {
+    org: v("beta-org"), title: v("beta-title"),
+    horizon_years: Number(v("beta-years")), demand_count: v("beta-count"),
+    price_min: pmin, price_max: pmax, currency: v("beta-cur"),
+    requirements: v("beta-req"),
+    answeredAt: new Date().toISOString(),
+  };
+  btn.disabled = true; btn.textContent = t("beta_sending");
+  const p = account.user.profile || {};
+  const r = await sendRecord("beta-survey", { email: account.user.email, name: p.name || "", followup: !!(p.followup_ok ?? p.followup),
+                                              ...survey, slugs: [...cart.items] });
+  if (!r.ok && r.reason !== "no-endpoint") {               // 端点配置了但没送达:不放行,让用户重试
+    err.textContent = t("beta_err_send"); err.hidden = false;
+    btn.disabled = false; btn.textContent = t("beta_submit");
+    return;
+  }
+  if (r.reason === "no-endpoint") {                         // 没配端点:邮件兜底,问卷仍到 notifyEmail
+    const subject = encodeURIComponent(`[SimGallery beta] ${account.user.email} · ${survey.org}`);
+    const body = encodeURIComponent(JSON.stringify(r.entry, null, 2));
+    try { window.open(`mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`, "_self"); } catch {}
+  }
+  await account.updateProfile({ org: survey.org, title: survey.title, survey });
+  btn.disabled = false; btn.textContent = t("beta_submit");
+  closeModal("beta");
+  e.target.reset();
+  await claimBeta();
+}
+async function claimBeta() {
+  const slugs = [...cart.items];
+  const p = account.user.profile || {};
+  await account.completeSandboxPurchase(slugs, 0, state.license);
+  record("beta-claim", { email: account.user.email, name: p.name || "", org: p.org || "", title: p.title || "",
+                         followup: !!(p.followup_ok ?? p.followup), survey: p.survey || null, slugs, license: state.license });
+  state.license = null;
+  cart.items = []; cart.save(); renderCart();
+  document.getElementById("cart-overlay").hidden = true;
+  if (state.sheetAsset && !overlay.hidden) openSheet(state.sheetAsset);   // 价签 → 已领取 + 下载链接
+  toast(t("beta_ok"));
 }
 
 function openPayModal() {
@@ -477,16 +596,12 @@ async function onReqSubmit(e) {
   log.push(payload);
   localStorage.setItem("simgen-requests", JSON.stringify(log));
 
-  if (CONFIG.requests.endpoint) {
+  if (RECORDS_ENDPOINT) {
     btn.disabled = true;
     btn.textContent = t("req_sending");
     try {
-      const res = await fetch(CONFIG.requests.endpoint, {
-        method: "POST",
-        headers: { "content-type": "application/json", accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error("http " + res.status);
+      const r = await sendRecord("asset-request", payload);
+      if (!r.ok) throw new Error("http " + r.status);
       closeModal("req");
       e.target.reset();
       toast(t("req_ok"));
@@ -503,7 +618,7 @@ async function onReqSubmit(e) {
     const subject = encodeURIComponent(`[Asset request] ${payload.title}`);
     const body = encodeURIComponent(
       `From: ${payload.user}\n\n${payload.detail}\n\nReference: ${payload.reference || "—"}\n\nSent from ${payload.page}`);
-    location.href = `mailto:${CONFIG.requests.notifyEmail}?subject=${subject}&body=${body}`;
+    location.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
     closeModal("req");
     e.target.reset();
     toast(t("req_ok"));
@@ -532,6 +647,13 @@ function applyLang() {
   });
   document.getElementById("search").placeholder = t("search_ph");
   document.getElementById("lang-toggle").textContent = state.lang === "en" ? "中文" : "EN";
+  if (BETA) {
+    document.getElementById("cart-checkout").textContent = t("cart_checkout_beta");
+    document.getElementById("cart-note").textContent = t("cart_note_beta");
+    document.getElementById("lic-submit").textContent = t("lic_continue_beta");
+    const bb = document.getElementById("beta-banner"); bb.textContent = t("beta_banner"); bb.hidden = false;
+    document.getElementById("beta-req").placeholder = t("beta_req_ph");
+  }
 }
 
 const aName = (a) => (state.lang === "zh" ? a.name_cn : a.name_en);
@@ -731,11 +853,11 @@ function metaPanel(a) {
     </div>` : ""}
 
     <div class="meta-section">
-      <h4>${t("files")} · <span class="price-tag">${account.owns(a.slug) ? t("purchased") : fmt(priceOf(a))}</span></h4>
+      <h4>${t("files")} · <span class="price-tag">${account.owns(a.slug) ? t("purchased") : priceLabel(a)}</span></h4>
       ${account.owns(a.slug)
         ? `<a class="dl" href="#" data-dl="${a.slug}">${t("dl_package")}</a>`
         : `<button class="add-cart" data-slug="${a.slug}">${cart.has(a.slug) ? t("in_cart") : t("add_cart")}</button>`}
-      <p class="meta-note">${t("meta_note")}</p>
+      <p class="meta-note">${t(BETA ? "meta_note_beta" : "meta_note")}</p>
     </div>`;
 }
 
@@ -766,7 +888,7 @@ function renderCart() {
           <div class="ci-meta">${slug}${a ? ` · ${a.dof ? a.dof + " " + t("dof_suffix") : t("rigid_label")} · ${a.formats.join("/")}` : ""}</div>
         </div>
         <div class="ci-right">
-          <span class="ci-price">${a ? fmt(priceOf(a)) : ""}</span>
+          <span class="ci-price">${a ? priceLabel(a) : ""}</span>
           <button class="ci-remove" title="remove">×</button>
         </div>`;
       el.querySelector(".ci-remove").addEventListener("click", () => cart.remove(slug));
@@ -777,7 +899,7 @@ function renderCart() {
     const a = state.assets.find((x) => x.slug === slug);
     return s + (a ? priceOf(a) : 0);
   }, 0);
-  document.getElementById("cart-total").textContent = cart.items.length ? fmt(total) : "—";
+  document.getElementById("cart-total").textContent = cart.items.length ? (BETA ? t("beta_free") : fmt(total)) : "—";
   document.getElementById("cart-checkout").disabled = !cart.items.length;
 }
 

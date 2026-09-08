@@ -65,6 +65,14 @@ const DemoBackend = {
     localStorage.setItem(this._pkey(user.email), JSON.stringify(orders));
   },
 
+  /* 问卷等资料并进用户档案(注册时的姓名 / 机构之外再加职位与内测问卷) */
+  async updateProfile(user, patch) {
+    const users = this._users();
+    const u = users[user.email]; if (!u) return;
+    u.profile = { ...(u.profile || {}), ...patch };
+    this._saveUsers(users);
+  },
+
   async downloadUrl(_user, slug) {
     // Sandbox mode hosts only the preview renders — the asset packages are not
     // on the static site. Callers treat null as "delivered by email instead".
@@ -124,6 +132,11 @@ const SupabaseBackend = {
     const { url } = await res.json();
     location.href = url;                       // Stripe-hosted payment page
   },
+  async updateProfile(_user, patch) {
+    const sb = await this._sb();
+    const { error } = await sb.auth.updateUser({ data: patch });   // -> raw_user_meta_data
+    if (error) throw new Error(error.message);
+  },
   async downloadUrl(_user, slug) {
     const sb = await this._sb();
     const { data: { session } } = await sb.auth.getSession();
@@ -176,6 +189,12 @@ export const account = {
   },
 
   purchases() { return this.user ? backend.purchases(this.user) : []; },
+
+  async updateProfile(patch) {
+    await backend.updateProfile(this.user, patch);
+    this.user.profile = { ...(this.user.profile || {}), ...patch };
+    this._emit();
+  },
 
   /* demo: record sandbox payment; supabase: redirect to Stripe instead */
   async completeSandboxPurchase(slugs, total, license) {

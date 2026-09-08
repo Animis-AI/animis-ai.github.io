@@ -17,6 +17,11 @@ Animis AI 的全部官网，单仓库、纯静态、GitHub Pages（Actions）自
 
 从建站到 SimGallery / 3D 查看器 / 安全闸门的完整过程、决策理由与踩坑,见 `DEVLOG.md`。
 
+## 记录
+
+注册、许可确认、内测问卷、领取、定制需求都 POST 到 `CONFIG.records.endpoint`;
+怎么配(Google 表格 + Apps Script)、每种记录有哪些字段,见 `asset-library/RECORDS.md`。
+
 ## 安全
 
 仓库公开即发布:售卖包永远不进仓库,部署前 `scripts/check-public-tree.sh`
