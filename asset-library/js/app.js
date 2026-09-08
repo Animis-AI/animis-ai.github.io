@@ -1,7 +1,7 @@
 /* SimGallery (Sim-Ready Asset Library) — grid, filters, viewer sheet, cart, accounts,
    payment-gated downloads, i18n (EN default). */
-import { CONFIG } from "./config.js";
-import { account } from "./account.js";
+import { CONFIG } from "./config.js?v=dev";
+import { account } from "./account.js?v=dev";
 
 const priceOf = (a) => a.price ?? CONFIG.pricing[a.kind] ?? CONFIG.pricing.rigid;
 const BETA = CONFIG.beta?.enabled === true;          // 内测:免费领取,问卷留痕
@@ -421,12 +421,20 @@ function onLicenseSubmit(e) {
 
 /* ------------------------------------------------ beta: survey + free claim
    问卷一个账号填一次(存进用户档案 profile.survey);之后每次领取只留 beta-claim 记录。 */
+// 选项用胶囊按钮而不是原生 <select>:不依赖 JS 填充时序,任何浏览器都能点
 function fillBetaOptions() {
-  const y = document.getElementById("beta-years"), c = document.getElementById("beta-count");
   const T = I18N[state.lang];
-  y.innerHTML = [1, 2, 3, 5, 10].map((n) => `<option value="${n}">${T.beta_years_opt(n)}</option>`).join("");
-  c.innerHTML = ["<10", "10-50", "50-200", "200-1000", ">1000"].map((v, i) => `<option value="${v}">${T.beta_count_opts[i]}</option>`).join("");
+  const chips = (el, opts) => {
+    el.innerHTML = opts.map(([v, label]) => `<button type="button" data-v="${v}"${v === el.dataset.value ? ' class="on"' : ""}>${label}</button>`).join("");
+  };
+  chips(document.getElementById("beta-years"), [1, 2, 3, 5, 10].map((n) => [String(n), T.beta_years_opt(n)]));
+  chips(document.getElementById("beta-count"), ["<10", "10-50", "50-200", "200-1000", ">1000"].map((v, i) => [v, T.beta_count_opts[i]]));
 }
+document.getElementById("beta-form").addEventListener("click", (e) => {
+  const b = e.target.closest(".chips-row button"); if (!b) return;
+  const row = b.parentElement; row.dataset.value = b.dataset.v;
+  row.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+});
 function openBetaModal() {
   const p = account.user?.profile || {};
   if (p.survey) { claimBeta(); return; }                    // 已填过:直接领取
@@ -441,7 +449,7 @@ async function onBetaSubmit(e) {
   e.preventDefault();
   const err = document.getElementById("beta-error"), btn = document.getElementById("beta-submit");
   err.hidden = true;
-  const v = (id) => document.getElementById(id).value.trim();
+  const v = (id) => { const el = document.getElementById(id); return el.dataset.value ?? el.value.trim(); };
   const pmin = Number(v("beta-pmin")), pmax = Number(v("beta-pmax"));
   if (!(pmin >= 0 && pmax >= pmin)) { err.textContent = t("beta_err_price"); err.hidden = false; return; }
   const survey = {

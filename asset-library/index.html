@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&display=swap">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=dev">
 </head>
 <body>
 
@@ -133,14 +133,15 @@
         <label><span data-i18n="beta_org">Affiliation</span><input id="beta-org" required maxlength="120" autocomplete="organization"></label>
         <label><span data-i18n="beta_title">Job title / role</span><input id="beta-title" required maxlength="80" autocomplete="organization-title"></label>
       </div>
-      <div class="pay-row">
-        <label><span data-i18n="beta_years">Planning horizon</span><select id="beta-years" required></select></label>
-        <label><span data-i18n="beta_count">Assets you expect to need in that time</span><select id="beta-count" required></select></label>
-      </div>
+      <div class="field"><span data-i18n="beta_years">Planning horizon</span>
+        <div class="chips-row" id="beta-years" data-value="1"></div></div>
+      <div class="field"><span data-i18n="beta_count">Assets you expect to need in that time</span>
+        <div class="chips-row" id="beta-count" data-value="<10"></div></div>
+      <div class="field"><span data-i18n="beta_cur">Currency</span>
+        <div class="chips-row" id="beta-cur" data-value="USD"><button type="button" data-v="USD" class="on">USD</button><button type="button" data-v="CNY">CNY</button><button type="button" data-v="EUR">EUR</button></div></div>
       <div class="pay-row">
         <label><span data-i18n="beta_pmin">Acceptable price per asset · from</span><input id="beta-pmin" type="number" min="0" step="1" required placeholder="0"></label>
         <label><span data-i18n="beta_pmax">to</span><input id="beta-pmax" type="number" min="0" step="1" required placeholder="100"></label>
-        <label class="narrow"><span data-i18n="beta_cur">Currency</span><select id="beta-cur"><option>USD</option><option>CNY</option><option>EUR</option></select></label>
       </div>
       <label><span data-i18n="beta_req">What do the assets need to be like?</span>
         <textarea id="beta-req" rows="4" maxlength="2000" required></textarea></label>
@@ -215,6 +216,6 @@
   </div>
 </div>
 
-<script src="js/app.js" type="module"></script>
+<script src="js/app.js?v=dev" type="module"></script>
 </body>
 </html>

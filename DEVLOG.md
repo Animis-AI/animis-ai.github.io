@@ -87,6 +87,9 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
   (脚本与步骤在 `asset-library/RECORDS.md`)。用户选定 **Formspree 免费档**(50 次提交/月):
   站点识别 formspree.io 后只发问卷(已含注册信息与许可版本)和定制需求,其余留痕本地,50 条 ≈ 50 个
   内测用户。**端点待用户注册 Formspree 后填入 `config.js`**,配好前记录只在访客浏览器里。
+- 问卷的规划周期 / 需求量 / 币种改成胶囊按钮(用户反馈原生下拉选不了,根因是发布后 10 分钟内
+  浏览器仍用旧 app.js,下拉选项是 JS 填的所以为空)。同时给 `?v=dev` 的脚本 / 样式 URL 在
+  Actions 部署时替换成提交号,以后每次发布浏览器都强制取新文件。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。
@@ -127,6 +130,8 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
 - sed 替换里的 `&` 会展开成匹配串,写 HTML 实体时要转义。
 - 加载遮罩淡出期间要 `pointer-events:none`,否则挡住第一下点击。
 - 测试机走公司代理,线上资源只有几十 KB/s,无头浏览器验证要等 60–90 秒,不是站点慢。
+- GitHub Pages 静态资源缓存 10 分钟:HTML 更新了、JS 还是旧的,凡是"JS 往 HTML 里填内容"的地方
+  就会空。脚本 / 样式 URL 必须带版本号(`?v=<sha>`,Actions 部署时替换)。
 
 ## 5. 上架一件新资产
 

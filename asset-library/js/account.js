@@ -8,7 +8,7 @@
  *
  * The rest of the app only talks to `account`.
  */
-import { CONFIG } from "./config.js";
+import { CONFIG } from "./config.js?v=dev";
 
 const enc = new TextEncoder();
 async function sha256(text) {
