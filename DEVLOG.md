@@ -84,7 +84,9 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
   每次领取另记一条 `beta-claim`。价签 / 购物车 / 按钮文案全部切到「内测免费」。
 - **留痕收口统一**:新增 `sendRecord()`,注册 / 许可 / 问卷 / 领取 / 下载申请 / 定制需求全部
   POST 到 `CONFIG.records.endpoint`;问卷环节必须送达才放行。收口用 Google 表格 + Apps Script
-  (脚本与步骤在 `asset-library/RECORDS.md`),**端点还没配,配好前记录只在访客浏览器里**。
+  (脚本与步骤在 `asset-library/RECORDS.md`)。用户选定 **Formspree 免费档**(50 次提交/月):
+  站点识别 formspree.io 后只发问卷(已含注册信息与许可版本)和定制需求,其余留痕本地,50 条 ≈ 50 个
+  内测用户。**端点待用户注册 Formspree 后填入 `config.js`**,配好前记录只在访客浏览器里。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。

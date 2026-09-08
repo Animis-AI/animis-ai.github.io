@@ -368,6 +368,10 @@ const NOTIFY_EMAIL = CONFIG.records?.notifyEmail || CONFIG.requests.notifyEmail;
 /* 一条记录 = 本地日志一行 + POST 到收口端点。返回 {ok} 让调用方决定要不要等它成功
    (内测问卷必须成功才放行;其余留痕尽力而为)。Apps Script 网页应用只接受简单请求,
    所以对它用 text/plain 发 JSON,避免 CORS 预检。 */
+// Formspree 免费档按提交次数计费(50 条/月):只把每个用户一条的问卷(已含注册信息与许可版本)
+// 和定制需求发过去,其余留痕只进本地日志。换成 Apps Script 等无限额端点时全部发送。
+const FORMSPREE = /formspree\.io/.test(RECORDS_ENDPOINT);
+const FORMSPREE_KINDS = new Set(["beta-survey", "asset-request"]);
 async function sendRecord(kind, data) {
   const entry = { kind: `simgen-${kind}`, ...data, page: location.href,
                   at: new Date().toISOString(), lang: state.lang };
@@ -375,6 +379,7 @@ async function sendRecord(kind, data) {
   log.push(entry);
   localStorage.setItem("simgen-records", JSON.stringify(log));
   if (!RECORDS_ENDPOINT) return { ok: false, reason: "no-endpoint", entry };
+  if (FORMSPREE && !FORMSPREE_KINDS.has(kind)) return { ok: true, reason: "local-only", entry };
   try {
     const gas = /script\.google(usercontent)?\.com/.test(RECORDS_ENDPOINT);
     const res = await fetch(RECORDS_ENDPOINT, {
@@ -449,7 +454,8 @@ async function onBetaSubmit(e) {
   btn.disabled = true; btn.textContent = t("beta_sending");
   const p = account.user.profile || {};
   const r = await sendRecord("beta-survey", { email: account.user.email, name: p.name || "", followup: !!(p.followup_ok ?? p.followup),
-                                              ...survey, slugs: [...cart.items] });
+                                              ...survey, slugs: [...cart.items], license: state.license,
+                                              _subject: `[SimGallery beta] ${survey.org} · ${account.user.email}` });
   if (!r.ok && r.reason !== "no-endpoint") {               // 端点配置了但没送达:不放行,让用户重试
     err.textContent = t("beta_err_send"); err.hidden = false;
     btn.disabled = false; btn.textContent = t("beta_submit");
@@ -584,7 +590,8 @@ async function onReqSubmit(e) {
   err.hidden = true;
   const payload = {
     kind: "simgen-asset-request",
-    user: account.user.email,
+    user: account.user.email, email: account.user.email,
+    _subject: `[SimGallery request] ${document.getElementById("req-title").value.trim().slice(0, 60)}`,
     title: document.getElementById("req-title").value.trim(),
     detail: document.getElementById("req-detail").value.trim(),
     reference: document.getElementById("req-ref").value.trim(),
@@ -600,7 +607,8 @@ async function onReqSubmit(e) {
     btn.disabled = true;
     btn.textContent = t("req_sending");
     try {
-      const r = await sendRecord("asset-request", payload);
+      const { kind: _k, ...rest } = payload;
+      const r = await sendRecord("asset-request", rest);
       if (!r.ok) throw new Error("http " + r.status);
       closeModal("req");
       e.target.reset();

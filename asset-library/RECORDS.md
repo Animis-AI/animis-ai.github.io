@@ -5,7 +5,7 @@
 访客自己的浏览器里(`localStorage["simgen-records"]`),问卷靠 mailto 兜底,**不会自动到
 我们手里**。所以上线内测前第一件事是把下面的收口配好(10 分钟)。
 
-## 1. 收口:Google 表格 + Apps Script(推荐)
+## 1. 收口:Google 表格 + Apps Script(无限额,记录种类最全)
 
 用 animislab@gmail.com 登录,所有记录一行一条落在一张 Google 表格里,按记录种类分工作表。
 
@@ -46,8 +46,18 @@ function doPost(e) {
 
 改过脚本要重新「部署 → 管理部署 → 编辑 → 新版本」,URL 不变。
 
-替代方案:Formspree(`https://formspree.io/f/<id>`,免费档每月 50 条,超了收费),同样填到
-`records.endpoint`,每条记录变成一封邮件,汇总要自己做。
+## 1b. 收口:Formspree(当前选用)
+
+用 animislab@gmail.com 在 https://formspree.io 注册 → New form → 名字 `SimGallery records`
+→ 复制端点 `https://formspree.io/f/<id>` → 填进 `js/config.js` 的 `records.endpoint` → push。
+第一条提交后 Formspree 会发一封激活邮件到 animislab@gmail.com,点确认后才开始收。
+
+免费档 **每月 50 次提交**,按提交次数算。站点识别到 formspree.io 后只发两种记录:
+`beta-survey`(一个用户一条,已包含注册的姓名 / 单位 / 回访意愿和许可版本)和 `asset-request`;
+注册、许可、领取、下载申请只进访客本地日志。于是 50 条 ≈ 50 个内测用户 + 定制需求。
+每条记录一封邮件,`_subject` 字段就是邮件标题;Formspree 后台也能按表格查看和导出 CSV。
+接近上限时切到 1b 上面的 Apps Script 方案(无限额),不用改前端代码,换个 URL 即可,
+届时六种记录全部发送。
 
 ## 2. 记录种类与字段
 
