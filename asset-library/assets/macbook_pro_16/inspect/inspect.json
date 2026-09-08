@@ -1,0 +1,6034 @@
+{
+ "name": "macbook_pro_16",
+ "up": "z",
+ "links": [
+  {
+   "name": "base_link",
+   "visuals": [
+    {
+     "file": "visual_meshes/base_link.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "lid_link",
+   "visuals": [
+    {
+     "file": "visual_meshes/lid_link.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_quote",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_quote.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_comma",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_comma.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_minus",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_minus.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_period",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_period.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_slash",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_slash.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_0",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_0.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_1",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_1.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_2",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_2.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_3",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_3.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_4",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_4.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_5",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_5.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_6",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_6.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_7",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_7.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_8",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_8.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_9",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_9.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_semicolon",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_semicolon.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_equals",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_equals.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_lbracket",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_lbracket.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_backslash",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_backslash.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_rbracket",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_rbracket.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_grave",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_grave.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_A",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_A.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Arrow_Down",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Arrow_Down.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Arrow_Left",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Arrow_Left.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Arrow_Right",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Arrow_Right.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Arrow_Up",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Arrow_Up.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_B",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_B.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_bright_up",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_bright_up.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_bright_down",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_bright_down.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_C",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_C.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Caps_Lock",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Caps_Lock.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Command",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Command.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Command_2",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Command_2.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Control",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Control.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_D",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_D.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Delete",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Delete.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_dnd",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_dnd.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_E",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_E.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Esc",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Esc.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_F",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_F.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Fn",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Fn.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_G",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_G.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_H",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_H.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_I",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_I.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_J",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_J.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_K",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_K.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_L",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_L.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_M",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_M.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_mic",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_mic.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_mission",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_mission.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_mute",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_mute.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_N",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_N.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_next",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_next.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_O",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_O.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Option",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Option.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Option_2",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Option_2.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_P",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_P.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_play",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_play.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_prev",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_prev.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Q",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Q.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_R",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_R.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Return",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Return.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_S",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_S.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_search",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_search.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Shift",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Shift.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Shift_2",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Shift_2.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Spacebar",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Spacebar.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_T",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_T.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Tab",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Tab.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_touchid",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_touchid.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_U",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_U.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_V",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_V.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_vol_up",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_vol_up.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_vol_down",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_vol_down.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_W",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_W.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_X",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_X.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Y",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Y.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "key_link_Z",
+   "visuals": [
+    {
+     "file": "visual_meshes/key_link_Z.glb",
+     "xyz": [
+      0,
+      0,
+      0
+     ],
+     "rpy": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  }
+ ],
+ "joints": [
+  {
+   "name": "lid_joint",
+   "type": "revolute",
+   "parent": "base_link",
+   "child": "lid_link",
+   "xyz": [
+    0.0,
+    0.116,
+    0.0145
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "lower": 0.0,
+   "upper": 1.7977
+  },
+  {
+   "name": "key_joint_quote",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_quote",
+   "xyz": [
+    0.095,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_comma",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_comma",
+   "xyz": [
+    0.0475,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_minus",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_minus",
+   "xyz": [
+    0.08075,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_period",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_period",
+   "xyz": [
+    0.0665,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_slash",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_slash",
+   "xyz": [
+    0.0855,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_0",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_0",
+   "xyz": [
+    0.06175,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_1",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_1",
+   "xyz": [
+    -0.10925,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_2",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_2",
+   "xyz": [
+    -0.09025,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_3",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_3",
+   "xyz": [
+    -0.07125,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_4",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_4",
+   "xyz": [
+    -0.05225,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_5",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_5",
+   "xyz": [
+    -0.03325,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_6",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_6",
+   "xyz": [
+    -0.01425,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_7",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_7",
+   "xyz": [
+    0.00475,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_8",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_8",
+   "xyz": [
+    0.02375,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_9",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_9",
+   "xyz": [
+    0.04275,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_semicolon",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_semicolon",
+   "xyz": [
+    0.076,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_equals",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_equals",
+   "xyz": [
+    0.09975,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_lbracket",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_lbracket",
+   "xyz": [
+    0.09025,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_backslash",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_backslash",
+   "xyz": [
+    0.12825,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_rbracket",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_rbracket",
+   "xyz": [
+    0.10925,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_grave",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_grave",
+   "xyz": [
+    -0.12825,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_A",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_A",
+   "xyz": [
+    -0.095,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Arrow_Down",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Arrow_Down",
+   "xyz": [
+    0.10925,
+    -2.5e-05,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Arrow_Left",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Arrow_Left",
+   "xyz": [
+    0.09025,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Arrow_Right",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Arrow_Right",
+   "xyz": [
+    0.12825,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Arrow_Up",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Arrow_Up",
+   "xyz": [
+    0.10925,
+    0.009475,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_B",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_B",
+   "xyz": [
+    -0.0095,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_bright_up",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_bright_up",
+   "xyz": [
+    -0.08075,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_bright_down",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_bright_down",
+   "xyz": [
+    -0.09975,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_C",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_C",
+   "xyz": [
+    -0.0475,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Caps_Lock",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Caps_Lock",
+   "xyz": [
+    -0.121125,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Command",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Command",
+   "xyz": [
+    -0.068875,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Command_2",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Command_2",
+   "xyz": [
+    0.049875,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Control",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Control",
+   "xyz": [
+    -0.10925,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_D",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_D",
+   "xyz": [
+    -0.057,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Delete",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Delete",
+   "xyz": [
+    0.1235,
+    0.080725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_dnd",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_dnd",
+   "xyz": [
+    -0.00475,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_E",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_E",
+   "xyz": [
+    -0.06175,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Esc",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Esc",
+   "xyz": [
+    -0.1235,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_F",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_F",
+   "xyz": [
+    -0.038,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Fn",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Fn",
+   "xyz": [
+    -0.12825,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_G",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_G",
+   "xyz": [
+    -0.019,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_H",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_H",
+   "xyz": [
+    0.0,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_I",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_I",
+   "xyz": [
+    0.03325,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_J",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_J",
+   "xyz": [
+    0.019,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_K",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_K",
+   "xyz": [
+    0.038,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_L",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_L",
+   "xyz": [
+    0.057,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_M",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_M",
+   "xyz": [
+    0.0285,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_mic",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_mic",
+   "xyz": [
+    -0.02375,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_mission",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_mission",
+   "xyz": [
+    -0.06175,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_mute",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_mute",
+   "xyz": [
+    0.07125,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_N",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_N",
+   "xyz": [
+    0.0095,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_next",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_next",
+   "xyz": [
+    0.05225,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_O",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_O",
+   "xyz": [
+    0.05225,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Option",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Option",
+   "xyz": [
+    -0.09025,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Option_2",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Option_2",
+   "xyz": [
+    0.07125,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_P",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_P",
+   "xyz": [
+    0.07125,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_play",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_play",
+   "xyz": [
+    0.03325,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_prev",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_prev",
+   "xyz": [
+    0.01425,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Q",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Q",
+   "xyz": [
+    -0.09975,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_R",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_R",
+   "xyz": [
+    -0.04275,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Return",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Return",
+   "xyz": [
+    0.121125,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_S",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_S",
+   "xyz": [
+    -0.076,
+    0.042725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_search",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_search",
+   "xyz": [
+    -0.04275,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Shift",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Shift",
+   "xyz": [
+    -0.116375,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Shift_2",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Shift_2",
+   "xyz": [
+    0.116375,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Spacebar",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Spacebar",
+   "xyz": [
+    -0.0095,
+    0.004725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_T",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_T",
+   "xyz": [
+    -0.02375,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Tab",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Tab",
+   "xyz": [
+    -0.1235,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_touchid",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_touchid",
+   "xyz": [
+    0.12825,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_U",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_U",
+   "xyz": [
+    0.01425,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_V",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_V",
+   "xyz": [
+    -0.0285,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_vol_up",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_vol_up",
+   "xyz": [
+    0.10925,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_vol_down",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_vol_down",
+   "xyz": [
+    0.09025,
+    0.09745,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_W",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_W",
+   "xyz": [
+    -0.08075,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_X",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_X",
+   "xyz": [
+    -0.0665,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Y",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Y",
+   "xyz": [
+    -0.00475,
+    0.061725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  },
+  {
+   "name": "key_joint_Z",
+   "type": "prismatic",
+   "parent": "base_link",
+   "child": "key_link_Z",
+   "xyz": [
+    -0.0855,
+    0.023725,
+    0.011075
+   ],
+   "rpy": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "lower": -0.0008,
+   "upper": 0.0
+  }
+ ],
+ "hull_counts": {
+  "base_link": 21,
+  "lid_link": 1,
+  "key_link_quote": 1,
+  "key_link_comma": 1,
+  "key_link_minus": 1,
+  "key_link_period": 1,
+  "key_link_slash": 1,
+  "key_link_0": 1,
+  "key_link_1": 1,
+  "key_link_2": 1,
+  "key_link_3": 1,
+  "key_link_4": 1,
+  "key_link_5": 1,
+  "key_link_6": 1,
+  "key_link_7": 1,
+  "key_link_8": 1,
+  "key_link_9": 1,
+  "key_link_semicolon": 1,
+  "key_link_equals": 1,
+  "key_link_lbracket": 1,
+  "key_link_backslash": 1,
+  "key_link_rbracket": 1,
+  "key_link_grave": 1,
+  "key_link_A": 1,
+  "key_link_Arrow_Down": 1,
+  "key_link_Arrow_Left": 1,
+  "key_link_Arrow_Right": 1,
+  "key_link_Arrow_Up": 1,
+  "key_link_B": 1,
+  "key_link_bright_up": 1,
+  "key_link_bright_down": 1,
+  "key_link_C": 1,
+  "key_link_Caps_Lock": 1,
+  "key_link_Command": 1,
+  "key_link_Command_2": 1,
+  "key_link_Control": 1,
+  "key_link_D": 1,
+  "key_link_Delete": 1,
+  "key_link_dnd": 1,
+  "key_link_E": 1,
+  "key_link_Esc": 1,
+  "key_link_F": 1,
+  "key_link_Fn": 1,
+  "key_link_G": 1,
+  "key_link_H": 1,
+  "key_link_I": 1,
+  "key_link_J": 1,
+  "key_link_K": 1,
+  "key_link_L": 1,
+  "key_link_M": 1,
+  "key_link_mic": 1,
+  "key_link_mission": 1,
+  "key_link_mute": 1,
+  "key_link_N": 1,
+  "key_link_next": 1,
+  "key_link_O": 1,
+  "key_link_Option": 1,
+  "key_link_Option_2": 1,
+  "key_link_P": 1,
+  "key_link_play": 1,
+  "key_link_prev": 1,
+  "key_link_Q": 1,
+  "key_link_R": 1,
+  "key_link_Return": 1,
+  "key_link_S": 1,
+  "key_link_search": 1,
+  "key_link_Shift": 1,
+  "key_link_Shift_2": 1,
+  "key_link_Spacebar": 1,
+  "key_link_T": 1,
+  "key_link_Tab": 1,
+  "key_link_touchid": 1,
+  "key_link_U": 1,
+  "key_link_V": 1,
+  "key_link_vol_up": 1,
+  "key_link_vol_down": 1,
+  "key_link_W": 1,
+  "key_link_X": 1,
+  "key_link_Y": 1,
+  "key_link_Z": 1
+ },
+ "physics": {
+  "units": {
+   "length": "m",
+   "mass": "kg",
+   "angle": "rad"
+  },
+  "material": "aluminium",
+  "total_mass": 2.1399810000000037,
+  "size": [
+   0.3557,
+   0.25355,
+   0.01985
+  ],
+  "volume": 0.0016596068954128817,
+  "density": 1289.450535494198,
+  "static_friction": 0.6,
+  "dynamic_friction": 0.5,
+  "restitution": 0.05,
+  "links": {
+   "base_link": {
+    "mass": 1.456388,
+    "com": [
+     -6.4e-05,
+     0.002044,
+     0.00572
+    ],
+    "inertia": {
+     "ixx": 0.007715827,
+     "iyy": 0.01527696,
+     "izz": 0.02295865,
+     "ixy": -6.806316e-06,
+     "ixz": -1.127092e-08,
+     "iyz": -2.690848e-05
+    },
+    "volume": 0.0009967455278111828,
+    "visual": {
+     "vertices": 3670,
+     "triangles": 4430
+    },
+    "collision": {
+     "hulls": 21,
+     "vertices": 1521,
+     "triangles": 2958
+    }
+   },
+   "lid_link": {
+    "mass": 0.6,
+    "com": [
+     0.0,
+     -0.12275,
+     -0.000227
+    ],
+    "inertia": {
+     "ixx": 0.003000084,
+     "iyy": 0.006301294,
+     "izz": 0.009297873,
+     "ixy": 2.575955e-12,
+     "ixz": -1.268742e-13,
+     "iyz": 7.003724e-14
+    },
+    "volume": 0.0006070501394335864,
+    "visual": {
+     "vertices": 4488,
+     "triangles": 3700
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 893,
+     "triangles": 1782
+    }
+   },
+   "key_link_quote": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 3.350352e-16,
+     "ixz": 1.625138e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.617137422025001e-07,
+    "visual": {
+     "vertices": 180,
+     "triangles": 338
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_comma": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 3.350352e-16,
+     "ixz": 1.625138e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.617957336466667e-07,
+    "visual": {
+     "vertices": 204,
+     "triangles": 364
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 155,
+     "triangles": 306
+    }
+   },
+   "key_link_minus": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -1.309486e-16,
+     "ixz": -2.059241e-16,
+     "iyz": -3.007877e-17
+    },
+    "volume": 6.6168938963e-07,
+    "visual": {
+     "vertices": 176,
+     "triangles": 336
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_period": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 3.350352e-16,
+     "ixz": 1.625138e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.617826945166667e-07,
+    "visual": {
+     "vertices": 179,
+     "triangles": 339
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_slash": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.040866e-16,
+     "ixz": -2.059321e-16,
+     "iyz": -3.007955e-17
+    },
+    "volume": 6.618536617351666e-07,
+    "visual": {
+     "vertices": 243,
+     "triangles": 401
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 165,
+     "triangles": 326
+    }
+   },
+   "key_link_0": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -2.984662e-16,
+     "ixz": 3.577009e-17,
+     "iyz": 5.618784e-18
+    },
+    "volume": 6.619934369466667e-07,
+    "visual": {
+     "vertices": 274,
+     "triangles": 436
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 178,
+     "triangles": 352
+    }
+   },
+   "key_link_1": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -1.309486e-16,
+     "ixz": 2.059241e-16,
+     "iyz": 3.007877e-17
+    },
+    "volume": 6.618381560833333e-07,
+    "visual": {
+     "vertices": 192,
+     "triangles": 350
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_2": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -3.231174e-25,
+     "ixz": -2.618513e-27,
+     "iyz": 5.102066e-26
+    },
+    "volume": 6.622275687050001e-07,
+    "visual": {
+     "vertices": 418,
+     "triangles": 580
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 165,
+     "triangles": 326
+    }
+   },
+   "key_link_3": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -3.231174e-25,
+     "ixz": -2.618513e-27,
+     "iyz": 5.102066e-26
+    },
+    "volume": 6.621005736549999e-07,
+    "visual": {
+     "vertices": 315,
+     "triangles": 477
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 167,
+     "triangles": 330
+    }
+   },
+   "key_link_4": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -3.350352e-16,
+     "ixz": 1.508336e-26,
+     "iyz": 4.092323e-26
+    },
+    "volume": 6.621259572091666e-07,
+    "visual": {
+     "vertices": 290,
+     "triangles": 456
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 165,
+     "triangles": 326
+    }
+   },
+   "key_link_5": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -2.984662e-16,
+     "ixz": 3.577009e-17,
+     "iyz": 5.618784e-18
+    },
+    "volume": 6.621242998108334e-07,
+    "visual": {
+     "vertices": 371,
+     "triangles": 531
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 176,
+     "triangles": 348
+    }
+   },
+   "key_link_6": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -3.350352e-16,
+     "ixz": 1.508336e-26,
+     "iyz": 4.092323e-26
+    },
+    "volume": 6.619913088641667e-07,
+    "visual": {
+     "vertices": 272,
+     "triangles": 434
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 166,
+     "triangles": 328
+    }
+   },
+   "key_link_7": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -3.350352e-16,
+     "ixz": 1.508336e-26,
+     "iyz": 4.092323e-26
+    },
+    "volume": 6.620866667133332e-07,
+    "visual": {
+     "vertices": 331,
+     "triangles": 495
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 166,
+     "triangles": 328
+    }
+   },
+   "key_link_8": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -1.675176e-16,
+     "ixz": 1.70154e-16,
+     "iyz": 2.445998e-17
+    },
+    "volume": 6.619652923633333e-07,
+    "visual": {
+     "vertices": 311,
+     "triangles": 475
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 167,
+     "triangles": 330
+    }
+   },
+   "key_link_9": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -3.231174e-25,
+     "ixz": -2.618513e-27,
+     "iyz": 5.102066e-26
+    },
+    "volume": 6.620104554991667e-07,
+    "visual": {
+     "vertices": 307,
+     "triangles": 469
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 172,
+     "triangles": 340
+    }
+   },
+   "key_link_semicolon": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.040866e-16,
+     "ixz": 2.059321e-16,
+     "iyz": 3.007955e-17
+    },
+    "volume": 6.61692810601e-07,
+    "visual": {
+     "vertices": 209,
+     "triangles": 365
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 156,
+     "triangles": 308
+    }
+   },
+   "key_link_equals": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -1.309486e-16,
+     "ixz": 2.059241e-16,
+     "iyz": 3.007877e-17
+    },
+    "volume": 6.618854067716667e-07,
+    "visual": {
+     "vertices": 188,
+     "triangles": 346
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_lbracket": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.618972e-16,
+     "ixz": 1.767048e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.619100182258334e-07,
+    "visual": {
+     "vertices": 247,
+     "triangles": 407
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 155,
+     "triangles": 306
+    }
+   },
+   "key_link_backslash": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.309486e-16,
+     "ixz": -2.062058e-16,
+     "iyz": -3.007955e-17
+    },
+    "volume": 6.618043942548334e-07,
+    "visual": {
+     "vertices": 176,
+     "triangles": 336
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 149,
+     "triangles": 294
+    }
+   },
+   "key_link_rbracket": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.309486e-16,
+     "ixz": -2.062058e-16,
+     "iyz": -3.007955e-17
+    },
+    "volume": 6.619101462756667e-07,
+    "visual": {
+     "vertices": 247,
+     "triangles": 407
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 155,
+     "triangles": 306
+    }
+   },
+   "key_link_grave": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": -1.309486e-16,
+     "ixz": 2.059241e-16,
+     "iyz": 3.007877e-17
+    },
+    "volume": 6.61717393255e-07,
+    "visual": {
+     "vertices": 248,
+     "triangles": 408
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 167,
+     "triangles": 330
+    }
+   },
+   "key_link_A": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 3.350352e-16,
+     "ixz": 1.625138e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.620455080741667e-07,
+    "visual": {
+     "vertices": 179,
+     "triangles": 343
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_Arrow_Down": {
+    "mass": 0.00043,
+    "com": [
+     0.0,
+     0.0,
+     -8e-06
+    ],
+    "inertia": {
+     "ixx": 2.084003e-09,
+     "iyy": 1.016434e-08,
+     "izz": 1.18578e-08,
+     "ixy": -1.063214e-15,
+     "ixz": -2.064782e-16,
+     "iyz": -7.416977e-18
+    },
+    "volume": 2.8432523790866665e-07,
+    "visual": {
+     "vertices": 171,
+     "triangles": 333
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 147,
+     "triangles": 290
+    }
+   },
+   "key_link_Arrow_Left": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.984662e-16,
+     "ixz": -5.618784e-18,
+     "iyz": 3.577009e-17
+    },
+    "volume": 6.596044379208335e-07,
+    "visual": {
+     "vertices": 171,
+     "triangles": 333
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 147,
+     "triangles": 290
+    }
+   },
+   "key_link_Arrow_Right": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.666222e-16,
+     "ixz": -2.116878e-16,
+     "iyz": 5.559544e-18
+    },
+    "volume": 6.636018956066667e-07,
+    "visual": {
+     "vertices": 171,
+     "triangles": 333
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 147,
+     "triangles": 290
+    }
+   },
+   "key_link_Arrow_Up": {
+    "mass": 0.00043,
+    "com": [
+     0.0,
+     0.0,
+     -8e-06
+    ],
+    "inertia": {
+     "ixx": 2.084003e-09,
+     "iyy": 1.016434e-08,
+     "izz": 1.18578e-08,
+     "ixy": -1.129724e-15,
+     "ixz": -1.819485e-16,
+     "iyz": -7.608361e-17
+    },
+    "volume": 2.8843688634816663e-07,
+    "visual": {
+     "vertices": 171,
+     "triangles": 333
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 147,
+     "triangles": 290
+    }
+   },
+   "key_link_B": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.675176e-16,
+     "ixz": -1.70424e-16,
+     "iyz": -2.446076e-17
+    },
+    "volume": 6.621890838330001e-07,
+    "visual": {
+     "vertices": 241,
+     "triangles": 407
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 164,
+     "triangles": 324
+    }
+   },
+   "key_link_bright_up": {
+    "mass": 0.000723,
+    "com": [
+     -0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.260418e-15,
+     "ixz": 2.308365e-16,
+     "iyz": -1.002449e-16
+    },
+    "volume": 4.827779791168334e-07,
+    "visual": {
+     "vertices": 218,
+     "triangles": 364
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 160,
+     "triangles": 316
+    }
+   },
+   "key_link_bright_down": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.260434e-15,
+     "ixz": -2.308365e-16,
+     "iyz": -1.083232e-16
+    },
+    "volume": 4.819983779568332e-07,
+    "visual": {
+     "vertices": 218,
+     "triangles": 364
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 160,
+     "triangles": 316
+    }
+   },
+   "key_link_C": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 3.350352e-16,
+     "ixz": 1.625138e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.620479541975001e-07,
+    "visual": {
+     "vertices": 234,
+     "triangles": 396
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 177,
+     "triangles": 350
+    }
+   },
+   "key_link_Caps_Lock": {
+    "mass": 0.001837,
+    "com": [
+     0.0,
+     -0.0,
+     -4e-06
+    ],
+    "inertia": {
+     "ixx": 4.393817e-08,
+     "iyy": 1.479622e-07,
+     "izz": 1.902197e-07,
+     "ixy": -3.226036e-15,
+     "ixz": 2.581603e-25,
+     "iyz": -4.034083e-26
+    },
+    "volume": 1.2252124168266668e-06,
+    "visual": {
+     "vertices": 683,
+     "triangles": 837
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 166,
+     "triangles": 328
+    }
+   },
+   "key_link_Command": {
+    "mass": 0.001274,
+    "com": [
+     0.0,
+     -0.0,
+     -4e-06
+    ],
+    "inertia": {
+     "ixx": 3.042864e-08,
+     "iyy": 4.967479e-08,
+     "izz": 7.893881e-08,
+     "ixy": -4.758335e-16,
+     "ixz": -1.896526e-16,
+     "iyz": 4.082895e-17
+    },
+    "volume": 8.500331113926669e-07,
+    "visual": {
+     "vertices": 699,
+     "triangles": 855
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 167,
+     "triangles": 330
+    }
+   },
+   "key_link_Command_2": {
+    "mass": 0.001274,
+    "com": [
+     -0.0,
+     -0.0,
+     -4e-06
+    ],
+    "inertia": {
+     "ixx": 3.042864e-08,
+     "iyy": 4.967479e-08,
+     "izz": 7.893881e-08,
+     "ixy": -6.150696e-16,
+     "ixz": 5.990901e-17,
+     "iyz": 2.467163e-17
+    },
+    "volume": 8.500330874409999e-07,
+    "visual": {
+     "vertices": 699,
+     "triangles": 855
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 167,
+     "triangles": 330
+    }
+   },
+   "key_link_Control": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.684131e-16,
+     "ixz": 2.004502e-16,
+     "iyz": 6.571863e-17
+    },
+    "volume": 6.621621239616667e-07,
+    "visual": {
+     "vertices": 496,
+     "triangles": 650
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 167,
+     "triangles": 330
+    }
+   },
+   "key_link_D": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": 3.656902e-17,
+     "ixz": -3.550809e-17,
+     "iyz": -5.618784e-18
+    },
+    "volume": 6.621310030198333e-07,
+    "visual": {
+     "vertices": 214,
+     "triangles": 378
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 163,
+     "triangles": 322
+    }
+   },
+   "key_link_Delete": {
+    "mass": 0.001555,
+    "com": [
+     -0.0,
+     0.0,
+     -4e-06
+    ],
+    "inertia": {
+     "ixx": 3.718341e-08,
+     "iyy": 9.0046e-08,
+     "izz": 1.258068e-07,
+     "ixy": -1.820651e-15,
+     "ixz": -2.65905e-25,
+     "iyz": -1.215576e-25
+    },
+    "volume": 1.0374063083638333e-06,
+    "visual": {
+     "vertices": 534,
+     "triangles": 694
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 193,
+     "triangles": 382
+    }
+   },
+   "key_link_dnd": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307918e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.286695e-15,
+     "ixz": 2.422109e-28,
+     "iyz": -1.042826e-16
+    },
+    "volume": 4.877947213851667e-07,
+    "visual": {
+     "vertices": 248,
+     "triangles": 372
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 165,
+     "triangles": 326
+    }
+   },
+   "key_link_E": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -3.656902e-17,
+     "ixz": -3.550809e-17,
+     "iyz": -5.618784e-18
+    },
+    "volume": 6.620993853558333e-07,
+    "visual": {
+     "vertices": 180,
+     "triangles": 342
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 149,
+     "triangles": 294
+    }
+   },
+   "key_link_Esc": {
+    "mass": 0.001133,
+    "com": [
+     -0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 1.463647e-08,
+     "iyy": 6.551648e-08,
+     "izz": 7.911771e-08,
+     "ixy": 1.85183e-15,
+     "ixz": -3.776503e-26,
+     "iyz": -1.042081e-16
+    },
+    "volume": 7.558326712791666e-07,
+    "visual": {
+     "vertices": 417,
+     "triangles": 577
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 181,
+     "triangles": 358
+    }
+   },
+   "key_link_F": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -3.029873e-42,
+     "ixz": -5.313699e-26,
+     "iyz": 5.105203e-26
+    },
+    "volume": 6.619850727526668e-07,
+    "visual": {
+     "vertices": 178,
+     "triangles": 340
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_Fn": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.684131e-16,
+     "ixz": 2.004502e-16,
+     "iyz": 6.571863e-17
+    },
+    "volume": 6.617666611125001e-07,
+    "visual": {
+     "vertices": 259,
+     "triangles": 419
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 162,
+     "triangles": 320
+    }
+   },
+   "key_link_G": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.040866e-16,
+     "ixz": -2.059321e-16,
+     "iyz": -3.007955e-17
+    },
+    "volume": 6.621610746418334e-07,
+    "visual": {
+     "vertices": 239,
+     "triangles": 401
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 172,
+     "triangles": 340
+    }
+   },
+   "key_link_H": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -3.029873e-42,
+     "ixz": -5.313699e-26,
+     "iyz": 5.105203e-26
+    },
+    "volume": 6.620911757193332e-07,
+    "visual": {
+     "vertices": 180,
+     "triangles": 342
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_I": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -3.656902e-17,
+     "ixz": -3.550809e-17,
+     "iyz": -5.618784e-18
+    },
+    "volume": 6.618020821591667e-07,
+    "visual": {
+     "vertices": 172,
+     "triangles": 334
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_J": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.040866e-16,
+     "ixz": 2.059321e-16,
+     "iyz": 3.007955e-17
+    },
+    "volume": 6.618904367418333e-07,
+    "visual": {
+     "vertices": 206,
+     "triangles": 368
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 164,
+     "triangles": 324
+    }
+   },
+   "key_link_K": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -3.029873e-42,
+     "ixz": -5.313699e-26,
+     "iyz": 5.105203e-26
+    },
+    "volume": 6.62079652346e-07,
+    "visual": {
+     "vertices": 180,
+     "triangles": 342
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_L": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": 3.656902e-17,
+     "ixz": 3.550808e-17,
+     "iyz": 5.618784e-18
+    },
+    "volume": 6.618883267548335e-07,
+    "visual": {
+     "vertices": 174,
+     "triangles": 336
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 149,
+     "triangles": 294
+    }
+   },
+   "key_link_M": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": 7.313803e-17,
+     "ixz": -1.514613e-26,
+     "iyz": 4.093892e-26
+    },
+    "volume": 6.623001080620001e-07,
+    "visual": {
+     "vertices": 198,
+     "triangles": 360
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_mic": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.287343e-15,
+     "ixz": -1.951706e-16,
+     "iyz": -1.041862e-16
+    },
+    "volume": 4.867059474761667e-07,
+    "visual": {
+     "vertices": 292,
+     "triangles": 408
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 164,
+     "triangles": 324
+    }
+   },
+   "key_link_mission": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307918e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.259786e-15,
+     "ixz": -3.566589e-17,
+     "iyz": -1.084196e-16
+    },
+    "volume": 4.920898928750001e-07,
+    "visual": {
+     "vertices": 180,
+     "triangles": 338
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_mute": {
+    "mass": 0.000723,
+    "com": [
+     -0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.286695e-15,
+     "ixz": 6.403625e-26,
+     "iyz": -1.040899e-16
+    },
+    "volume": 4.839353203096666e-07,
+    "visual": {
+     "vertices": 187,
+     "triangles": 341
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 152,
+     "triangles": 300
+    }
+   },
+   "key_link_N": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.675176e-16,
+     "ixz": 1.70424e-16,
+     "iyz": 2.446076e-17
+    },
+    "volume": 6.621580752471667e-07,
+    "visual": {
+     "vertices": 178,
+     "triangles": 340
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_next": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307918e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.286695e-15,
+     "ixz": 2.422109e-28,
+     "iyz": -1.042826e-16
+    },
+    "volume": 4.864631960493333e-07,
+    "visual": {
+     "vertices": 178,
+     "triangles": 336
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_O": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -7.313803e-17,
+     "ixz": -5.298007e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.621442341836668e-07,
+    "visual": {
+     "vertices": 232,
+     "triangles": 396
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 176,
+     "triangles": 348
+    }
+   },
+   "key_link_Option": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.984662e-16,
+     "ixz": -5.618784e-18,
+     "iyz": 3.577009e-17
+    },
+    "volume": 6.621421037766666e-07,
+    "visual": {
+     "vertices": 465,
+     "triangles": 621
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 171,
+     "triangles": 338
+    }
+   },
+   "key_link_Option_2": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.984662e-16,
+     "ixz": -5.618784e-18,
+     "iyz": 3.577009e-17
+    },
+    "volume": 6.621421037766666e-07,
+    "visual": {
+     "vertices": 465,
+     "triangles": 621
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 171,
+     "triangles": 338
+    }
+   },
+   "key_link_P": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.618972e-16,
+     "ixz": 1.767048e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.620440636849999e-07,
+    "visual": {
+     "vertices": 208,
+     "triangles": 372
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 160,
+     "triangles": 316
+    }
+   },
+   "key_link_play": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307918e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.259786e-15,
+     "ixz": -3.566589e-17,
+     "iyz": -1.084196e-16
+    },
+    "volume": 4.85759855915e-07,
+    "visual": {
+     "vertices": 179,
+     "triangles": 337
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_prev": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307918e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.286695e-15,
+     "ixz": -1.577722e-26,
+     "iyz": -1.042826e-16
+    },
+    "volume": 4.794298216493333e-07,
+    "visual": {
+     "vertices": 178,
+     "triangles": 336
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_Q": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.309486e-16,
+     "ixz": -2.062058e-16,
+     "iyz": -3.007955e-17
+    },
+    "volume": 6.621959732348334e-07,
+    "visual": {
+     "vertices": 254,
+     "triangles": 418
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 170,
+     "triangles": 336
+    }
+   },
+   "key_link_R": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.618972e-16,
+     "ixz": 1.767048e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.621516144833333e-07,
+    "visual": {
+     "vertices": 244,
+     "triangles": 408
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 157,
+     "triangles": 310
+    }
+   },
+   "key_link_Return": {
+    "mass": 0.001837,
+    "com": [
+     0.0,
+     -0.0,
+     -4e-06
+    ],
+    "inertia": {
+     "ixx": 4.393817e-08,
+     "iyy": 1.479622e-07,
+     "izz": 1.902197e-07,
+     "ixy": -3.226036e-15,
+     "ixz": 2.581603e-25,
+     "iyz": -4.034083e-26
+    },
+    "volume": 1.2249094414808332e-06,
+    "visual": {
+     "vertices": 459,
+     "triangles": 613
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 159,
+     "triangles": 314
+    }
+   },
+   "key_link_S": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.040866e-16,
+     "ixz": -2.059321e-16,
+     "iyz": -3.007955e-17
+    },
+    "volume": 6.621009441385001e-07,
+    "visual": {
+     "vertices": 268,
+     "triangles": 430
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 178,
+     "triangles": 352
+    }
+   },
+   "key_link_search": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.286695e-15,
+     "ixz": 7.766242e-26,
+     "iyz": -1.040899e-16
+    },
+    "volume": 4.83814696213e-07,
+    "visual": {
+     "vertices": 252,
+     "triangles": 374
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 160,
+     "triangles": 316
+    }
+   },
+   "key_link_Shift": {
+    "mass": 0.002399,
+    "com": [
+     -0.0,
+     -0.0,
+     -3e-06
+    ],
+    "inertia": {
+     "ixx": 5.74477e-08,
+     "iyy": 3.291287e-07,
+     "izz": 3.843797e-07,
+     "ixy": 4.336521e-15,
+     "ixz": 1.692885e-16,
+     "iyz": 5.612069e-18
+    },
+    "volume": 1.6000488132940001e-06,
+    "visual": {
+     "vertices": 403,
+     "triangles": 555
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 171,
+     "triangles": 338
+    }
+   },
+   "key_link_Shift_2": {
+    "mass": 0.002399,
+    "com": [
+     0.0,
+     0.0,
+     -3e-06
+    ],
+    "inertia": {
+     "ixx": 5.74477e-08,
+     "iyy": 3.291287e-07,
+     "izz": 3.843797e-07,
+     "ixy": 4.336521e-15,
+     "ixz": -1.692885e-16,
+     "iyz": -5.612069e-18
+    },
+    "volume": 1.6000488132940001e-06,
+    "visual": {
+     "vertices": 403,
+     "triangles": 555
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 171,
+     "triangles": 338
+    }
+   },
+   "key_link_Spacebar": {
+    "mass": 0.005495,
+    "com": [
+     -0.0,
+     -0.0,
+     -3e-06
+    ],
+    "inertia": {
+     "ixx": 1.317501e-07,
+     "iyy": 3.941973e-06,
+     "izz": 4.068688e-06,
+     "ixy": 2.918737e-15,
+     "ixz": 3.957813e-16,
+     "iyz": 7.702962e-17
+    },
+    "volume": 3.663379688004833e-06,
+    "visual": {
+     "vertices": 168,
+     "triangles": 332
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 144,
+     "triangles": 284
+    }
+   },
+   "key_link_T": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 9.437958e-17,
+     "ixz": -1.706978e-16,
+     "iyz": -2.446076e-17
+    },
+    "volume": 6.619203624101667e-07,
+    "visual": {
+     "vertices": 176,
+     "triangles": 338
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 150,
+     "triangles": 296
+    }
+   },
+   "key_link_Tab": {
+    "mass": 0.001555,
+    "com": [
+     -0.0,
+     0.0,
+     -4e-06
+    ],
+    "inertia": {
+     "ixx": 3.718341e-08,
+     "iyy": 9.0046e-08,
+     "izz": 1.258068e-07,
+     "ixy": -1.820651e-15,
+     "ixz": 7.215134e-26,
+     "iyz": -1.21454e-25
+    },
+    "volume": 1.0371292041305e-06,
+    "visual": {
+     "vertices": 415,
+     "triangles": 577
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 171,
+     "triangles": 338
+    }
+   },
+   "key_link_touchid": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.260434e-15,
+     "ixz": -2.308365e-16,
+     "iyz": -1.083232e-16
+    },
+    "volume": 4.839627413751667e-07,
+    "visual": {
+     "vertices": 499,
+     "triangles": 651
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 160,
+     "triangles": 316
+    }
+   },
+   "key_link_U": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -7.313803e-17,
+     "ixz": -5.298007e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.620531545803333e-07,
+    "visual": {
+     "vertices": 206,
+     "triangles": 368
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 163,
+     "triangles": 322
+    }
+   },
+   "key_link_V": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": 7.313803e-17,
+     "ixz": -1.514613e-26,
+     "iyz": 4.093892e-26
+    },
+    "volume": 6.619883652453333e-07,
+    "visual": {
+     "vertices": 175,
+     "triangles": 337
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_vol_up": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.260434e-15,
+     "ixz": -2.308365e-16,
+     "iyz": -1.083232e-16
+    },
+    "volume": 4.876202082835e-07,
+    "visual": {
+     "vertices": 339,
+     "triangles": 417
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 169,
+     "triangles": 334
+    }
+   },
+   "key_link_vol_down": {
+    "mass": 0.000723,
+    "com": [
+     0.0,
+     0.0,
+     -6e-06
+    ],
+    "inertia": {
+     "ixx": 9.307917e-09,
+     "iyy": 1.720352e-08,
+     "izz": 2.5852e-08,
+     "ixy": -1.286695e-15,
+     "ixz": 7.766242e-26,
+     "iyz": -1.040899e-16
+    },
+    "volume": 4.86643248823e-07,
+    "visual": {
+     "vertices": 259,
+     "triangles": 377
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 169,
+     "triangles": 334
+    }
+   },
+   "key_link_W": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 1.309486e-16,
+     "ixz": 2.062058e-16,
+     "iyz": 3.007955e-17
+    },
+    "volume": 6.623018761314999e-07,
+    "visual": {
+     "vertices": 181,
+     "triangles": 343
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_X": {
+    "mass": 0.000992,
+    "com": [
+     0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 3.350352e-16,
+     "ixz": 1.625138e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.620456768575e-07,
+    "visual": {
+     "vertices": 180,
+     "triangles": 342
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_Y": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644117e-08,
+     "ixy": -7.313803e-17,
+     "ixz": -5.298007e-26,
+     "iyz": 5.105204e-26
+    },
+    "volume": 6.619277419770001e-07,
+    "visual": {
+     "vertices": 177,
+     "triangles": 339
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 148,
+     "triangles": 292
+    }
+   },
+   "key_link_Z": {
+    "mass": 0.000992,
+    "com": [
+     -0.0,
+     -0.0,
+     -5e-06
+    ],
+    "inertia": {
+     "ixx": 2.367388e-08,
+     "iyy": 2.367388e-08,
+     "izz": 4.644116e-08,
+     "ixy": 2.040866e-16,
+     "ixz": 2.059321e-16,
+     "iyz": 3.007955e-17
+    },
+    "volume": 6.620551019676667e-07,
+    "visual": {
+     "vertices": 178,
+     "triangles": 340
+    },
+    "collision": {
+     "hulls": 1,
+     "vertices": 149,
+     "triangles": 294
+    }
+   }
+  },
+  "joints": {
+   "lid_joint": {
+    "type": "revolute",
+    "effort": 10.0,
+    "velocity": 3.0,
+    "damping": 0.3,
+    "friction": 1.0
+   },
+   "key_joint_quote": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_comma": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_minus": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_period": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_slash": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_0": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_1": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_2": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_3": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_4": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_5": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_6": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_7": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_8": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_9": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_semicolon": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_equals": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_lbracket": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_backslash": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_rbracket": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_grave": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_A": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Arrow_Down": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Arrow_Left": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Arrow_Right": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Arrow_Up": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_B": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_bright_up": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_bright_down": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_C": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Caps_Lock": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Command": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Command_2": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Control": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_D": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Delete": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_dnd": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_E": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Esc": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_F": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Fn": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_G": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_H": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_I": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_J": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_K": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_L": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_M": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_mic": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_mission": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_mute": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_N": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_next": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_O": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Option": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Option_2": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_P": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_play": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_prev": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Q": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_R": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Return": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_S": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_search": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Shift": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Shift_2": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Spacebar": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_T": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Tab": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_touchid": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_U": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_V": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_vol_up": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_vol_down": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_W": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_X": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Y": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   },
+   "key_joint_Z": {
+    "type": "prismatic",
+    "effort": 2.0,
+    "velocity": 0.1,
+    "damping": 0.6,
+    "friction": 0.02
+   }
+  },
+  "formats": [
+   "URDF",
+   "MJCF",
+   "USD",
+   "OBJ"
+  ],
+  "engines": [
+   "Isaac Sim",
+   "MuJoCo",
+   "Genesis"
+  ],
+  "validated": [
+   "Isaac Sim \u00b7 PhysX articulation, drives, drop",
+   "MuJoCo \u00b7 physics battery"
+  ]
+ },
+ "geometry": {
+  "visual": {
+   "meshes": 80,
+   "vertices": 29244,
+   "triangles": 41448
+  },
+  "collision": {
+   "hulls": 100,
+   "vertices": 14859,
+   "triangles": 29318
+  }
+ },
+ "look": {
+  "material_override": false,
+  "note": "multi-material constant PBR from the package MTL; keep as authored"
+ }
+}

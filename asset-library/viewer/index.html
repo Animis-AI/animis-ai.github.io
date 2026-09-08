@@ -146,7 +146,7 @@ import { LineGeometry } from "./vendor/three/jsm/lines/LineGeometry.js";
 
 const q = new URLSearchParams(location.search);
 const MODE = q.get("mode") || "visual";
-const FIX = q.get("fix") !== "0";      // 丢掉交付件那张迷彩 roughness 贴图
+let FIX = q.get("fix") !== "0";        // 丢掉交付件那张迷彩 roughness 贴图(资产可在 inspect.json look.material_override=false 关掉,多材质常量 PBR 资产要保留自己的材质)
 const ROUGH = parseFloat(q.get("rough") ?? "0.22");
 const ENVI = parseFloat(q.get("envi") ?? "5.0");
 const ENVROT = parseFloat(q.get("envrot") ?? "0");  // 环境绕 Y 旋转(度)
@@ -251,6 +251,7 @@ scene.add(sun);
 
 // ---- 资产 ----
 const spec = await fetch(BASE + "inspect/inspect.json").then((r) => r.json());
+if (q.get("fix") === null && spec.look && spec.look.material_override === false) FIX = false;
 const loader = new GLTFLoader();
 const loadGlb = (u) => new Promise((res, rej) => loader.load(u, res, undefined, rej));
 
@@ -322,8 +323,11 @@ for (const j of movable) {
   g.traverse((n) => { n.renderOrder = 999; n.userData.link = j.child; n.userData.proxy = true; });
   proxies.push({ joint: j, group: g, disc, arc, needle, knob, hot: false });
 }
+// 关节很多的资产(键盘:78 个键各一个滑动关节)不能满屏画表盘,只画悬停/拖拽中的那个
+const DENSE = movable.length > 12;
 function updateProxies() {
   for (const px of proxies) {
+    if (DENSE) { px.group.visible = px.hot; if (!px.hot) continue; }
     const wp = new THREE.Vector3(); px.group.getWorldPosition(wp);
     const d = camera.position.distanceTo(wp);
     // Palatial 的公式:控件在屏幕上大小恒定,约视口高的 ~7%

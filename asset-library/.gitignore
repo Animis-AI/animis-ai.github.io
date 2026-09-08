@@ -2,3 +2,4 @@ node_modules/
 # 资产按需上架:未上架的测试资产不入库,上架的显式 add
 /assets/*
 !/assets/scissors/
+!/assets/macbook_pro_16/
