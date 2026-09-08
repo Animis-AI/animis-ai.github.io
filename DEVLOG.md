@@ -1,6 +1,6 @@
 # 开发文档 · Animis 官网与 SimGallery
 
-本文是这个仓库从 2026-08-22 到 2026-09-07 的开发记录:做了什么、为什么这样做、
+本文是这个仓库从 2026-08-22 到 2026-09-08 的开发记录:做了什么、为什么这样做、
 踩过哪些坑、下一步是什么。面向接手的人,读完应该能独立上架资产、改界面、上线。
 更细的操作命令在 `README.md` 与 `asset-library/README.md`,安全在 `SECURITY.md`,
 支付接入在 `asset-library/SETUP-PAYMENTS.md`。
@@ -64,9 +64,12 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
   密钥;`robots.txt`;`SECURITY.md` 写清威胁模型与收款前清单。
 - 剪刀详情页只留交互 3D:三段视频与标签栏移除,点开卡片即查看器。
 - 公司主页改成产品介绍页(信息架构参照 lightwheel.ai/asset-library):MacBook Pro 宣传片开场
-  (网页版 1280p、1.8 MB,`media/`)→「按需制作仿真就绪资产」+ What's included 六条 →
-  四个案例卡片(MacBook / 剪刀 / 止血钳 / GPU 模块)各带「定制同类资产」→ 资产库 `#request`
-  直接打开定制表单(未登录先登录)。文案里的数字全部来自实测记录,没有的不写。
+  (网页版 1280p、1.8 MB,`media/`)→「按需制作仿真就绪资产」+ 交付内容六条 → 「进入 SimGallery」
+  与「定制资产」两个入口;资产库 `#request` 直接打开定制表单(未登录先登录)。
+
+### 2026-09-08
+- 主页去掉「为机器人训练任务而建」四个案例卡片(MacBook / 剪刀 / 止血钳 / GPU 模块),
+  用户决定不公开展示具体案例;主页只留 宣传片 → 按需制作 → 交付内容。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。
