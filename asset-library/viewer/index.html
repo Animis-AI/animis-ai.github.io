@@ -86,7 +86,8 @@
   #joints label.hot{border-color:var(--accent)}
   #joints .jh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
   #joints .jn{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
-  #joints b{font-family:var(--disp);font-size:18px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+  #joints .jn .jl{font-style:normal;color:var(--fg2);letter-spacing:.08em;text-transform:none}
+  #joints b{font-family:var(--disp);font-size:18px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.04em;white-space:nowrap}
   #joints input[type=range]{width:100%;accent-color:var(--accent);height:2px;cursor:pointer;margin:0}
   #joints .jr{display:flex;justify-content:space-between;font-size:10px;color:var(--fg3);margin-top:7px;letter-spacing:.08em}
   #tip{position:fixed;left:50%;top:70px;transform:translateX(-50%);z-index:5;font-size:10.5px;letter-spacing:.16em;
@@ -325,6 +326,12 @@ for (const j of movable) {
 }
 // 关节很多的资产(键盘:78 个键各一个滑动关节)不能满屏画表盘,只画悬停/拖拽中的那个
 const DENSE = movable.length > 12;
+if (DENSE) {   // 同组滑动关节按枢轴 X 坐标错相位:idle 时键盘像波浪一样起伏,而不是 78 个键一起按下
+  const ps = movable.filter((j) => j.type === "prismatic");
+  const xs = ps.map((j) => j.motion.parent.position.x);
+  const lo = Math.min(...xs), hi = Math.max(...xs);
+  ps.forEach((j, i) => { j.phase = hi > lo ? (xs[i] - lo) / (hi - lo) * Math.PI * 2 : 0; });
+}
 function updateProxies() {
   for (const px of proxies) {
     if (DENSE) { px.group.visible = px.hot; if (!px.hot) continue; }
@@ -600,28 +607,48 @@ for (const j of movable) jointByLink[j.child] = j;
 
 const panel = document.createElement("div");
 panel.id = "joints";
-const fmtLim = (j, v) => j.type === "prismatic" ? `${(v * 100).toFixed(1)} cm` : `${Math.round(v * 180 / Math.PI)}°`;
-panel.innerHTML = movable.map((j, i) => `
+// 长度单位按行程自适应:键帽 0.8 mm 行程显示 cm 会变成 "-0.0 cm"
+const fmtLen = (j, v) => {
+  const span = Math.abs(j.upper - j.lower);
+  return span < 0.01 ? `${(v * 1000).toFixed(2)} mm` : span < 1 ? `${(v * 100).toFixed(1)} cm` : `${v.toFixed(3)} m`;
+};
+const fmtVal = (j, v) => j.type === "prismatic" ? fmtLen(j, v) : `${Math.round(v * 180 / Math.PI)}°`;
+// 关节分组:关节很多的资产(键盘 78 个键)把 同类型 + 同限位 + 同名字前缀 的关节合成一张卡,
+// 一根滑杆驱动整组;拖某一个键时该键成为组的"当前关节",卡片显示它的名字和值
+const groups = [];
+for (const j of movable) {
+  const key = DENSE ? `${j.type}|${j.lower.toFixed(6)}|${j.upper.toFixed(6)}` : j.name;
+  let g = groups.find((x) => x.key === key);
+  if (!g) { g = { key, joints: [], type: j.type, lower: j.lower, upper: j.upper, lead: j }; groups.push(g); }
+  g.joints.push(j); j.group = g;
+}
+const commonPrefix = (names) => { let p = names[0]; for (const n of names) { while (!n.startsWith(p)) p = p.slice(0, -1); } return p; };
+for (const g of groups) {
+  if (g.joints.length === 1) { g.name = g.joints[0].name; continue; }
+  const pre = commonPrefix(g.joints.map((j) => j.name)).replace(/[_-]+$/, "").replace(/[_-]?joints?$/, "").replace(/[_-]+$/, "");
+  g.name = `${pre || g.type} × ${g.joints.length}`;
+}
+panel.innerHTML = groups.map((g, i) => `
   <label>
-    <div class="jh"><span class="jn">${j.name} · ${T[j.type] || j.type}</span><b data-v="${i}"></b></div>
+    <div class="jh"><span class="jn">${g.name} · ${T[g.type] || g.type}${g.joints.length > 1 ? `<i class="jl" data-l="${i}"></i>` : ""}</span><b data-v="${i}"></b></div>
     <input type="range" min="0" max="1000" data-j="${i}">
-    <div class="jr"><span>${fmtLim(j, j.lower)}</span><span>${fmtLim(j, j.upper)}</span></div>
+    <div class="jr"><span>${fmtVal(g, g.lower)}</span><span>${fmtVal(g, g.upper)}</span></div>
   </label>`).join("");
 document.body.appendChild(panel);
 
 const frac = (j) => (j.value - j.lower) / ((j.upper - j.lower) || 1);
 function syncUI() {
-  movable.forEach((j, i) => {
+  groups.forEach((g, i) => {
+    const j = g.lead;
     panel.querySelector(`input[data-j="${i}"]`).value = Math.round(frac(j) * 1000);
-    panel.querySelector(`b[data-v="${i}"]`).textContent =
-      j.type === "prismatic" ? `${(j.value * 100).toFixed(1)} cm`
-                             : `${Math.round(j.value * 180 / Math.PI)}°`;
+    panel.querySelector(`b[data-v="${i}"]`).textContent = fmtVal(j, j.value);
+    const l = panel.querySelector(`i.jl[data-l="${i}"]`); if (l) l.textContent = ` · ${j.name}`;
   });
 }
 panel.addEventListener("input", (e) => {
-  const i = +e.target.dataset.j;
+  const g = groups[+e.target.dataset.j];
   stopIdle();
-  setJoint(movable[i], movable[i].lower + (e.target.value / 1000) * (movable[i].upper - movable[i].lower));
+  for (const j of g.joints) setJoint(j, j.lower + (e.target.value / 1000) * (j.upper - j.lower));
   syncUI();
 });
 
@@ -653,7 +680,9 @@ function setHover(j, active) {
     outline.edgeGlow = active ? 1 : 0;
   }
   for (const px of proxies) px.hot = !!j && px.joint === j;
-  panel.querySelectorAll("label").forEach((l, i) => l.classList.toggle("hot", !!j && movable[i] === j));
+  if (j && j.group) j.group.lead = j;
+  panel.querySelectorAll("label").forEach((l, i) => l.classList.toggle("hot", !!j && groups[i] === j.group));
+  if (j) syncUI();
 }
 
 renderer.domElement.addEventListener("pointerdown", (e) => {
@@ -746,7 +775,7 @@ renderer.setAnimationLoop(() => {
     const t = (performance.now() - t0) / 1000 * 0.8;
     for (const j of movable) {
       if (j.lower === j.upper) continue;
-      setJoint(j, j.lower + (Math.sin(t) + 1) / 2 * (j.upper - j.lower));
+      setJoint(j, j.lower + (Math.sin(t * (j.phase ? 1.8 : 1) - (j.phase || 0)) + 1) / 2 * (j.upper - j.lower));
     }
     syncUI();
   }
@@ -820,13 +849,14 @@ paintBar();
     + `<div class="sub">${esc(T.collision_g)}</div>` + row(T.hulls, fmtN(gc.hulls), "acc") + row(T.vertices, fmtN(gc.vertices), "acc") + row(T.triangles, fmtN(gc.triangles), "acc");
 
   let articulation = "";
-  for (const j of movable) {
+  for (const g of groups) {
+    const j = g.joints[0];
     const dj = PJ[j.name] || {};
-    const lim = j.type === "prismatic" ? `${num(j.lower * 100, 1)} … ${num(j.upper * 100, 1)} cm` : `${Math.round(j.lower * 180 / Math.PI)}° … ${Math.round(j.upper * 180 / Math.PI)}°`;
-    articulation += `<div class="sub">${esc(j.name)} · ${esc(T[j.type] || j.type)}</div>`
+    const lim = `${fmtVal(j, j.lower)} … ${fmtVal(j, j.upper)}`;
+    articulation += `<div class="sub">${esc(g.name)} · ${esc(T[j.type] || j.type)}</div>`
       + row(T.axis, `[${j.axis.map((v) => num(v, 2)).join(", ")}]`) + row(T.limits, lim)
-      + row(T.damping, dj.damping != null ? `${dj.damping} N·m·s/rad` : null) + row(T.friction, dj.friction != null ? `${dj.friction} N·m` : null)
-      + row(T.effort, dj.effort != null ? `${dj.effort} N·m` : null) + row(T.velocity, dj.velocity != null ? `${dj.velocity} rad/s` : null);
+      + row(T.damping, dj.damping != null ? `${dj.damping} ${j.type === "prismatic" ? "N·s/m" : "N·m·s/rad"}` : null) + row(T.friction, dj.friction != null ? `${dj.friction} ${j.type === "prismatic" ? "N" : "N·m"}` : null)
+      + row(T.effort, dj.effort != null ? `${dj.effort} ${j.type === "prismatic" ? "N" : "N·m"}` : null) + row(T.velocity, dj.velocity != null ? `${dj.velocity} ${j.type === "prismatic" ? "m/s" : "rad/s"}` : null);
   }
 
   // 层级树:link → joint → child link,悬停行 = 场景里描边

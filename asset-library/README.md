@@ -49,10 +49,11 @@ three.js r179 本地 WebGL 渲染,思路照 Palatial(见 `PALATIAL_VIEWER_REFERE
         --asset <URDF包> --out <tmp>/baked            # 重展 UV + 逐 link 烘 AO
     python3 pipeline/build_web_asset.py <URDF包> <tmp>/out --material uniform \
         --visual-dir <tmp>/baked --ao-dir <tmp>/baked --brush-axis 1,0,0 --tex 1024
+    # 多材质 OBJ(mtllib 常量 PBR,如 laptop_16)改用 build_web_asset_mtl.py,不需要烘 AO / 重展 UV
     cp -r <tmp>/out/inspect assets/<slug>/inspect      # 然后 manifest 里 "inspect": true
     python3 pipeline/inspect_physics.py <交付包目录> assets/<slug>/inspect/inspect.json \
-        --material steel --formats URDF MJCF USD --engines "Isaac Sim" MuJoCo Genesis \
-        --validated "MuJoCo · drop & settle"           # Details 面板的物理/几何数据(读 URDF/MJCF/USD/OBJ)
+        --material aluminium --formats URDF MJCF USD --engines "Isaac Sim" MuJoCo Genesis \
+        --validated "MuJoCo · physics battery"       # Details 面板的物理/几何数据(读 URDF/MJCF/USD/OBJ)
 
 `--material uniform` 是因为交付件的 roughness/metallic 贴图是迷彩噪声,实时 PBR 下会渲成
 色斑;有干净贴图的资产用默认 `textures`。

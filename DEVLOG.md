@@ -10,7 +10,7 @@
 | 路径 | 内容 | 状态 |
 |---|---|---|
 | `/` | 公司落地页:slogan + SimGallery 宣传片区块,中英自动切换 | 上线 |
-| `/asset-library/` | **SimGallery**(副标题 Sim-Ready Asset Library),资产目录 + 账号 + 购物车 + 许可门禁 | 上线,1 件资产 |
+| `/asset-library/` | **SimGallery**(副标题 Sim-Ready Asset Library),资产目录 + 账号 + 购物车 + 许可门禁 | 上线,1 件资产(`laptop_16`) |
 | `/asset-library/viewer/` | 浏览器内 3D 查看器(three.js),铰接可拖拽,Details 面板 | 上线 |
 | 账号 / 支付 | demo 档(浏览器 localStorage),Supabase + Stripe 接口已预留 | 收款前必须切正式,见 `SECURITY.md` |
 
@@ -63,13 +63,22 @@ three.js r179 以 ES module 形式 vendored 在 `viewer/vendor/`,不依赖 CDN�
 - 安全(`9315013`):CI 前置 `scripts/check-public-tree.sh`,拦可售格式、assets 白名单、
   密钥;`robots.txt`;`SECURITY.md` 写清威胁模型与收款前清单。
 - 剪刀详情页只留交互 3D:三段视频与标签栏移除,点开卡片即查看器。
-- 公司主页改成产品介绍页(信息架构参照 lightwheel.ai/asset-library):MacBook Pro 宣传片开场
+- 公司主页改成产品介绍页(信息架构参照 lightwheel.ai/asset-library):16 英寸笔记本电脑铰接资产的宣传片开场
   (网页版 1280p、1.8 MB,`media/`)→「按需制作仿真就绪资产」+ 交付内容六条 → 「进入 SimGallery」
   与「定制资产」两个入口;资产库 `#request` 直接打开定制表单(未登录先登录)。
 
 ### 2026-09-08
-- 主页去掉「为机器人训练任务而建」四个案例卡片(MacBook / 剪刀 / 止血钳 / GPU 模块),
+- 主页去掉「为机器人训练任务而建」四个案例卡片(笔记本 / 剪刀 / 止血钳 / GPU 模块),
   用户决定不公开展示具体案例;主页只留 宣传片 → 按需制作 → 交付内容。
+- **上架 16 英寸笔记本电脑**(slug `laptop_16`,80 连杆 / 79 关节:1 转动上盖 + 78 移动键帽,
+  100 凸包,2.14 kg):管线新增 `build_web_asset_mtl.py`(按 OBJ `usemtl` 分组,颜色/金属度/
+  粗糙度/自发光取自 MTL 常量,屏幕壁纸走 emissive 贴图),`inspect_physics.py` 尺寸改为按关节
+  原点合成零位姿。inspect.json 新增 `look.material_override=false`,查看器据此保留资产自带
+  材质(剪刀那套"丢贴图换常量"的修正不再一刀切)。**页面与日志一律用中性命名,不出现品牌名。**
+- 查看器适配关节很多的资产:关节 >12 时表盘只在悬停/拖拽时显示;同类型 + 同限位 + 同名字
+  前缀的关节合成一张卡片(`key × 78`),一根滑杆驱动整组,拖某个键时卡片切到该键;长度单位按
+  行程自适应(0.8 mm 键程不再显示成 "-0.0 cm");idle 时键帽按 X 位置错相位走波浪。
+- **剪刀下架**:从 manifest 与仓库移除(交付件仍在构建机),SimGallery 只保留笔记本。
 - Details 面板(`3ada4b4`):Physics / Geometry / Asset hierarchy / Articulation / Package,
   数据由 `pipeline/inspect_physics.py` 从交付件写进 `inspect.json`;着色模式
   Lit / Unlit / Normals / Wireframe;查看器固定英文。

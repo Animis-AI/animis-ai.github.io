@@ -1,543 +1,510 @@
 {
- "library": {
-  "articulated_total": 1,
-  "categories_total": 1,
-  "curated": 2
- },
- "assets": [
-  {
-   "slug": "laptop_16",
-   "name_cn": "16 英寸笔记本电脑",
-   "name_en": "16-inch Laptop",
-   "kind": "articulated",
-   "category": "Laptop",
-   "hero": true,
-   "joints": [
-    {
-     "name": "lid_joint",
-     "type": "revolute",
-     "lower": 0.0,
-     "upper": 1.7977
-    },
-    {
-     "name": "key_joint_quote",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_comma",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_minus",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_period",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_slash",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_0",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_1",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_2",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_3",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_4",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_5",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_6",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_7",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_8",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_9",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_semicolon",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_equals",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_lbracket",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_backslash",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_rbracket",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_grave",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_A",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Arrow_Down",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Arrow_Left",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Arrow_Right",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Arrow_Up",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_B",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_bright_up",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_bright_down",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_C",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Caps_Lock",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Command",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Command_2",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Control",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_D",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Delete",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_dnd",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_E",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Esc",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_F",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Fn",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_G",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_H",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_I",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_J",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_K",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_L",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_M",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_mic",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_mission",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_mute",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_N",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_next",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_O",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Option",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Option_2",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_P",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_play",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_prev",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Q",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_R",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Return",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_S",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_search",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Shift",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Shift_2",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Spacebar",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_T",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Tab",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_touchid",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_U",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_V",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_vol_up",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_vol_down",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_W",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_X",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Y",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    },
-    {
-     "name": "key_joint_Z",
-     "type": "prismatic",
-     "lower": -0.0008,
-     "upper": 0.0
-    }
-   ],
-   "dof": 79,
-   "physics": {
-    "mass": 2.14,
-    "friction": 0.6,
-    "restitution": 0.05,
-    "material": "aluminium",
-    "engine": "Isaac Sim · MuJoCo · Genesis"
-   },
-   "formats": [
-    "URDF",
-    "MJCF",
-    "USD",
-    "OBJ"
-   ],
-   "poster": true,
-   "media": [],
-   "inspect": true
+  "library": {
+    "articulated_total": 1,
+    "categories_total": 1,
+    "curated": 2
   },
-  {
-   "slug": "scissors",
-   "name_cn": "剪刀",
-   "name_en": "Scissors",
-   "kind": "articulated",
-   "category": "Tool",
-   "hero": true,
-   "joints": [
+  "assets": [
     {
-     "name": "shear",
-     "type": "revolute",
-     "lower": 0.0,
-     "upper": 0.55
+      "slug": "laptop_16",
+      "name_cn": "16 英寸笔记本电脑",
+      "name_en": "16-inch Laptop",
+      "kind": "articulated",
+      "category": "Laptop",
+      "hero": true,
+      "joints": [
+        {
+          "name": "lid_joint",
+          "type": "revolute",
+          "lower": 0.0,
+          "upper": 1.7977
+        },
+        {
+          "name": "key_joint_quote",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_comma",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_minus",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_period",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_slash",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_0",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_1",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_2",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_3",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_4",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_5",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_6",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_7",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_8",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_9",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_semicolon",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_equals",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_lbracket",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_backslash",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_rbracket",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_grave",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_A",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Arrow_Down",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Arrow_Left",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Arrow_Right",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Arrow_Up",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_B",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_bright_up",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_bright_down",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_C",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Caps_Lock",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Command",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Command_2",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Control",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_D",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Delete",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_dnd",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_E",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Esc",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_F",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Fn",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_G",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_H",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_I",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_J",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_K",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_L",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_M",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_mic",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_mission",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_mute",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_N",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_next",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_O",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Option",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Option_2",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_P",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_play",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_prev",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Q",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_R",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Return",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_S",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_search",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Shift",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Shift_2",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Spacebar",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_T",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Tab",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_touchid",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_U",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_V",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_vol_up",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_vol_down",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_W",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_X",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Y",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        },
+        {
+          "name": "key_joint_Z",
+          "type": "prismatic",
+          "lower": -0.0008,
+          "upper": 0.0
+        }
+      ],
+      "dof": 79,
+      "physics": {
+        "mass": 2.14,
+        "friction": 0.6,
+        "restitution": 0.05,
+        "material": "aluminium",
+        "engine": "Isaac Sim · MuJoCo · Genesis"
+      },
+      "formats": [
+        "URDF",
+        "MJCF",
+        "USD",
+        "OBJ"
+      ],
+      "poster": true,
+      "media": [],
+      "inspect": true
     }
-   ],
-   "dof": 1,
-   "physics": {
-    "mass": 0.139,
-    "friction": 0.6,
-    "restitution": 0.1,
-    "material": "steel",
-    "engine": "Isaac Sim · MuJoCo · Genesis"
-   },
-   "formats": [
-    "URDF",
-    "MJCF",
-    "USD",
-    "OBJ"
-   ],
-   "poster": true,
-   "media": [],
-   "inspect": true
-  }
- ]
+  ]
 }
